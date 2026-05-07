@@ -11,6 +11,7 @@ skill_id: "historical-thinking/historical-thinking-assessment-designer"
 skill_name: "Historical Thinking Assessment Designer"
 domain: "historical-thinking"
 version: "1.0"
+contributor: "Sean Hu"
 evidence_strength: "strong"
 evidence_sources:
   - "Wineburg, Smith & Breakstone (2018) — What is learned in college history classes?"

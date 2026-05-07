@@ -11,6 +11,7 @@ skill_id: "historical-thinking/historical-thinking-strategy-modelling-guide"
 skill_name: "Historical Thinking Strategy Modelling Guide"
 domain: "historical-thinking"
 version: "1.0"
+contributor: "Sean Hu"
 evidence_strength: "strong"
 evidence_sources:
   - "Wineburg (2007) — Unnatural and essential: the nature of historical thinking"

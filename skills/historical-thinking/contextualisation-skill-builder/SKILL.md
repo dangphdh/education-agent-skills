@@ -11,6 +11,7 @@ skill_id: "historical-thinking/contextualisation-skill-builder"
 skill_name: "Contextualisation Skill Builder"
 domain: "historical-thinking"
 version: "1.0"
+contributor: "Sean Hu"
 evidence_strength: "moderate"
 evidence_sources:
   - "Wineburg (2007) — Unnatural and essential: the nature of historical thinking"

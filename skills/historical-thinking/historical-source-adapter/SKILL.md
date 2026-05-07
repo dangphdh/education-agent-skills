@@ -11,6 +11,7 @@ skill_id: "historical-thinking/historical-source-adapter"
 skill_name: "Historical Source Adapter"
 domain: "historical-thinking"
 version: "1.0"
+contributor: "Sean Hu"
 evidence_strength: "moderate"
 evidence_sources:
   - "Reisman (2012) — Reading like a historian: a document-based history curriculum intervention in urban high schools"

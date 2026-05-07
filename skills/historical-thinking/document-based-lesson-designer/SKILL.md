@@ -11,6 +11,7 @@ skill_id: "historical-thinking/document-based-lesson-designer"
 skill_name: "Document-Based Lesson Designer"
 domain: "historical-thinking"
 version: "1.0"
+contributor: "Sean Hu"
 evidence_strength: "strong"
 evidence_sources:
   - "Reisman (2012) — Reading like a historian: a document-based history curriculum intervention in urban high schools"

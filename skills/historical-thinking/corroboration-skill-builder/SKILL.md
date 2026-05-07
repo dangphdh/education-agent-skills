@@ -11,6 +11,7 @@ skill_id: "historical-thinking/corroboration-skill-builder"
 skill_name: "Corroboration Skill Builder"
 domain: "historical-thinking"
 version: "1.0"
+contributor: "Sean Hu"
 evidence_strength: "moderate"
 evidence_sources:
   - "Wineburg (1991) — Historical problem solving: cognitive processes in the evaluation of documentary and pictorial evidence"
