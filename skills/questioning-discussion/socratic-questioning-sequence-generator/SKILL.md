@@ -63,6 +63,7 @@ chains_well_with:
   - "dialogic-teaching-move-generator"
   - "hinge-question-designer"
   - "elaborative-interrogation-generator"
+  - "ai-socratic-dialogue-designer"
 teacher_time: "4 minutes"
 tags: ["questioning", "Socratic", "critical-thinking", "dialogue", "reasoning"]
 ---

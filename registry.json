@@ -1,13 +1,18 @@
 {
   "version": "2.0",
-  "generated": "2026-05-07T12:37:04.415944+00:00",
+  "generated": "2026-05-07T13:17:06.393524+00:00",
   "standard": "agent-skills-1.0",
-  "total_skills": 124,
+  "total_skills": 131,
   "domains": [
     {
       "id": "ai-learning-science",
       "label": "AI & Learning Science",
       "skill_count": 14
+    },
+    {
+      "id": "ai-literacy",
+      "label": "AI Literacy",
+      "skill_count": 7
     },
     {
       "id": "curriculum-alignment",
@@ -440,7 +445,9 @@
         "self-explanation-prompt-designer",
         "ai-feedback-design-principles",
         "productive-failure-desirable-difficulty-designer",
-        "formative-assessment-loop-designer"
+        "formative-assessment-loop-designer",
+        "ai-learning-boundary-mapper",
+        "ai-output-critical-audit-designer"
       ],
       "chain_edges": {
         "receives_from": [],
@@ -547,6 +554,225 @@
         "input_field": null
       },
       "path": "skills/ai-learning-science/worked-example-to-problem-solving-transition-designer/SKILL.md"
+    },
+    {
+      "id": "ai-literacy/ai-expertise-interrogation-designer",
+      "name": "ai-expertise-interrogation-designer",
+      "display_name": "AI Expertise Interrogation Designer",
+      "domain": "ai-literacy",
+      "description": "Design a Funhouse Mirror activity where students use their own domain expertise to detect AI distortions, omissions, and overconfidence. Use when students know a subject well enough to evaluate AI claims about it.",
+      "disable_model_invocation": false,
+      "evidence_strength": "moderate",
+      "tags": [
+        "AI-literacy",
+        "expertise",
+        "distortion",
+        "Funhouse-Mirror",
+        "metacognition",
+        "Dunning-Kruger",
+        "domain-knowledge"
+      ],
+      "teacher_time": "4 minutes",
+      "chains_with": [
+        "metacognitive-monitoring-ai-contexts",
+        "ai-output-critical-audit-designer",
+        "pedagogical-content-knowledge-developer"
+      ],
+      "chain_edges": {
+        "receives_from": [],
+        "feeds_into": [],
+        "output_field": null,
+        "input_field": null
+      },
+      "path": "skills/ai-literacy/ai-expertise-interrogation-designer/SKILL.md"
+    },
+    {
+      "id": "ai-literacy/ai-hallucination-fact-check-protocol",
+      "name": "ai-hallucination-fact-check-protocol",
+      "display_name": "AI Hallucination Fact-Check Protocol",
+      "domain": "ai-literacy",
+      "description": "Design a fact-checking protocol for AI-generated text, extending SIFT with AI-specific adaptations for hallucination detection. Use when students need to verify AI claims and citations.",
+      "disable_model_invocation": false,
+      "evidence_strength": "moderate",
+      "tags": [
+        "AI-literacy",
+        "hallucination",
+        "fact-checking",
+        "SIFT",
+        "lateral-reading",
+        "AI-citations",
+        "verification"
+      ],
+      "teacher_time": "4 minutes",
+      "chains_with": [
+        "source-credibility-evaluation-protocol",
+        "ai-output-critical-audit-designer",
+        "media-literacy-deconstruction-protocol"
+      ],
+      "chain_edges": {
+        "receives_from": [],
+        "feeds_into": [],
+        "output_field": null,
+        "input_field": null
+      },
+      "path": "skills/ai-literacy/ai-hallucination-fact-check-protocol/SKILL.md"
+    },
+    {
+      "id": "ai-literacy/ai-learning-boundary-mapper",
+      "name": "ai-learning-boundary-mapper",
+      "display_name": "AI Learning Boundary Mapper",
+      "domain": "ai-literacy",
+      "description": "Map which elements of an assignment benefit from AI assistance vs. which AI use undermines. Use when redesigning tasks for AI-age classrooms or setting defensible AI use policies for specific assignments.",
+      "disable_model_invocation": false,
+      "evidence_strength": "moderate",
+      "tags": [
+        "AI-literacy",
+        "assignment-design",
+        "AI-policy",
+        "backward-design",
+        "tool-selection",
+        "learning-objectives",
+        "AI-boundaries"
+      ],
+      "teacher_time": "5 minutes",
+      "chains_with": [
+        "metacognitive-monitoring-ai-contexts",
+        "backwards-design-unit-planner",
+        "assessment-validity-checker"
+      ],
+      "chain_edges": {
+        "receives_from": [],
+        "feeds_into": [],
+        "output_field": null,
+        "input_field": null
+      },
+      "path": "skills/ai-literacy/ai-learning-boundary-mapper/SKILL.md"
+    },
+    {
+      "id": "ai-literacy/ai-output-critical-audit-designer",
+      "name": "ai-output-critical-audit-designer",
+      "display_name": "AI Output Critical Audit Designer",
+      "domain": "ai-literacy",
+      "description": "Design a structured protocol for auditing AI-generated text against Ennis's six CT standards. Use when students need to critically evaluate AI output in any subject.",
+      "disable_model_invocation": false,
+      "evidence_strength": "strong",
+      "tags": [
+        "AI-literacy",
+        "critical-thinking",
+        "Ennis",
+        "audit",
+        "annotation",
+        "AI-output",
+        "hallucination",
+        "epistemic"
+      ],
+      "teacher_time": "4 minutes",
+      "chains_with": [
+        "critical-thinking-task-designer",
+        "source-credibility-evaluation-protocol",
+        "elaborative-interrogation-generator",
+        "ai-hallucination-fact-check-protocol"
+      ],
+      "chain_edges": {
+        "receives_from": [],
+        "feeds_into": [],
+        "output_field": null,
+        "input_field": null
+      },
+      "path": "skills/ai-literacy/ai-output-critical-audit-designer/SKILL.md"
+    },
+    {
+      "id": "ai-literacy/ai-socratic-dialogue-designer",
+      "name": "ai-socratic-dialogue-designer",
+      "display_name": "AI Socratic Dialogue Designer",
+      "domain": "ai-literacy",
+      "description": "Design a multi-round questioning sequence for interrogating AI chatbot answers, tracking how responses shift and distinguishing genuine updates from sycophantic capitulation. Use when teaching students to probe AI critically.",
+      "disable_model_invocation": false,
+      "evidence_strength": "moderate",
+      "tags": [
+        "AI-literacy",
+        "Socratic-questioning",
+        "sycophancy",
+        "AI-behaviour",
+        "critical-thinking",
+        "multi-round",
+        "capitulation"
+      ],
+      "teacher_time": "4 minutes",
+      "chains_with": [
+        "socratic-questioning-sequence-generator",
+        "ai-output-critical-audit-designer",
+        "critical-thinking-task-designer"
+      ],
+      "chain_edges": {
+        "receives_from": [],
+        "feeds_into": [],
+        "output_field": null,
+        "input_field": null
+      },
+      "path": "skills/ai-literacy/ai-socratic-dialogue-designer/SKILL.md"
+    },
+    {
+      "id": "ai-literacy/disciplinary-ai-literacy-sequence-designer",
+      "name": "disciplinary-ai-literacy-sequence-designer",
+      "display_name": "Disciplinary AI Literacy Sequence Designer",
+      "domain": "ai-literacy",
+      "description": "Design a sequence where students compare AI's handling of the same question across disciplines, developing a mental model of where AI is reliable vs. distorting based on knowledge type.",
+      "disable_model_invocation": false,
+      "evidence_strength": "moderate",
+      "tags": [
+        "AI-literacy",
+        "disciplinary-thinking",
+        "knowledge-types",
+        "Bernstein",
+        "Willingham",
+        "domain-specificity",
+        "AI-reliability"
+      ],
+      "teacher_time": "5 minutes",
+      "chains_with": [
+        "kud-knowledge-type-mapper",
+        "curriculum-knowledge-architecture-designer",
+        "ai-output-critical-audit-designer"
+      ],
+      "chain_edges": {
+        "receives_from": [],
+        "feeds_into": [],
+        "output_field": null,
+        "input_field": null
+      },
+      "path": "skills/ai-literacy/disciplinary-ai-literacy-sequence-designer/SKILL.md"
+    },
+    {
+      "id": "ai-literacy/prompt-literacy-sequence-designer",
+      "name": "prompt-literacy-sequence-designer",
+      "display_name": "Prompt Literacy Sequence Designer",
+      "domain": "ai-literacy",
+      "description": "Design a learning sequence teaching prompt quality \u2014 comparing vague vs. refined prompts to show why specificity and context transform AI output. Use when students use AI without understanding why output quality varies.",
+      "disable_model_invocation": false,
+      "evidence_strength": "low-moderate",
+      "tags": [
+        "AI-literacy",
+        "prompt-engineering",
+        "prompt-literacy",
+        "specificity",
+        "AI-use",
+        "context",
+        "constraints"
+      ],
+      "teacher_time": "4 minutes",
+      "chains_with": [
+        "ai-output-critical-audit-designer",
+        "metacognitive-monitoring-ai-contexts",
+        "explicit-instruction-sequence-builder"
+      ],
+      "chain_edges": {
+        "receives_from": [],
+        "feeds_into": [],
+        "output_field": null,
+        "input_field": null
+      },
+      "path": "skills/ai-literacy/prompt-literacy-sequence-designer/SKILL.md"
     },
     {
       "id": "curriculum-alignment/coverage-audit",
@@ -834,7 +1060,8 @@
         "curriculum-knowledge-architecture-designer",
         "kud-knowledge-type-mapper",
         "coherent-rubric-logic-builder",
-        "learning-target-authoring-guide"
+        "learning-target-authoring-guide",
+        "ai-output-critical-audit-designer"
       ],
       "chain_edges": {
         "receives_from": [],
@@ -2321,7 +2548,8 @@
         "socratic-questioning-sequence-generator",
         "argument-structure-scaffold-generator",
         "source-credibility-evaluation-protocol",
-        "discussion-protocol-selector"
+        "discussion-protocol-selector",
+        "ai-output-critical-audit-designer"
       ],
       "chain_edges": {
         "receives_from": [],
@@ -2443,7 +2671,8 @@
         "critical-thinking-task-designer",
         "media-literacy-deconstruction-protocol",
         "reading-comprehension-strategy-selector",
-        "socratic-questioning-sequence-generator"
+        "socratic-questioning-sequence-generator",
+        "ai-hallucination-fact-check-protocol"
       ],
       "chain_edges": {
         "receives_from": [],
@@ -3585,7 +3814,8 @@
         "discussion-protocol-selector",
         "dialogic-teaching-move-generator",
         "hinge-question-designer",
-        "elaborative-interrogation-generator"
+        "elaborative-interrogation-generator",
+        "ai-socratic-dialogue-designer"
       ],
       "chain_edges": {
         "receives_from": [],

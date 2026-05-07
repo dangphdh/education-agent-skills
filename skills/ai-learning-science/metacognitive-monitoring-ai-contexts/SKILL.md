@@ -60,6 +60,8 @@ chains_well_with:
   - "ai-feedback-design-principles"
   - "productive-failure-desirable-difficulty-designer"
   - "formative-assessment-loop-designer"
+  - "ai-learning-boundary-mapper"
+  - "ai-output-critical-audit-designer"
 teacher_time: "4 minutes"
 tags: ["metacognition", "self-regulation", "Dunning-Kruger", "overconfidence", "AI-literacy", "Winne", "Thiede", "calibration"]
 ---

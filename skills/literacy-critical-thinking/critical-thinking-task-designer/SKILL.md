@@ -63,6 +63,7 @@ chains_well_with:
   - "argument-structure-scaffold-generator"
   - "source-credibility-evaluation-protocol"
   - "discussion-protocol-selector"
+  - "ai-output-critical-audit-designer"
 teacher_time: "4 minutes"
 tags: ["critical-thinking", "analysis", "evaluation", "domain-specific", "higher-order-thinking"]
 ---

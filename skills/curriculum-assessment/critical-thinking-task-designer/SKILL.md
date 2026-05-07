@@ -71,6 +71,7 @@ chains_well_with:
   - "kud-knowledge-type-mapper"
   - "coherent-rubric-logic-builder"
   - "learning-target-authoring-guide"
+  - "ai-output-critical-audit-designer"
 teacher_time: "10 minutes"
 tags: ["critical-thinking", "disciplinary-thinking", "horizontal-knowledge", "knowledge-contingent", "task-design", "intellectual-resources", "Bailin", "Willingham", "domain-specific"]
 ---

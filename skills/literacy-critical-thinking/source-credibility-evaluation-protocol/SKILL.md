@@ -63,6 +63,7 @@ chains_well_with:
   - "media-literacy-deconstruction-protocol"
   - "reading-comprehension-strategy-selector"
   - "socratic-questioning-sequence-generator"
+  - "ai-hallucination-fact-check-protocol"
 teacher_time: "3 minutes"
 tags: ["source-evaluation", "lateral-reading", "SIFT", "digital-literacy", "critical-thinking"]
 ---
