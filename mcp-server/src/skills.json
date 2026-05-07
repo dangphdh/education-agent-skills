@@ -6128,6 +6128,1211 @@
   },
   {
     "metadata": {
+      "name": "central-historical-question-evaluator",
+      "description": "Evaluate a teacher-drafted central historical question for its capacity to drive genuine historical inquiry. Use when assessing whether a question will generate real evidence-weighing or produce shallow responses.",
+      "disable-model-invocation": false,
+      "user-invocable": true,
+      "effort": "medium",
+      "skill_id": "historical-thinking/central-historical-question-evaluator",
+      "skill_name": "Central Historical Question Evaluator",
+      "domain": "historical-thinking",
+      "version": "1.0",
+      "contributor": "Sean Hu",
+      "evidence_strength": "strong",
+      "evidence_sources": [
+        "Reisman (2012) — Reading like a historian: a document-based history curriculum intervention in urban high schools",
+        "Wineburg, Martin & Monte-Sano (2011) — Reading like a historian: teaching literacy in middle and high school history classrooms",
+        "Wineburg & Martin (2004) — Reading and rewriting history",
+        "Wineburg (2007) — Unnatural and essential: the nature of historical thinking",
+        "Wineburg (2016) — Why historical thinking is not about history"
+      ],
+      "input_schema": {
+        "required": [
+          {
+            "field": "draft_question",
+            "type": "string",
+            "description": "The teacher's draft central historical question — the question intended to drive a document-based lesson or unit"
+          },
+          {
+            "field": "available_sources",
+            "type": "string",
+            "description": "Description of the primary and secondary sources students will use to investigate the question — number, types, and key tensions or perspectives represented"
+          },
+          {
+            "field": "student_level",
+            "type": "string",
+            "description": "Age/year group and current experience with document-based inquiry"
+          }
+        ],
+        "optional": [
+          {
+            "field": "historical_topic",
+            "type": "string",
+            "description": "The broader topic or unit within which this question sits"
+          },
+          {
+            "field": "learning_objectives",
+            "type": "string",
+            "description": "What the teacher wants students to learn or be able to do through investigating this question"
+          },
+          {
+            "field": "previous_questions",
+            "type": "string",
+            "description": "Central questions from earlier lessons — to check for variety in question type and to build on what students have already practised"
+          },
+          {
+            "field": "curriculum_framework",
+            "type": "string",
+            "description": "From context engine: relevant curriculum standards or historical thinking framework in use"
+          }
+        ]
+      },
+      "output_schema": {
+        "type": "object",
+        "fields": [
+          {
+            "field": "question_evaluation",
+            "type": "object",
+            "description": "Analysis of the draft question against criteria for productive historical inquiry — does it require evidence, permit multiple defensible answers, demand the use of historical thinking skills, and avoid retrievable-answer or opinion-only traps"
+          },
+          {
+            "field": "strengths",
+            "type": "array",
+            "description": "What the draft question does well — specific features that will drive productive inquiry"
+          },
+          {
+            "field": "threats",
+            "type": "array",
+            "description": "Specific problems with the draft question that may produce shallow, predictable, or non-historical responses — with explanations of why each is a threat"
+          },
+          {
+            "field": "revised_question",
+            "type": "string",
+            "description": "If the draft question needs modification, a revised version with an explanation of what changed and why — if the draft question is strong, confirmation that no revision is needed"
+          },
+          {
+            "field": "question_type_analysis",
+            "type": "string",
+            "description": "Classification of the question type and guidance on what kind of historical thinking it will demand"
+          }
+        ]
+      },
+      "chains_well_with": [
+        "document-based-lesson-designer",
+        "historical-document-set-curator",
+        "historical-source-adapter",
+        "sourcing-skill-builder",
+        "corroboration-skill-builder",
+        "backwards-design-unit-planner",
+        "hinge-question-designer"
+      ],
+      "teacher_time": "2 minutes",
+      "tags": [
+        "historical-questions",
+        "inquiry",
+        "document-based-lessons",
+        "historical-thinking",
+        "lesson-design",
+        "DIG"
+      ]
+    },
+    "prompt": "You are an expert in historical thinking pedagogy and document-based lesson design, with deep knowledge of the Reading Like a Historian curriculum structure (Reisman, 2012; Wineburg, Martin & Monte-Sano, 2011) and the role of central historical questions in driving genuine inquiry. You understand that a well-designed central question is the engine of a document-based lesson — it determines whether students engage in genuine historical thinking or merely retrieve answers, recite opinions, or perform research simulations.\n\nYour task is to evaluate a teacher-drafted central historical question:\n\n**Draft question:** {{draft_question}}\n**Available sources:** {{available_sources}}\n**Student level:** {{student_level}}\n\nThe following optional context may or may not be provided. Use whatever is available.\n\n**Historical topic:** {{historical_topic}}\n**Learning objectives:** {{learning_objectives}}\n**Previous questions:** {{previous_questions}} — if provided, check that the draft question offers variety in question type.\n**Curriculum framework:** {{curriculum_framework}}\n\nEvaluate the draft question against these criteria:\n\n1. **Evidence-dependent:** Does answering this question REQUIRE engagement with the available sources? Or could a student answer it from general knowledge or personal opinion without reading any documents?\n\n2. **Genuinely contested:** Does the question permit multiple defensible answers? Could two students examine the same evidence and reach different but equally well-supported conclusions? If the question has a single correct answer, it is a retrieval task, not an inquiry.\n\n3. **Historically specific:** Is the question anchored to specific evidence, events, and actors? Or is it so broad that it becomes an essay prompt rather than an investigation? A question that can only be answered with a book is too broad for a document-based lesson.\n\n4. **Skill-demanding:** Does answering the question require students to use historical thinking skills — sourcing, close reading, contextualisation, corroboration — or could it be answered without any of these? The best questions make one or more skills essential to reaching a defensible answer.\n\n5. **Appropriately scoped:** Is the question answerable with the available document set? Too few sources and the question can't be investigated; too many or too complex and the question overwhelms the students.\n\n6. **Engaging and accessible:** Will this question interest students at this level? Does its language make the task clear? Questions that use jargon, assume prior knowledge students don't have, or sound like essay prompts rather than genuine puzzles will fail to motivate inquiry.\n\nClassify the question type:\n- **Factual-investigative:** \"Did X happen?\" — requires weighing evidence for and against a factual claim\n- **Causal-analytical:** \"What caused X?\" or \"Why did X happen?\" — requires identifying and weighing causal factors\n- **Evaluative-interpretive:** \"Was X justified?\" or \"Was X a turning point?\" — requires evaluating significance or making a judgement grounded in evidence\n- **Perspective-analytical:** \"How did different groups see X?\" — requires reconstructing multiple viewpoints\n- **Comparative:** \"How was X different from Y?\" — requires structured comparison\n\nReturn your output in this exact format:\n\n## Question Evaluation\n\n**Draft question:** [The question as submitted]\n**Question type:** [Classification]\n**Overall verdict:** [Strong / Needs modification / Needs substantial revision]\n\n### Strengths\n\n[What the question does well — be specific about which criteria it meets and why]\n\n### Threats\n\n[Specific problems, each with an explanation of why it threatens the quality of inquiry. Number each threat.]\n\n### Source-Question Fit\n\n[Does the available document set support investigation of this question? Are there gaps — sources that would strengthen the investigation — or mismatches — sources that don't connect to the question?]\n\n### Revised Question\n\n[If the question needs modification: the revised version with a brief explanation of what changed and why. If the question is strong: \"No revision needed\" with a brief explanation of why the question works as drafted.]\n\n### Teaching Notes\n\n[1–2 practical notes for the teacher: what historical thinking skills this question will foreground, what student responses to anticipate, and any potential pitfalls to watch for during the lesson.]\n\n**Self-check before returning output:** Verify that (a) the evaluation addresses all six criteria, (b) the strengths and threats are specific to this question, not generic, (c) the source-question fit analysis considers the actual available sources, (d) any revised question preserves the teacher's intent while addressing the identified threats, and (e) the teaching notes are practical and actionable.",
+    "description": "Evaluate a teacher-drafted central historical question for its capacity to drive genuine historical inquiry. Use when assessing whether a question will generate real evidence-weighing or produce shallow responses.",
+    "toolName": "central-historical-question-evaluator"
+  },
+  {
+    "metadata": {
+      "name": "close-reading-skill-builder",
+      "description": "Build students' capacity to read historical documents closely — attending to word choice, tone, and rhetoric as evidence of perspective. Use when students summarise sources without analysing language.",
+      "disable-model-invocation": false,
+      "user-invocable": true,
+      "effort": "medium",
+      "skill_id": "historical-thinking/close-reading-skill-builder",
+      "skill_name": "Close Reading Skill Builder",
+      "domain": "historical-thinking",
+      "version": "1.0",
+      "contributor": "Sean Hu",
+      "evidence_strength": "strong",
+      "evidence_sources": [
+        "Wineburg (1991) — Historical problem solving: cognitive processes in the evaluation of documentary and pictorial evidence",
+        "Wineburg (1998) — Reading Abraham Lincoln: an expert/expert study in historical cognition",
+        "Reisman (2012) — Reading like a historian: a document-based history curriculum intervention in urban high schools",
+        "Wineburg & Reisman (2015) — Disciplinary literacy in history: a toolkit for digital citizenship",
+        "Wineburg, Martin & Monte-Sano (2011) — Reading like a historian: teaching literacy in middle and high school history classrooms",
+        "Leinhardt & Young (1996) — Two texts, three readers: distance and expertise in reading history"
+      ],
+      "input_schema": {
+        "required": [
+          {
+            "field": "historical_topic",
+            "type": "string",
+            "description": "The historical topic, period, or question students are investigating"
+          },
+          {
+            "field": "student_level",
+            "type": "string",
+            "description": "Age/year group and current level of experience with close reading of historical texts"
+          },
+          {
+            "field": "current_challenge",
+            "type": "string",
+            "description": "What students currently do or fail to do when reading a historical document closely — the observable behaviour that signals close reading is not yet developed"
+          }
+        ],
+        "optional": [
+          {
+            "field": "source_type",
+            "type": "string",
+            "description": "The type of historical source — e.g. speech, letter, testimony, proclamation, diary entry, newspaper editorial, treaty, political cartoon"
+          },
+          {
+            "field": "available_documents",
+            "type": "string",
+            "description": "Description of the specific documents students will work with"
+          },
+          {
+            "field": "curriculum_framework",
+            "type": "string",
+            "description": "From context engine: relevant curriculum standards or historical thinking framework in use"
+          },
+          {
+            "field": "prior_instruction",
+            "type": "string",
+            "description": "What close reading instruction students have already received — including any literary close reading from English/Language Arts"
+          }
+        ]
+      },
+      "output_schema": {
+        "type": "object",
+        "fields": [
+          {
+            "field": "close_reading_progression",
+            "type": "object",
+            "description": "What close reading looks like at novice, developing, and proficient levels for this student age group — with observable indicators distinguishing between summarising content and analysing language as evidence of perspective"
+          },
+          {
+            "field": "explicit_instruction_sequence",
+            "type": "object",
+            "description": "A three-part sequence (model → guided practice → independent practice) for teaching close reading with the specified source type, including a teacher think-aloud script demonstrating how an expert reader attends to word choice, tone, and rhetorical strategy as evidence"
+          },
+          {
+            "field": "language_analysis_prompts",
+            "type": "array",
+            "description": "Source-type-specific prompts that direct students' attention to how language reveals the author's perspective, purpose, and reliability — calibrated to developmental level"
+          },
+          {
+            "field": "common_failure_patterns",
+            "type": "array",
+            "description": "Specific ways students at this level typically fail to read closely — with targeted instructional responses for each"
+          },
+          {
+            "field": "assessment_indicators",
+            "type": "object",
+            "description": "Observable signs that students are developing close reading as an analytical practice — what to listen for in discussion, what to look for in written work"
+          }
+        ]
+      },
+      "chains_well_with": [
+        "sourcing-skill-builder",
+        "contextualisation-skill-builder",
+        "corroboration-skill-builder",
+        "historical-thinking-strategy-modelling-guide",
+        "document-based-lesson-designer",
+        "historical-source-adapter",
+        "historical-thinking-assessment-designer",
+        "disciplinary-writing-scaffold",
+        "text-complexity-analyser"
+      ],
+      "teacher_time": "3 minutes",
+      "tags": [
+        "close-reading",
+        "historical-thinking",
+        "disciplinary-literacy",
+        "language-analysis",
+        "document-analysis",
+        "rhetoric",
+        "DIG"
+      ]
+    },
+    "prompt": "You are an expert in historical thinking pedagogy, with deep knowledge of Wineburg's (1991, 1998) research on how expert historians read documents closely for evidence of perspective, Leinhardt and Young's (1996) work on how language differences between accounts function as historical evidence, and Reisman's (2012) evidence that close reading is teachable through explicit instruction. You understand that close reading in history is distinct from literary close reading: the goal is not to appreciate aesthetic features but to analyse language as evidence of the author's perspective, purpose, and reliability.\n\nYour task is to design targeted close reading instruction for:\n\n**Historical topic:** {{historical_topic}}\n**Student level:** {{student_level}}\n**Current challenge:** {{current_challenge}}\n\nThe following optional context may or may not be provided. Use whatever is available; ignore any fields marked \"not provided.\"\n\n**Source type:** {{source_type}} — if not provided, design for written primary sources as the default.\n**Available documents:** {{available_documents}} — if provided, tailor the instruction to these specific documents.\n**Curriculum framework:** {{curriculum_framework}} — if not provided, use the DIG framework as the default.\n**Prior instruction:** {{prior_instruction}} — if provided, build on existing skills. If students have literary close reading experience, explicitly address how historical close reading differs.\n\nDesign the following:\n\n1. **Close reading progression:** What close reading looks like at three levels for this age group:\n   - **Novice:** The student extracts content from the document — they can tell you WHAT it says but not HOW it says it or WHY the author chose those words. Describe what this looks like with specific observable indicators.\n   - **Developing:** The student notices some language features (e.g., identifies \"persuasive language\" or \"emotive words\") but treats them as generic categories rather than connecting them to the author's specific historical position and purpose. Describe what superficial close reading looks like.\n   - **Proficient:** The student analyses specific word choices, claims, and rhetorical strategies as evidence of the author's perspective, connecting language to the author's historical circumstances. Describe what this looks like — the specific analytical moves a proficient student makes.\n\n2. **Explicit instruction sequence:**\n   - **I DO:** A think-aloud script (150–200 words) showing the teacher modelling close reading of a specific passage — pausing at key word choices, asking what they reveal about the author's stance, identifying claims and evaluating the evidence offered for them, noticing what the author does NOT say.\n   - **WE DO:** A guided practice activity where students close-read a passage together with teacher support.\n   - **YOU DO:** Independent close reading with monitoring criteria.\n\n3. **Language analysis prompts:** Source-type-specific prompts that direct students' attention to historically significant language features. For each prompt, include the prompt itself, why it matters for this source type, and a sentence starter. Adapt prompts to the source type — a speech demands attention to rhetorical strategy and audience; a private letter demands attention to what the author says differently in private than in public; testimony demands attention to what is claimed vs. what is evidenced.\n\n4. **Common failure patterns:** 3–4 patterns with descriptions, explanations, and instructional responses.\n\n5. **Assessment indicators:** What to listen for in discussion, what to look for in written work, and the key test that distinguishes a student who close-reads analytically from one who only summarises content.\n\nReturn your output in this exact format:\n\n## Close Reading Instruction Plan\n\n**Topic:** [Historical topic]\n**Students:** [Level and current challenge]\n**Source type:** [Type of source]\n\n### Close Reading Progression\n\n**Novice — reading for content only:**\n[Observable indicators]\n\n**Developing — noticing language without connecting it to perspective:**\n[Observable indicators]\n\n**Proficient — analysing language as evidence of perspective:**\n[Observable indicators]\n\n### Explicit Instruction Sequence\n\n**I DO — Teacher Think-Aloud**\n[Script, 150–200 words]\n\n**WE DO — Guided Practice**\n[Activity with teacher prompts]\n\n**YOU DO — Independent Practice**\n[What to monitor for]\n\n### Language Analysis Prompts\n\n[Source-type-specific prompts with rationale and sentence starters]\n\n### Common Failure Patterns\n\n[3–4 patterns]\n\n### Assessment Indicators\n\n**In discussion:** [What to listen for]\n**In written work:** [What to look for]\n**The key test:** [Single most reliable indicator]\n\n**Self-check before returning output:** Verify that (a) the progression distinguishes between summarising content and analysing language as evidence, (b) the think-aloud models attention to SPECIFIC word choices, not generic \"language features,\" (c) the prompts are adapted to the source type, (d) the failure patterns distinguish between literary and historical close reading where relevant, and (e) the assessment indicators describe analytical close reading, not comprehension.",
+    "description": "Build students' capacity to read historical documents closely — attending to word choice, tone, and rhetoric as evidence of perspective. Use when students summarise sources without analysing language.",
+    "toolName": "close-reading-skill-builder"
+  },
+  {
+    "metadata": {
+      "name": "contextualisation-skill-builder",
+      "description": "Build students' capacity to place historical documents in their temporal and social context. Use when students read sources without considering what was happening at the time, or know the context but don't deploy it.",
+      "disable-model-invocation": false,
+      "user-invocable": true,
+      "effort": "medium",
+      "skill_id": "historical-thinking/contextualisation-skill-builder",
+      "skill_name": "Contextualisation Skill Builder",
+      "domain": "historical-thinking",
+      "version": "1.0",
+      "contributor": "Sean Hu",
+      "evidence_strength": "moderate",
+      "evidence_sources": [
+        "Wineburg (2007) — Unnatural and essential: the nature of historical thinking",
+        "Wineburg (1998) — Reading Abraham Lincoln: an expert/expert study in historical cognition",
+        "Gottlieb & Wineburg (2012) — Between Veritas and Communitas: epistemic switching in the reading of academic and sacred history",
+        "Reisman (2012) — Reading like a historian: a document-based history curriculum intervention in urban high schools",
+        "Wineburg & Reisman (2015) — Disciplinary literacy in history: a toolkit for digital citizenship",
+        "Wineburg, Smith & Breakstone (2018) — What is learned in college history classes?"
+      ],
+      "input_schema": {
+        "required": [
+          {
+            "field": "historical_topic",
+            "type": "string",
+            "description": "The historical topic, period, or question students are investigating"
+          },
+          {
+            "field": "student_level",
+            "type": "string",
+            "description": "Age/year group and current level of experience with contextualisation"
+          },
+          {
+            "field": "current_challenge",
+            "type": "string",
+            "description": "What students currently do or fail to do when contextualising — the observable behaviour that signals contextualisation is not yet developed"
+          }
+        ],
+        "optional": [
+          {
+            "field": "source_type",
+            "type": "string",
+            "description": "The type of historical source students are working with"
+          },
+          {
+            "field": "available_documents",
+            "type": "string",
+            "description": "Description of the specific documents students will work with"
+          },
+          {
+            "field": "background_knowledge",
+            "type": "string",
+            "description": "What background knowledge students already possess about the period — critical because contextualisation requires knowledge to deploy, and the gap may be knowledge rather than skill"
+          },
+          {
+            "field": "curriculum_framework",
+            "type": "string",
+            "description": "From context engine: relevant curriculum standards or historical thinking framework in use"
+          },
+          {
+            "field": "prior_instruction",
+            "type": "string",
+            "description": "What contextualisation instruction students have already received"
+          }
+        ]
+      },
+      "output_schema": {
+        "type": "object",
+        "fields": [
+          {
+            "field": "contextualisation_progression",
+            "type": "object",
+            "description": "What contextualisation looks like at novice, developing, and proficient levels — with observable indicators distinguishing between knowing background information and deploying it to transform interpretation of a document"
+          },
+          {
+            "field": "explicit_instruction_sequence",
+            "type": "object",
+            "description": "A three-part sequence for teaching contextualisation, designed for the greater complexity of this skill compared to sourcing and close reading — includes strategies for making the invisible mental move of connecting a document to its historical moment visible and practicable"
+          },
+          {
+            "field": "contextualisation_prompts",
+            "type": "array",
+            "description": "Prompts that guide students to connect a document to its historical moment — calibrated to developmental level and source type"
+          },
+          {
+            "field": "common_failure_patterns",
+            "type": "array",
+            "description": "Specific ways students fail to contextualise, including the critical distinction between possessing background knowledge and activating it during document reading"
+          },
+          {
+            "field": "assessment_indicators",
+            "type": "object",
+            "description": "Observable signs that students are contextualising — what to listen for in discussion, what to look for in written work"
+          }
+        ]
+      },
+      "chains_well_with": [
+        "sourcing-skill-builder",
+        "close-reading-skill-builder",
+        "corroboration-skill-builder",
+        "historical-thinking-strategy-modelling-guide",
+        "document-based-lesson-designer",
+        "historical-thinking-assessment-designer",
+        "lesson-opening-designer"
+      ],
+      "teacher_time": "4 minutes",
+      "tags": [
+        "contextualisation",
+        "historical-thinking",
+        "disciplinary-literacy",
+        "document-analysis",
+        "chronological-reasoning",
+        "DIG"
+      ]
+    },
+    "prompt": "You are an expert in historical thinking pedagogy, with deep knowledge of Wineburg's (2007) demonstration that contextualisation requires both possession of background knowledge AND the disposition to activate it during reading, Gottlieb and Wineburg's (2012) finding that contextualisation transforms meaning rather than merely adding background information, and Reisman's (2012) finding that contextualisation did NOT show significant treatment effects in a six-month intervention — suggesting it requires different instructional strategies than sourcing or close reading.\n\nYour task is to design targeted contextualisation instruction for:\n\n**Historical topic:** {{historical_topic}}\n**Student level:** {{student_level}}\n**Current challenge:** {{current_challenge}}\n\nThe following optional context may or may not be provided. Use whatever is available.\n\n**Source type:** {{source_type}}\n**Available documents:** {{available_documents}}\n**Background knowledge:** {{background_knowledge}} — if provided, this is critical. If students already know the relevant context, the problem is DEPLOYMENT, not knowledge — and instruction should focus on activating existing knowledge during reading. If students lack the background, the problem is partly a knowledge gap and instruction must address both knowledge and deployment.\n**Curriculum framework:** {{curriculum_framework}}\n**Prior instruction:** {{prior_instruction}}\n\nDesign the following:\n\n1. **Contextualisation progression:** What contextualisation looks like at three levels:\n   - **Novice:** The student reads the document as if it could have been written at any time. They engage with the content in isolation from historical circumstances. Describe what this looks like with observable indicators.\n   - **Developing:** The student can state relevant background information when prompted (\"What was happening in 1892?\") but does not spontaneously connect it to the document. Context and document remain in separate compartments. Describe what this disconnection looks like.\n   - **Proficient:** The student spontaneously connects the document to its historical moment, using context to transform their interpretation of the document's meaning, purpose, or reliability. Describe what this integration looks like — the specific reasoning moves a proficient student makes.\n\n   IMPORTANT: The critical distinction here is between POSSESSING context and DEPLOYING it (Wineburg, 2007). A student who can recite facts about the 1890s but reads Harrison's proclamation as a statement about Columbus possesses knowledge but does not deploy it. Make this distinction concrete and observable.\n\n2. **Explicit instruction sequence:** This must differ from the sourcing and close reading sequences because contextualisation involves an inferential leap that is harder to model with concrete actions. Design a sequence that makes the invisible mental move of \"connecting document to context\" visible:\n   - **I DO:** A think-aloud script (150–200 words) showing the teacher modelling the contextualisation move — reading the document's date and immediately reaching for what they know about that moment, connecting specific features of the document to specific historical circumstances, and showing how context changes the interpretation. The think-aloud should make the INFERENCE explicit: \"Because I know X was happening in [year], this document probably means Y rather than Z.\"\n   - **WE DO:** A guided practice activity that scaffolds the inferential leap. Consider using a structured bridge — e.g., students first list what they know about the period (activating knowledge), then read the document, then explicitly connect items from their list to specific features of the document. The bridge makes the connection step deliberate rather than implicit.\n   - **YOU DO:** Independent practice with monitoring criteria.\n\n3. **Contextualisation prompts:** Prompts that guide students toward the contextualisation move, calibrated to the source type. For each prompt, include the prompt itself, why it matters, and a sentence starter. Prompts should push students beyond \"when was this written?\" toward \"why does it matter that it was written THEN?\"\n\n4. **Common failure patterns:** 3–4 patterns, including the knowledge-possession-without-deployment pattern that is distinctive to contextualisation.\n\n5. **Assessment indicators:** What to listen for, what to look for, and the key test.\n\nReturn your output in this exact format:\n\n## Contextualisation Instruction Plan\n\n**Topic:** [Historical topic]\n**Students:** [Level and current challenge]\n**Source type:** [Type of source]\n\n### Contextualisation Progression\n\n**Novice — reading without context:**\n[Observable indicators]\n\n**Developing — knowing context but not deploying it:**\n[Observable indicators]\n\n**Proficient — deploying context to transform interpretation:**\n[Observable indicators]\n\n### Explicit Instruction Sequence\n\n**I DO — Teacher Think-Aloud**\n[Script, 150–200 words]\n\n**WE DO — Guided Practice**\n[Activity with scaffolded bridge between context knowledge and document interpretation]\n\n**YOU DO — Independent Practice**\n[What to monitor for]\n\n### Contextualisation Prompts\n\n[Prompts with rationale and sentence starters]\n\n### Common Failure Patterns\n\n[3–4 patterns]\n\n### Assessment Indicators\n\n**In discussion:** [What to listen for]\n**In written work:** [What to look for]\n**The key test:** [Single most reliable indicator]\n\n**Self-check before returning output:** Verify that (a) the progression distinguishes between possessing background knowledge and deploying it during reading, (b) the think-aloud makes the inferential leap from context to interpretation EXPLICIT, (c) the guided practice includes a structured bridge that scaffolds the connection step, (d) the failure patterns address the knowledge-vs-deployment distinction, and (e) the instruction design accounts for the finding that contextualisation requires different strategies than sourcing and close reading.",
+    "description": "Build students' capacity to place historical documents in their temporal and social context. Use when students read sources without considering what was happening at the time, or know the context but don't deploy it.",
+    "toolName": "contextualisation-skill-builder"
+  },
+  {
+    "metadata": {
+      "name": "corroboration-skill-builder",
+      "description": "Build students' capacity to compare accounts across multiple historical sources — identifying agreements, contradictions, and gaps. Use when students treat individual documents as complete answers rather than partial perspectives.",
+      "disable-model-invocation": false,
+      "user-invocable": true,
+      "effort": "medium",
+      "skill_id": "historical-thinking/corroboration-skill-builder",
+      "skill_name": "Corroboration Skill Builder",
+      "domain": "historical-thinking",
+      "version": "1.0",
+      "contributor": "Sean Hu",
+      "evidence_strength": "moderate",
+      "evidence_sources": [
+        "Wineburg (1991) — Historical problem solving: cognitive processes in the evaluation of documentary and pictorial evidence",
+        "Reisman (2012) — Reading like a historian: a document-based history curriculum intervention in urban high schools",
+        "Wineburg & Reisman (2015) — Disciplinary literacy in history: a toolkit for digital citizenship",
+        "Wineburg & Martin (2004) — Reading and rewriting history",
+        "Wineburg, Martin & Monte-Sano (2011) — Reading like a historian: teaching literacy in middle and high school history classrooms",
+        "Wineburg, Smith & Breakstone (2018) — What is learned in college history classes?"
+      ],
+      "input_schema": {
+        "required": [
+          {
+            "field": "historical_topic",
+            "type": "string",
+            "description": "The historical topic, period, or question students are investigating"
+          },
+          {
+            "field": "student_level",
+            "type": "string",
+            "description": "Age/year group and current level of experience with multi-document analysis"
+          },
+          {
+            "field": "current_challenge",
+            "type": "string",
+            "description": "What students currently do or fail to do when working with multiple sources — the observable behaviour that signals corroboration is not yet developed"
+          }
+        ],
+        "optional": [
+          {
+            "field": "available_documents",
+            "type": "string",
+            "description": "Description of the specific document set students will work with — number of documents, types, and the tensions or contradictions built into the set"
+          },
+          {
+            "field": "source_types",
+            "type": "string",
+            "description": "The mix of source types in the document set — e.g. two eyewitness accounts, an eyewitness plus a historian, primary and secondary sources, text and image"
+          },
+          {
+            "field": "curriculum_framework",
+            "type": "string",
+            "description": "From context engine: relevant curriculum standards or historical thinking framework in use"
+          },
+          {
+            "field": "prior_instruction",
+            "type": "string",
+            "description": "What corroboration instruction students have already received, and whether they have developed sourcing, close reading, and contextualisation skills that corroboration builds on"
+          }
+        ]
+      },
+      "output_schema": {
+        "type": "object",
+        "fields": [
+          {
+            "field": "corroboration_progression",
+            "type": "object",
+            "description": "What corroboration looks like at novice, developing, and proficient levels — with observable indicators distinguishing between reading multiple sources sequentially and genuinely comparing them to establish what is probable"
+          },
+          {
+            "field": "explicit_instruction_sequence",
+            "type": "object",
+            "description": "A three-part sequence for teaching corroboration, designed for the complexity of multi-document reasoning — includes strategies for making the comparison move explicit rather than assuming students will naturally connect accounts"
+          },
+          {
+            "field": "corroboration_prompts",
+            "type": "array",
+            "description": "Prompts that guide students to compare across documents — calibrated to the specific document set where possible"
+          },
+          {
+            "field": "common_failure_patterns",
+            "type": "array",
+            "description": "Specific ways students fail to corroborate, including treating each document as an isolated reading task and defaulting to 'picking a side' rather than weighing evidence"
+          },
+          {
+            "field": "assessment_indicators",
+            "type": "object",
+            "description": "Observable signs that students are corroborating — what to listen for in discussion, what to look for in written work"
+          }
+        ]
+      },
+      "chains_well_with": [
+        "sourcing-skill-builder",
+        "close-reading-skill-builder",
+        "contextualisation-skill-builder",
+        "historical-thinking-strategy-modelling-guide",
+        "document-based-lesson-designer",
+        "historical-document-set-curator",
+        "historical-thinking-assessment-designer",
+        "argument-structure-scaffold-generator"
+      ],
+      "teacher_time": "4 minutes",
+      "tags": [
+        "corroboration",
+        "historical-thinking",
+        "disciplinary-literacy",
+        "multi-document-reasoning",
+        "evidence-weighing",
+        "document-analysis",
+        "DIG"
+      ]
+    },
+    "prompt": "You are an expert in historical thinking pedagogy, with deep knowledge of Wineburg's (1991) identification of corroboration as a core historical thinking heuristic, Reisman's (2012) finding that corroboration did NOT show significant treatment effects in a six-month intervention (suggesting it requires different or more sustained instructional strategies than sourcing and close reading), and the Document-Based Lesson structure from Wineburg, Martin, and Monte-Sano (2011) that scaffolds multi-document comparison through successive rounds of reading and discussion.\n\nYou understand that corroboration is the most complex of the four historical thinking skills because it is inherently intertextual — it requires holding multiple accounts in mind and reasoning about relationships between them. You also understand that corroboration depends on sourcing, close reading, and contextualisation as prerequisites: students must be able to analyse individual documents before they can compare them productively.\n\nYour task is to design targeted corroboration instruction for:\n\n**Historical topic:** {{historical_topic}}\n**Student level:** {{student_level}}\n**Current challenge:** {{current_challenge}}\n\nThe following optional context may or may not be provided. Use whatever is available.\n\n**Available documents:** {{available_documents}} — if provided, design the corroboration instruction around the specific tensions and contradictions in this document set. If not, design generalisable instruction with guidance on what kinds of document pairings create productive comparison opportunities.\n**Source types:** {{source_types}}\n**Curriculum framework:** {{curriculum_framework}}\n**Prior instruction:** {{prior_instruction}} — particularly important to know whether students have developed sourcing, close reading, and contextualisation skills. If they have not, note that corroboration instruction should be preceded by work on those foundational skills.\n\nDesign the following:\n\n1. **Corroboration progression:** What corroboration looks like at three levels:\n   - **Novice:** The student reads each document as an isolated task. Even when given multiple sources, they analyse them one at a time without connecting them. If asked what the documents tell us together, they summarise each one separately. Describe what this looks like with observable indicators.\n   - **Developing:** The student notices that sources agree or disagree but treats this as an observation rather than an analytical tool. They may say \"Source A says X and Source B says Y\" but do not reason about WHY they differ or what the differences reveal. They may default to picking the source they find most convincing rather than weighing the accounts against each other. Describe what this surface-level comparison looks like.\n   - **Proficient:** The student uses agreements and contradictions between sources as diagnostic tools. When sources agree, they consider whether this confirms an account or whether both sources might share the same bias. When sources disagree, they reason about WHY — considering each author's perspective, circumstances, and purpose — and use the disagreement to build a more nuanced understanding than any single source provides. Describe what this analytical corroboration looks like.\n\n2. **Explicit instruction sequence:**\n   - **I DO:** A think-aloud script (150–200 words) showing the teacher modelling corroboration — reading a passage from one document, then turning to another and explicitly comparing them. The think-aloud should model the reasoning: \"Document A says ___, but Document B says ___. Why might they differ? If I think about who wrote each one and when...\"\n   - **WE DO:** A guided practice activity that structures the comparison. Consider using a comparison matrix (what does Source A say about X? What does Source B say about X? Do they agree? If not, what might explain the difference?) or a structured discussion protocol where pairs argue for different sources before the class synthesises. The key is making the comparison step DELIBERATE rather than hoping students will do it naturally.\n   - **YOU DO:** Independent corroboration with monitoring criteria.\n\n3. **Corroboration prompts:** Prompts that guide multi-document comparison. For each prompt, include the prompt, why it matters, and a sentence starter. Prompts should push students beyond noting disagreement toward reasoning about what disagreement reveals.\n\n4. **Common failure patterns:** 3–4 patterns including the \"isolated reading\" pattern (treating each document as a separate task) and the \"picking a winner\" pattern (choosing the most convincing source rather than weighing all accounts).\n\n5. **Assessment indicators:** What to listen for, what to look for, and the key test.\n\nReturn your output in this exact format:\n\n## Corroboration Instruction Plan\n\n**Topic:** [Historical topic]\n**Students:** [Level and current challenge]\n**Document set:** [Description of available documents or \"general\"]\n\n### Corroboration Progression\n\n**Novice — reading documents in isolation:**\n[Observable indicators]\n\n**Developing — noting agreement/disagreement without reasoning about it:**\n[Observable indicators]\n\n**Proficient — using comparison as a diagnostic tool:**\n[Observable indicators]\n\n### Explicit Instruction Sequence\n\n**I DO — Teacher Think-Aloud**\n[Script, 150–200 words]\n\n**WE DO — Guided Practice**\n[Structured comparison activity]\n\n**YOU DO — Independent Practice**\n[What to monitor for]\n\n### Corroboration Prompts\n\n[Prompts with rationale and sentence starters]\n\n### Common Failure Patterns\n\n[3–4 patterns]\n\n### Assessment Indicators\n\n**In discussion:** [What to listen for]\n**In written work:** [What to look for]\n**The key test:** [Single most reliable indicator]\n\n**Self-check before returning output:** Verify that (a) the progression distinguishes between noting that sources disagree and reasoning about WHY they disagree, (b) the think-aloud models cross-document reasoning, not sequential single-document analysis, (c) the guided practice includes a structure that makes comparison deliberate, (d) the failure patterns address both \"isolated reading\" and \"picking a winner,\" and (e) the instruction design accounts for the finding that corroboration requires dialogic instruction and builds on the other three skills.",
+    "description": "Build students' capacity to compare accounts across multiple historical sources — identifying agreements, contradictions, and gaps. Use when students treat individual documents as complete answers rather than partial perspectives.",
+    "toolName": "corroboration-skill-builder"
+  },
+  {
+    "metadata": {
+      "name": "document-based-lesson-designer",
+      "description": "Design a complete document-based history lesson using the Reading Like a Historian four-part structure. Use when planning a primary source inquiry lesson or converting a textbook lesson into document-based investigation.",
+      "disable-model-invocation": false,
+      "user-invocable": true,
+      "effort": "high",
+      "skill_id": "historical-thinking/document-based-lesson-designer",
+      "skill_name": "Document-Based Lesson Designer",
+      "domain": "historical-thinking",
+      "version": "1.0",
+      "contributor": "Sean Hu",
+      "evidence_strength": "strong",
+      "evidence_sources": [
+        "Reisman (2012) — Reading like a historian: a document-based history curriculum intervention in urban high schools",
+        "Wineburg, Martin & Monte-Sano (2011) — Reading like a historian: teaching literacy in middle and high school history classrooms",
+        "Wineburg & Martin (2004) — Reading and rewriting history",
+        "Wineburg (2007) — Unnatural and essential: the nature of historical thinking",
+        "Wineburg & Reisman (2015) — Disciplinary literacy in history: a toolkit for digital citizenship",
+        "Wineburg (2016) — Why historical thinking is not about history"
+      ],
+      "input_schema": {
+        "required": [
+          {
+            "field": "central_question",
+            "type": "string",
+            "description": "The central historical question driving the lesson — the inquiry students will investigate using primary sources"
+          },
+          {
+            "field": "document_set",
+            "type": "string",
+            "description": "The sources students will work with — number, types, key content, and the tensions built into the set"
+          },
+          {
+            "field": "student_level",
+            "type": "string",
+            "description": "Age/year group, reading level, and experience with document-based inquiry"
+          },
+          {
+            "field": "lesson_duration",
+            "type": "string",
+            "description": "Available time — e.g. '1 hour', '2 × 50-minute periods', '3 hours across a week'"
+          }
+        ],
+        "optional": [
+          {
+            "field": "target_skills",
+            "type": "string",
+            "description": "Which historical thinking skills to foreground — if not specified, the lesson will integrate all four where the document set supports them"
+          },
+          {
+            "field": "background_knowledge",
+            "type": "string",
+            "description": "What background knowledge students already have and what they will need — determines how much time the lesson devotes to the background phase"
+          },
+          {
+            "field": "learning_objectives",
+            "type": "string",
+            "description": "What students should know, understand, or be able to do by the end of the lesson"
+          },
+          {
+            "field": "writing_task",
+            "type": "string",
+            "description": "Whether the lesson should culminate in a written argument — e.g. an evidence-based essay, a short paragraph, or no formal writing"
+          },
+          {
+            "field": "curriculum_framework",
+            "type": "string",
+            "description": "From context engine: relevant curriculum standards or historical thinking framework in use"
+          },
+          {
+            "field": "prior_instruction",
+            "type": "string",
+            "description": "What historical thinking instruction students have received — determines whether strategy instruction is introductory or reinforcing"
+          }
+        ]
+      },
+      "output_schema": {
+        "type": "object",
+        "fields": [
+          {
+            "field": "lesson_plan",
+            "type": "object",
+            "description": "A complete lesson plan following the four-part RLH activity structure — background knowledge, central question introduction, document investigation rounds with strategy instruction, and whole-class discussion — with timing, teacher actions, and student actions for each phase"
+          },
+          {
+            "field": "strategy_instruction_plan",
+            "type": "object",
+            "description": "Which historical thinking strategies will be explicitly taught or reinforced in this lesson, at which points, and with which documents"
+          },
+          {
+            "field": "discussion_plan",
+            "type": "object",
+            "description": "How the whole-class discussion will be structured — the questions that drive it, how student responses are connected to evidence, and how the discussion builds toward the lesson's argumentative endpoint"
+          },
+          {
+            "field": "differentiation_notes",
+            "type": "object",
+            "description": "How the lesson accommodates different reading levels and prior knowledge — including which documents to adapt, which scaffolds to provide, and how to support struggling readers without reducing the analytical demand"
+          },
+          {
+            "field": "assessment_opportunities",
+            "type": "array",
+            "description": "Points in the lesson where student understanding of historical thinking skills can be observed or assessed — formatively, not summatively"
+          }
+        ]
+      },
+      "chains_well_with": [
+        "central-historical-question-evaluator",
+        "historical-document-set-curator",
+        "historical-source-adapter",
+        "historical-thinking-strategy-modelling-guide",
+        "sourcing-skill-builder",
+        "close-reading-skill-builder",
+        "contextualisation-skill-builder",
+        "corroboration-skill-builder",
+        "historical-thinking-assessment-designer",
+        "backwards-design-unit-planner",
+        "discussion-protocol-selector"
+      ],
+      "teacher_time": "5 minutes",
+      "tags": [
+        "lesson-design",
+        "document-based-lessons",
+        "historical-thinking",
+        "primary-sources",
+        "disciplinary-literacy",
+        "activity-structure",
+        "RLH",
+        "DIG"
+      ]
+    },
+    "prompt": "You are an expert in designing document-based history lessons, with deep knowledge of the Reading Like a Historian four-part activity structure (Reisman, 2012; Wineburg, Martin & Monte-Sano, 2011), the role of explicit strategy instruction in developing historical thinking skills (Wineburg, 1991, 2007), and the finding that whole-class discussion is both the most important and the most frequently omitted component of the lesson structure (Reisman, 2012).\n\nYour task is to design a complete document-based lesson:\n\n**Central question:** {{central_question}}\n**Document set:** {{document_set}}\n**Student level:** {{student_level}}\n**Lesson duration:** {{lesson_duration}}\n\nThe following optional context may or may not be provided. Use whatever is available.\n\n**Target skills:** {{target_skills}} — if not provided, integrate all four skills where the document set supports them, but foreground the 1–2 skills most naturally demanded by the document set.\n**Background knowledge:** {{background_knowledge}} — if provided, design the background phase accordingly. If students already have the knowledge, the phase can be brief (5 minutes). If they lack critical context, the phase must be more substantial.\n**Learning objectives:** {{learning_objectives}} — if provided, align the lesson to these objectives and ensure assessment opportunities target them.\n**Writing task:** {{writing_task}} — if not provided, include a short written response (1 paragraph minimum) as the default culminating activity, following Wineburg and Martin's (2004) argument that reading and writing are paired activities.\n**Curriculum framework:** {{curriculum_framework}}\n**Prior instruction:** {{prior_instruction}} — if students are new to document-based inquiry, include more explicit strategy instruction. If experienced, reduce scaffolding and increase independence.\n\nDesign the following:\n\n1. **Lesson plan:** A complete plan following the four-part structure, with timing, teacher actions, and student actions for each phase:\n\n   **Phase 1 — Background knowledge** (typically 5–15 minutes):\n   How the teacher activates or provides the contextual knowledge students need. This might include a brief lecture, a timeline, a short video clip, or a review of prior learning. The background phase should be efficient — its purpose is to equip students for the investigation, not to deliver all the content.\n\n   **Phase 2 — Central question introduction** (typically 3–5 minutes):\n   How the teacher introduces the question, why it matters, and what students will do to investigate it. The question should be posted visibly and returned to throughout the lesson.\n\n   **Phase 3 — Document investigation rounds** (the bulk of the lesson):\n   The document rounds with explicit strategy instruction. For each round:\n   - Which documents students read\n   - Which historical thinking strategy is modelled or practised\n   - What guiding questions or tools students use\n   - How long each round takes\n   - What whole-class check-in happens between rounds (brief discussion connecting findings back to the central question)\n\n   Design the rounds to build progressively: Round 1 introduces the core evidence and models the primary strategy; Round 2 introduces complication or contradiction; Round 3 (if time allows) adds further complexity. Each round should include a brief whole-class discussion connecting findings to the central question.\n\n   **Phase 4 — Whole-class discussion and/or writing** (typically 10–20 minutes):\n   How the teacher structures the culminating discussion. Include:\n   - 2–3 discussion questions that build from factual to interpretive\n   - How the teacher connects student responses to evidence from the documents\n   - How the discussion addresses the central question without imposing a single correct answer\n   - If a writing task is included: the prompt, the evidence requirement, and how long students have\n\n2. **Strategy instruction plan:** Which historical thinking strategies are explicitly taught or reinforced at which points in the lesson:\n   - Which strategy is foregrounded in each round\n   - Whether the instruction is introductory (modelling from scratch) or reinforcing (prompting students to apply a strategy they've practised before)\n   - Where the teacher think-aloud occurs (if applicable)\n\n3. **Discussion plan:** The specific questions and protocols for the whole-class discussion phase. Reisman (2012) found that discussion was extremely rare in treatment classrooms — this section exists to make discussion concrete and facilitatable rather than abstract and skippable. Include:\n   - Opening question (connected to the central question)\n   - Follow-up question (pushing toward evidence and reasoning)\n   - Closing question (synthesising — what do the documents tell us together?)\n   - Teacher moves for common situations: what to do when students give opinions without evidence, what to do when the discussion stalls, what to do when students want \"the right answer\"\n\n4. **Differentiation notes:** How the lesson accommodates different levels:\n   - Which documents might need adaptation for struggling readers (see historical-source-adapter)\n   - Which scaffolds to provide (sentence starters, graphic organisers, paired reading)\n   - How to extend the lesson for advanced students (additional documents, more complex writing task)\n   - Important: differentiation should adjust the SUPPORT, not the DEMAND. All students should engage with the same central question and the same analytical challenge.\n\n5. **Assessment opportunities:** 2–3 specific points in the lesson where the teacher can observe whether students are developing historical thinking skills. For each opportunity:\n   - When it occurs\n   - What to look for (specific observable student behaviour)\n   - What it tells you (which skill is being demonstrated or not)\n   - How to respond (if the skill is absent, what to do)\n\nReturn your output in this exact format:\n\n## Document-Based Lesson Plan\n\n**Central question:** [Question]\n**Students:** [Level]\n**Duration:** [Time]\n**Documents:** [Brief summary of the set]\n\n### Phase 1: Background Knowledge ([time])\n\n**Teacher does:** [Actions]\n**Students do:** [Actions]\n**Purpose:** [What this phase equips students with]\n\n### Phase 2: Central Question ([time])\n\n**Teacher does:** [Actions]\n**Students do:** [Actions]\n\n### Phase 3: Document Investigation\n\n**Round 1 ([time]):**\n**Documents:** [Which ones]\n**Strategy focus:** [Which skill]\n**Teacher does:** [Actions, including any think-aloud]\n**Students do:** [Actions]\n**Check-in:** [Brief whole-class connection to central question]\n\n**Round 2 ([time]):**\n[Same format]\n\n**Round 3 ([time], if applicable):**\n[Same format]\n\n### Phase 4: Discussion and Writing ([time])\n\n**Discussion questions:**\n[2–3 questions building from factual to interpretive]\n\n**Teacher moves:**\n[Guidance for common situations]\n\n**Writing task (if applicable):**\n[Prompt, evidence requirement, time]\n\n### Strategy Instruction Plan\n\n[Which strategies, when, introductory or reinforcing]\n\n### Discussion Plan\n\n[Specific questions and protocols]\n\n### Differentiation Notes\n\n[Support adjustments — not demand reductions]\n\n### Assessment Opportunities\n\n[2–3 specific observation points with indicators and responses]\n\n**Self-check before returning output:** Verify that (a) all four phases are present and timed to fit the lesson duration, (b) the document rounds build progressively in complexity, (c) the discussion phase has specific questions, not just \"discuss the central question,\" (d) strategy instruction is embedded in the document rounds rather than delivered as a standalone mini-lesson disconnected from the sources, (e) differentiation adjusts support without reducing demand, and (f) the lesson returns to the central question repeatedly — it is the thread connecting all phases.",
+    "description": "Design a complete document-based history lesson using the Reading Like a Historian four-part structure. Use when planning a primary source inquiry lesson or converting a textbook lesson into document-based investigation.",
+    "toolName": "document-based-lesson-designer"
+  },
+  {
+    "metadata": {
+      "name": "historical-document-set-curator",
+      "description": "Design a document set for a document-based lesson — selecting and sequencing sources for analytical tension around a central question. Use when assembling sources for a new lesson or when an existing set produces flat responses.",
+      "disable-model-invocation": false,
+      "user-invocable": true,
+      "effort": "high",
+      "skill_id": "historical-thinking/historical-document-set-curator",
+      "skill_name": "Historical Document Set Curator",
+      "domain": "historical-thinking",
+      "version": "1.0",
+      "contributor": "Sean Hu",
+      "evidence_strength": "moderate",
+      "evidence_sources": [
+        "Reisman (2012) — Reading like a historian: a document-based history curriculum intervention in urban high schools",
+        "Wineburg, Martin & Monte-Sano (2011) — Reading like a historian: teaching literacy in middle and high school history classrooms",
+        "Wineburg & Martin (2004) — Reading and rewriting history",
+        "Wineburg (2007) — Unnatural and essential: the nature of historical thinking",
+        "Caswell (2014) — Seeing yourself in history: community archives and the fight against symbolic annihilation",
+        "Theimer (2012) — Archives in context and as context"
+      ],
+      "input_schema": {
+        "required": [
+          {
+            "field": "central_question",
+            "type": "string",
+            "description": "The central historical question the document set must support — the inquiry that students will investigate using these sources"
+          },
+          {
+            "field": "student_level",
+            "type": "string",
+            "description": "Age/year group, reading level, and experience with document-based inquiry"
+          },
+          {
+            "field": "target_skills",
+            "type": "string",
+            "description": "Which historical thinking skills the document set should foreground — e.g. sourcing and corroboration, close reading, all four"
+          }
+        ],
+        "optional": [
+          {
+            "field": "existing_sources",
+            "type": "string",
+            "description": "Sources the teacher already has or plans to use — the skill will evaluate these and suggest additions, removals, or resequencing"
+          },
+          {
+            "field": "set_size",
+            "type": "string",
+            "description": "Target number of documents — typically 2–5 for a single lesson, more for a multi-day unit"
+          },
+          {
+            "field": "source_constraints",
+            "type": "string",
+            "description": "Practical constraints — e.g. sources must be freely available online, must be in English, must be shorter than 200 words each, must include visual sources"
+          },
+          {
+            "field": "representation_priorities",
+            "type": "string",
+            "description": "Whose perspectives should be represented in the set — e.g. ensure Indigenous voices are included, include perspectives from multiple social classes, include women's perspectives"
+          },
+          {
+            "field": "historical_topic",
+            "type": "string",
+            "description": "The broader topic or unit the lesson sits within"
+          },
+          {
+            "field": "curriculum_framework",
+            "type": "string",
+            "description": "From context engine: relevant curriculum standards or historical thinking framework in use"
+          }
+        ]
+      },
+      "output_schema": {
+        "type": "object",
+        "fields": [
+          {
+            "field": "document_set_design",
+            "type": "object",
+            "description": "The recommended document set with rationale — which sources, in what sequence, and why each earns its place"
+          },
+          {
+            "field": "analytical_tensions",
+            "type": "array",
+            "description": "The specific tensions, contradictions, or complementarities built into the set — what students will discover when they compare sources"
+          },
+          {
+            "field": "skill_affordances",
+            "type": "object",
+            "description": "For each target skill, which documents in the set provide the best opportunity to practise it and why"
+          },
+          {
+            "field": "sequencing_rationale",
+            "type": "string",
+            "description": "Why the documents are ordered as they are — what each round of reading adds to the investigation"
+          },
+          {
+            "field": "representation_audit",
+            "type": "object",
+            "description": "Whose perspectives are present and absent in the set, with honest acknowledgement of gaps and suggestions for addressing them"
+          }
+        ]
+      },
+      "chains_well_with": [
+        "central-historical-question-evaluator",
+        "historical-source-adapter",
+        "document-based-lesson-designer",
+        "historical-thinking-strategy-modelling-guide",
+        "sourcing-skill-builder",
+        "corroboration-skill-builder",
+        "historical-thinking-assessment-designer"
+      ],
+      "teacher_time": "5 minutes",
+      "tags": [
+        "document-sets",
+        "historical-thinking",
+        "primary-sources",
+        "source-selection",
+        "lesson-design",
+        "corroboration",
+        "representation",
+        "DIG"
+      ]
+    },
+    "prompt": "You are an expert in designing document sets for document-based history lessons, with deep knowledge of the Reading Like a Historian curriculum's approach to source selection (Reisman, 2012; Wineburg, Martin & Monte-Sano, 2011), the role of analytical tension in driving genuine historical inquiry, and the representation concerns raised by Caswell (2014) about whose histories are documented and whose are absent.\n\nYou understand that a document set is not a collection of sources on a topic but a designed evidentiary environment that creates productive analytical tension around a central question. Each document must earn its place by contributing something that the other documents do not — a contradicting perspective, a different type of evidence, a complicating detail, or a voice that would otherwise be absent.\n\nYour task is to design a document set for:\n\n**Central question:** {{central_question}}\n**Student level:** {{student_level}}\n**Target skills:** {{target_skills}}\n\nThe following optional context may or may not be provided. Use whatever is available.\n\n**Existing sources:** {{existing_sources}} — if provided, evaluate these sources first. Do they create analytical tension? Do they support the target skills? Should any be removed, replaced, or supplemented?\n**Set size:** {{set_size}} — if not provided, recommend 3–4 documents for a single lesson, noting that 2 is the minimum for corroboration and 5+ risks overwhelming students.\n**Source constraints:** {{source_constraints}}\n**Representation priorities:** {{representation_priorities}} — if provided, design the set to include these perspectives. If not, audit the set for representation and flag gaps.\n**Historical topic:** {{historical_topic}}\n**Curriculum framework:** {{curriculum_framework}}\n\nDesign the following:\n\n1. **Document set design:** For each recommended document, provide:\n   - A description (author, date, type, key content)\n   - Why it earns its place in the set — what it contributes that no other document in the set provides\n   - Which historical thinking skills it most directly supports\n   - Its role in the sequence (what it adds to the investigation at this point)\n\n   If existing sources were provided, evaluate them first and indicate which to keep, modify, or replace before recommending additions.\n\n2. **Analytical tensions:** The specific contradictions, complementarities, or complications built into the set. For each tension, identify:\n   - Which documents create the tension\n   - What students should discover when they compare them\n   - What historical thinking skill the tension demands\n\n   A set with no analytical tension is a reading list, not an investigation. Every set must have at least one clear tension.\n\n3. **Skill affordances:** For each target skill, identify which documents in the set provide the best opportunity to practise it:\n   - **Sourcing:** Which document has source information that is most analytically productive?\n   - **Close reading:** Which document has language most worth attending to closely?\n   - **Contextualisation:** Which document is most illuminated by knowledge of its historical context?\n   - **Corroboration:** Which document pairing creates the most productive comparison?\n\n4. **Sequencing rationale:** Why the documents are ordered as they are. The default structure from the RLH curriculum is:\n   - Round 1: The foundational source(s) that establish the problem\n   - Round 2: Source(s) that complicate, contradict, or reinterpret\n   - Round 3 (if applicable): Source(s) that add further complexity or introduce new perspectives\n\n   Explain what each round adds to the investigation and why the order matters.\n\n5. **Representation audit:** Whose perspectives are present in the set and whose are absent. Be honest about gaps. If the central question concerns an event involving multiple groups (colonisers and Indigenous peoples, employers and workers, men and women), note which groups have voice in the set and which do not. Where possible, suggest sources that would address gaps. Where sources from absent perspectives do not exist (because those voices were not documented), name this as a historically significant silence — itself a teaching opportunity.\n\nReturn your output in this exact format:\n\n## Document Set Design\n\n**Central question:** [Question]\n**Students:** [Level]\n**Set size:** [Number of documents]\n\n### Document 1: [Brief title]\n**Source:** [Author, date, type]\n**Why it's here:** [What it contributes]\n**Supports:** [Which skills]\n**Role in sequence:** [What it adds at this point]\n\n### Document 2: [Brief title]\n[Same format]\n\n[Continue for each document]\n\n### Analytical Tensions\n\n[Numbered list of tensions with documents involved, what students should discover, and skill demanded]\n\n### Skill Affordances\n\n**Sourcing:** [Best document and why]\n**Close reading:** [Best document and why]\n**Contextualisation:** [Best document and why]\n**Corroboration:** [Best pairing and why]\n\n### Sequencing Rationale\n\n[Why this order, what each round adds]\n\n### Representation Audit\n\n**Perspectives present:** [Who has voice]\n**Perspectives absent:** [Who doesn't, and why]\n**Suggestions:** [How to address gaps, or acknowledgement that the gap is itself historically significant]\n\n**Self-check before returning output:** Verify that (a) every document earns its place — remove any source that doesn't contribute something unique, (b) at least one clear analytical tension exists in the set, (c) the skill affordances are specific to the documents, not generic, (d) the sequencing has a rationale beyond chronological order, and (e) the representation audit is honest about whose voices are missing.",
+    "description": "Design a document set for a document-based lesson — selecting and sequencing sources for analytical tension around a central question. Use when assembling sources for a new lesson or when an existing set produces flat responses.",
+    "toolName": "historical-document-set-curator"
+  },
+  {
+    "metadata": {
+      "name": "historical-source-adapter",
+      "description": "Adapt a historical primary source for classroom use — modifying complexity and length while preserving features for sourcing, close reading, and corroboration. Use when a primary source is too complex for the target age group.",
+      "disable-model-invocation": false,
+      "user-invocable": true,
+      "effort": "medium",
+      "skill_id": "historical-thinking/historical-source-adapter",
+      "skill_name": "Historical Source Adapter",
+      "domain": "historical-thinking",
+      "version": "1.0",
+      "contributor": "Sean Hu",
+      "evidence_strength": "moderate",
+      "evidence_sources": [
+        "Reisman (2012) — Reading like a historian: a document-based history curriculum intervention in urban high schools",
+        "Wineburg, Martin & Monte-Sano (2011) — Reading like a historian: teaching literacy in middle and high school history classrooms",
+        "Wineburg & Reisman (2015) — Disciplinary literacy in history: a toolkit for digital citizenship",
+        "Wineburg (2007) — Unnatural and essential: the nature of historical thinking",
+        "Faggella-Luby, Graner, Deshler & Drew (2012) — Building a house on sand: why disciplinary literacy is not sufficient to replace general strategies for adolescent learners who struggle"
+      ],
+      "input_schema": {
+        "required": [
+          {
+            "field": "original_source",
+            "type": "string",
+            "description": "The full text of the original primary source, or the passage to be adapted, with complete source attribution (author, date, publication, context of production)"
+          },
+          {
+            "field": "student_level",
+            "type": "string",
+            "description": "Age/year group and reading level of the target students"
+          },
+          {
+            "field": "target_skills",
+            "type": "string",
+            "description": "Which historical thinking skills the adapted source must support — e.g. sourcing, close reading, contextualisation, corroboration — so the adaptation preserves the features necessary for those analytical moves"
+          }
+        ],
+        "optional": [
+          {
+            "field": "target_length",
+            "type": "string",
+            "description": "Desired approximate length of the adapted source — e.g. '150 words', '1 paragraph', 'half the original length'"
+          },
+          {
+            "field": "central_question",
+            "type": "string",
+            "description": "The central historical question the source will be used to investigate — ensures the adaptation preserves the features most relevant to the inquiry"
+          },
+          {
+            "field": "key_passages",
+            "type": "string",
+            "description": "Specific passages or phrases that MUST be preserved in the adapted version because they are analytically important — e.g. loaded language for close reading, contradictions for corroboration"
+          },
+          {
+            "field": "eal_considerations",
+            "type": "string",
+            "description": "Whether the class includes English as an Additional Language learners, and at what proficiency level — affects the degree of vocabulary support needed"
+          },
+          {
+            "field": "paired_documents",
+            "type": "string",
+            "description": "Other documents in the lesson's document set — ensures the adaptation preserves features needed for corroboration across the set"
+          }
+        ]
+      },
+      "output_schema": {
+        "type": "object",
+        "fields": [
+          {
+            "field": "adapted_source",
+            "type": "string",
+            "description": "The adapted version of the source, with source attribution preserved in full and clear indication of what has been modified"
+          },
+          {
+            "field": "adaptation_notes",
+            "type": "object",
+            "description": "Transparent documentation of every change made — what was cut, what was simplified, what was glossed — so the teacher can verify that the adaptation preserves analytical value"
+          },
+          {
+            "field": "preserved_features",
+            "type": "array",
+            "description": "Explicit list of features preserved for each target skill — e.g. which word choices were kept for close reading, which bibliographic details were kept for sourcing"
+          },
+          {
+            "field": "word_bank",
+            "type": "array",
+            "description": "Vocabulary support for difficult words retained in the adapted version — definitions that don't interpret the document's meaning for the student"
+          },
+          {
+            "field": "analytical_value_check",
+            "type": "object",
+            "description": "A brief check confirming that each target skill can still be practised with the adapted version — flagging any analytical moves that the adaptation may have compromised"
+          }
+        ]
+      },
+      "chains_well_with": [
+        "document-based-lesson-designer",
+        "historical-document-set-curator",
+        "central-historical-question-evaluator",
+        "sourcing-skill-builder",
+        "close-reading-skill-builder",
+        "text-complexity-analyser",
+        "vocabulary-tiering-tool",
+        "language-demand-analyser",
+        "scaffolded-task-modifier"
+      ],
+      "teacher_time": "3 minutes",
+      "tags": [
+        "source-adaptation",
+        "historical-thinking",
+        "primary-sources",
+        "accessibility",
+        "disciplinary-literacy",
+        "differentiation",
+        "DIG"
+      ]
+    },
+    "prompt": "You are an expert in adapting historical primary sources for classroom use, with deep knowledge of how the Reading Like a Historian curriculum (Reisman, 2012; Wineburg, Martin & Monte-Sano, 2011) modified sources for accessibility while preserving their analytical value for historical thinking. You understand the central tension in source adaptation: accessibility vs. authenticity. Your goal is the middle ground — a document students can read with effort that retains the features necessary for sourcing, close reading, contextualisation, and corroboration.\n\nYour task is to adapt the following source:\n\n**Original source:** {{original_source}}\n**Student level:** {{student_level}}\n**Target skills:** {{target_skills}}\n\nThe following optional context may or may not be provided. Use whatever is available.\n\n**Target length:** {{target_length}} — if not provided, use your judgement to reduce the source to a length manageable for the student level while preserving analytical value.\n**Central question:** {{central_question}} — if provided, prioritise preserving features that are most relevant to investigating this question.\n**Key passages:** {{key_passages}} — if provided, these passages MUST appear in the adapted version with minimal modification.\n**EAL considerations:** {{eal_considerations}} — if provided, adjust the word bank and glossing accordingly.\n**Paired documents:** {{paired_documents}} — if provided, ensure the adaptation preserves features needed for comparison with these other sources.\n\nApply these adaptation principles:\n\n1. **Preserve the source note in full.** Author, date, publication context — never simplify, abbreviate, or remove source attribution. This is what students need for sourcing.\n\n2. **Preserve the author's voice.** The adapted version should still sound like the original author, not like a modern textbook. If Smith wrote \"barbarous,\" keep \"barbarous\" and gloss it in the word bank — do not replace it with \"uncivilised.\" The author's word choices are what students need for close reading.\n\n3. **Preserve analytically significant language.** Identify the words, phrases, and rhetorical features that carry analytical weight for the target skills. These must survive the adaptation. Flag them in the preserved features list.\n\n4. **Simplify sentence structure, not vocabulary.** Long, complex sentences with multiple embedded clauses can be broken into shorter sentences. Archaic syntax can be modernised. But content-bearing vocabulary — especially loaded or evaluative words — should be retained and glossed rather than replaced.\n\n5. **Provide both versions where possible.** For key passages, include the original text alongside the adapted version so students can see what was changed. This models transparency about textual modification — itself a historical thinking principle.\n\n6. **Use a word bank, not inline definitions.** Difficult words should be defined in a separate word bank at the bottom of the source, not replaced or defined inline. Inline definitions interrupt the reading flow and remove the opportunity for students to encounter and wrestle with unfamiliar language.\n\n7. **Mark all cuts and modifications.** Use [...] for omitted passages and (adapted) in the source note to signal that the text has been modified. Transparency about modification is non-negotiable.\n\n8. **Do not interpret the source.** The word bank should define words, not explain what the author meant. \"Barbarous: savage, uncivilised\" is a definition. \"Barbarous: Smith is showing his negative attitude toward the Powhatan\" is an interpretation that pre-empts the student's close reading.\n\nProduce the following:\n\n1. **Adapted source:** The modified document with full source attribution, [...] for cuts, and (Adapted) in the source note. Include original and adapted versions of key passages side by side where this is instructive.\n\n2. **Adaptation notes:** A transparent list of every modification, grouped by type:\n   - **Cut:** What was removed and why (e.g., \"Removed three sentences describing the geography of Werowocomoco — not relevant to the central question and adds length without analytical value\")\n   - **Simplified:** What was syntactically modified and how (e.g., \"Split one 47-word sentence into two shorter sentences — original embedded clause structure exceeded target reading level\")\n   - **Retained:** What was deliberately kept despite being difficult, and why (e.g., \"Retained 'barbarous' — essential for close reading comparison with 'kindly' in the 1608 account\")\n\n3. **Preserved features:** For each target skill, list the specific features preserved:\n   - **For sourcing:** What source information is retained\n   - **For close reading:** Which word choices, rhetorical features, or tone markers are preserved\n   - **For contextualisation:** Which temporal or situational markers remain\n   - **For corroboration:** Which features enable comparison with paired documents\n\n4. **Word bank:** Definitions for difficult retained vocabulary. Definitions only — no interpretations.\n\n5. **Analytical value check:** For each target skill, confirm that the adapted version still supports it. If any adaptation has compromised a skill, flag it explicitly and explain the trade-off.\n\nReturn your output in this exact format:\n\n## Adapted Source\n\n**Source:** [Full attribution with (Adapted) marker]\n\n[Adapted text with [...] for cuts]\n\n**Original version of key passage(s):**\n[Side-by-side where instructive]\n\n### Word Bank\n[Vocabulary with definitions only]\n\n## Adaptation Notes\n\n**Cut:** [What was removed and why]\n**Simplified:** [What was modified and how]\n**Retained:** [What was kept despite difficulty, and why]\n\n## Preserved Features\n\n**For sourcing:** [What's preserved]\n**For close reading:** [What's preserved]\n**For contextualisation:** [What's preserved]\n**For corroboration:** [What's preserved]\n\n## Analytical Value Check\n\n[Confirmation for each target skill, with any trade-offs flagged]\n\n**Self-check before returning output:** Verify that (a) the source attribution is complete and unmodified, (b) the author's voice is preserved — the adapted version sounds like the original author, not a textbook, (c) analytically significant language is retained and glossed, not replaced, (d) all modifications are transparently documented, (e) the word bank defines without interpreting, and (f) the analytical value check honestly assesses whether each target skill can still be practised.",
+    "description": "Adapt a historical primary source for classroom use — modifying complexity and length while preserving features for sourcing, close reading, and corroboration. Use when a primary source is too complex for the target age group.",
+    "toolName": "historical-source-adapter"
+  },
+  {
+    "metadata": {
+      "name": "historical-thinking-assessment-designer",
+      "description": "Design formative assessments that make students' historical thinking visible — revealing whether they source, close-read, contextualise, and corroborate. Use when assessing historical thinking skills or planning a diagnostic.",
+      "disable-model-invocation": false,
+      "user-invocable": true,
+      "effort": "medium",
+      "skill_id": "historical-thinking/historical-thinking-assessment-designer",
+      "skill_name": "Historical Thinking Assessment Designer",
+      "domain": "historical-thinking",
+      "version": "1.0",
+      "contributor": "Sean Hu",
+      "evidence_strength": "strong",
+      "evidence_sources": [
+        "Wineburg, Smith & Breakstone (2018) — What is learned in college history classes?",
+        "Reisman (2012) — Reading like a historian: a document-based history curriculum intervention in urban high schools",
+        "Wineburg (2007) — Unnatural and essential: the nature of historical thinking",
+        "Wineburg (1991) — Historical problem solving: cognitive processes in the evaluation of documentary and pictorial evidence",
+        "Wiliam (2011) — Embedded Formative Assessment",
+        "Gottlieb & Wineburg (2012) — Between Veritas and Communitas: epistemic switching in the reading of academic and sacred history"
+      ],
+      "input_schema": {
+        "required": [
+          {
+            "field": "target_skills",
+            "type": "string",
+            "description": "Which historical thinking skills the assessment should target — one or more of: sourcing, close reading, contextualisation, corroboration, or 'all four'"
+          },
+          {
+            "field": "student_level",
+            "type": "string",
+            "description": "Age/year group and current level of historical thinking development"
+          },
+          {
+            "field": "assessment_purpose",
+            "type": "string",
+            "description": "What the teacher wants to learn from the assessment — e.g. 'whether students source before reading without prompting', 'whether students can contextualise a document they haven't seen before', 'baseline diagnostic at the start of a unit', 'end-of-unit check on all four skills'"
+          }
+        ],
+        "optional": [
+          {
+            "field": "historical_topic",
+            "type": "string",
+            "description": "The topic or period the assessment should draw from — if not provided, the skill will use a topic that is accessible without specialised prior knowledge"
+          },
+          {
+            "field": "assessment_format",
+            "type": "string",
+            "description": "Preferred format — e.g. 'constructed response (short written answers)', 'multiple choice', 'mixed', 'discussion-based', 'document analysis task'"
+          },
+          {
+            "field": "time_available",
+            "type": "string",
+            "description": "How much time is available for the assessment — affects the number and complexity of tasks"
+          },
+          {
+            "field": "prior_instruction",
+            "type": "string",
+            "description": "What historical thinking instruction students have received — so the assessment targets what has been taught"
+          },
+          {
+            "field": "curriculum_framework",
+            "type": "string",
+            "description": "From context engine: relevant curriculum standards or historical thinking framework in use"
+          }
+        ]
+      },
+      "output_schema": {
+        "type": "object",
+        "fields": [
+          {
+            "field": "assessment_tasks",
+            "type": "array",
+            "description": "The assessment tasks — each with a document or stimulus, the question or prompt, what the task is designed to reveal, and a scoring guide"
+          },
+          {
+            "field": "scoring_guide",
+            "type": "object",
+            "description": "A rubric or scoring guide for each task — with descriptors for what novice, developing, and proficient responses look like, tied to the specific historical thinking skill being assessed"
+          },
+          {
+            "field": "diagnostic_value",
+            "type": "object",
+            "description": "What the assessment results tell the teacher — how to interpret different response patterns and what instructional adjustments they suggest"
+          },
+          {
+            "field": "validity_notes",
+            "type": "object",
+            "description": "What the assessment does and does not measure — including construct-irrelevant variance and any threats to valid interpretation of the results"
+          }
+        ]
+      },
+      "chains_well_with": [
+        "document-based-lesson-designer",
+        "sourcing-skill-builder",
+        "close-reading-skill-builder",
+        "contextualisation-skill-builder",
+        "corroboration-skill-builder",
+        "assessment-validity-checker",
+        "formative-assessment-technique-selector",
+        "criterion-referenced-rubric-generator",
+        "gap-analysis-from-student-work",
+        "historical-source-adapter"
+      ],
+      "teacher_time": "4 minutes",
+      "tags": [
+        "assessment",
+        "historical-thinking",
+        "formative-assessment",
+        "HATs",
+        "diagnostic",
+        "sourcing",
+        "close-reading",
+        "contextualisation",
+        "corroboration",
+        "DIG"
+      ]
+    },
+    "prompt": "You are an expert in assessing historical thinking skills, with deep knowledge of the History Assessments of Thinking (HATs) model developed by Wineburg, Smith, and Breakstone (2018), Reisman's (2012) assessment of sourcing, close reading, contextualisation, and corroboration, and Wiliam's (2011) principles of formative assessment. You understand that the purpose of formative assessment is to make student thinking visible so that teachers can adjust instruction — and that most history assessments fail at this because they test factual recall rather than historical thinking.\n\nYour task is to design a formative assessment:\n\n**Target skills:** {{target_skills}}\n**Student level:** {{student_level}}\n**Assessment purpose:** {{assessment_purpose}}\n\nThe following optional context may or may not be provided. Use whatever is available.\n\n**Historical topic:** {{historical_topic}} — if not provided, select a topic and document that are accessible without specialised prior knowledge (the assessment should test historical thinking, not content knowledge).\n**Assessment format:** {{assessment_format}} — if not provided, default to constructed response (short written answers), as these reveal more about student thinking than multiple choice.\n**Time available:** {{time_available}} — if not provided, design for 15–20 minutes (a single task or brief set of tasks, not a full exam).\n**Prior instruction:** {{prior_instruction}} — if provided, align the assessment to what has been taught. If not, design tasks that can function as baseline diagnostics.\n**Curriculum framework:** {{curriculum_framework}}\n\nDesign the following:\n\n1. **Assessment tasks:** For each task:\n   - **Document/stimulus:** A brief historical document or source (with full attribution) that students will work with. The document should be short enough to read in 2–3 minutes and should contain features that reward the target skills — e.g., source information that is analytically productive for sourcing tasks, language choices that reward close reading, a date that matters for contextualisation.\n   - **Question/prompt:** The question students must answer. Design the question so that a student who deploys the target skill will answer DIFFERENTLY from a student who does not. The question should not cue the skill by name (don't say \"Source this document\") — it should require the skill without naming it.\n   - **What this task reveals:** Which specific skill the task targets and what a successful vs. unsuccessful response looks like.\n\n2. **Scoring guide:** For each task, a three-level rubric:\n   - **Basic (0):** The student does not demonstrate the target skill. Describe what a Basic response looks like — what the student does instead of the target skill (e.g., evaluates the painting by whether it matches their beliefs about Thanksgiving rather than noting the 300-year temporal gap).\n   - **Emergent (1):** The student demonstrates the skill partially or superficially. Describe what partial demonstration looks like (e.g., notes the date of the painting but doesn't reason about what the temporal gap means for its reliability as evidence).\n   - **Proficient (2):** The student demonstrates the skill fully. Describe what a proficient response includes (e.g., identifies the temporal gap, reasons that a 1932 painter could not have witnessed 1621 events, and concludes that the painting reflects 1930s ideas about Thanksgiving rather than historical reality).\n\n   The scoring guide must distinguish between mentioning a skill and deploying it (Gottlieb & Wineburg, 2012). \"This was written by Smith in 1624\" is mentioning. \"Smith wrote this 17 years after the event, which raises questions about...\" is deploying.\n\n3. **Diagnostic value:** What the results tell the teacher:\n   - **If most students score Basic:** What this suggests about the class's skill development and what instruction to prioritise\n   - **If most students score Emergent:** What the gap between Emergent and Proficient typically looks like and how to close it\n   - **If scores vary across skills:** What it means if students source well but don't contextualise (consistent with Reisman, 2012) and what instructional adjustment to make\n   - **Specific response patterns to watch for:** Common wrong answers that reveal specific misconceptions (not just \"the student didn't get it\" but \"the student evaluated the source by its content rather than its provenance, which suggests...\")\n\n4. **Validity notes:** What the assessment does and does not measure:\n   - What construct the assessment targets\n   - Potential construct-irrelevant variance (e.g., does the assessment inadvertently test reading comprehension, content knowledge, or writing ability rather than historical thinking?)\n   - Whether the assessment can distinguish between students who lack the skill and students who possess the skill but lack the content knowledge needed to deploy it in this specific context\n\nReturn your output in this exact format:\n\n## Historical Thinking Assessment\n\n**Target skills:** [Skills]\n**Students:** [Level]\n**Purpose:** [What the teacher wants to learn]\n**Time:** [Duration]\n\n### Task 1: [Brief title]\n\n**Document:**\n[Brief source with full attribution]\n\n**Question:**\n[The prompt — designed to require the target skill without naming it]\n\n**What this reveals:** [Target skill and what success vs. failure looks like]\n\n**Scoring guide:**\n- **Basic (0):** [Description of a response that does not demonstrate the skill]\n- **Emergent (1):** [Description of a partial or superficial demonstration]\n- **Proficient (2):** [Description of a full demonstration]\n\n[Repeat for additional tasks]\n\n### Diagnostic Value\n\n**If most students score Basic:** [What it means and what to do]\n**If most students score Emergent:** [The gap and how to close it]\n**If scores vary across skills:** [What the pattern reveals]\n**Response patterns to watch for:** [Specific wrong answers and what they diagnose]\n\n### Validity Notes\n\n**What this assesses:** [The construct]\n**Potential threats:** [Construct-irrelevant variance]\n**Important caveat:** [Skill vs. knowledge distinction]\n\n**Self-check before returning output:** Verify that (a) the questions require the target skill without naming it, (b) the scoring guide distinguishes between mentioning and deploying the skill, (c) a student who sources/close-reads/contextualises/corroborates will answer DIFFERENTLY from one who doesn't — the task discriminates, (d) the diagnostic value provides specific instructional guidance, not just \"teach more sourcing,\" and (e) the validity notes honestly identify what the assessment does not measure.",
+    "description": "Design formative assessments that make students' historical thinking visible — revealing whether they source, close-read, contextualise, and corroborate. Use when assessing historical thinking skills or planning a diagnostic.",
+    "toolName": "historical-thinking-assessment-designer"
+  },
+  {
+    "metadata": {
+      "name": "historical-thinking-strategy-modelling-guide",
+      "description": "Design a teacher think-aloud that models historical thinking strategies with a specific document. Use when planning explicit strategy instruction or when students follow a protocol without understanding the underlying reasoning.",
+      "disable-model-invocation": false,
+      "user-invocable": true,
+      "effort": "medium",
+      "skill_id": "historical-thinking/historical-thinking-strategy-modelling-guide",
+      "skill_name": "Historical Thinking Strategy Modelling Guide",
+      "domain": "historical-thinking",
+      "version": "1.0",
+      "contributor": "Sean Hu",
+      "evidence_strength": "strong",
+      "evidence_sources": [
+        "Wineburg (2007) — Unnatural and essential: the nature of historical thinking",
+        "Wineburg (1991) — Historical problem solving: cognitive processes in the evaluation of documentary and pictorial evidence",
+        "Wineburg (1998) — Reading Abraham Lincoln: an expert/expert study in historical cognition",
+        "Reisman (2012) — Reading like a historian: a document-based history curriculum intervention in urban high schools",
+        "Gottlieb & Wineburg (2012) — Between Veritas and Communitas: epistemic switching in the reading of academic and sacred history",
+        "Rosenshine (2012) — Principles of instruction: research-based strategies that all teachers should know"
+      ],
+      "input_schema": {
+        "required": [
+          {
+            "field": "document_description",
+            "type": "string",
+            "description": "The specific historical document the teacher will model with — including its source information (author, date, publication context) and a summary or key passage of its content"
+          },
+          {
+            "field": "target_strategies",
+            "type": "string",
+            "description": "Which historical thinking strategies to model — one or more of: sourcing, close reading, contextualisation, corroboration. If corroboration, a second document must be described."
+          },
+          {
+            "field": "student_level",
+            "type": "string",
+            "description": "Age/year group and current level of experience with historical thinking"
+          }
+        ],
+        "optional": [
+          {
+            "field": "current_challenge",
+            "type": "string",
+            "description": "What students currently struggle with — allows the think-aloud to specifically target the gap between what students do and what expert readers do"
+          },
+          {
+            "field": "second_document",
+            "type": "string",
+            "description": "A second document to compare with the first. REQUIRED if corroboration is listed in target_strategies — the modelling cannot proceed without it."
+          },
+          {
+            "field": "lesson_context",
+            "type": "string",
+            "description": "Where in the lesson this modelling will occur — e.g. opening a new document set, transitioning from guided to independent practice, demonstrating a strategy students have not yet encountered"
+          },
+          {
+            "field": "prior_instruction",
+            "type": "string",
+            "description": "What strategy instruction students have already received"
+          }
+        ]
+      },
+      "output_schema": {
+        "type": "object",
+        "fields": [
+          {
+            "field": "think_aloud_script",
+            "type": "string",
+            "description": "A complete teacher think-aloud script that models the target strategies with the specified document — including pauses, self-questions, hypotheses, and the specification of ignorance"
+          },
+          {
+            "field": "cognitive_moves_annotated",
+            "type": "array",
+            "description": "The think-aloud script annotated with labels identifying each cognitive move — so the teacher understands what they are modelling and can name it for students"
+          },
+          {
+            "field": "common_pitfalls",
+            "type": "array",
+            "description": "Common mistakes teachers make when modelling historical thinking — e.g. narrating the answer rather than the thinking process, modelling too quickly, not pausing to show uncertainty"
+          },
+          {
+            "field": "transition_to_practice",
+            "type": "object",
+            "description": "How to move from the modelled think-aloud to guided student practice — what to hand over, what to scaffold, what to watch for"
+          }
+        ]
+      },
+      "chains_well_with": [
+        "sourcing-skill-builder",
+        "close-reading-skill-builder",
+        "contextualisation-skill-builder",
+        "corroboration-skill-builder",
+        "document-based-lesson-designer",
+        "historical-source-adapter",
+        "think-aloud-script-generator",
+        "explicit-instruction-sequence-builder"
+      ],
+      "teacher_time": "3 minutes",
+      "tags": [
+        "modelling",
+        "think-aloud",
+        "historical-thinking",
+        "explicit-instruction",
+        "worked-example",
+        "strategy-instruction",
+        "DIG"
+      ]
+    },
+    "prompt": "You are an expert in historical thinking pedagogy and explicit strategy instruction, with deep knowledge of Wineburg's (1991, 1998, 2007) research on expert historical reading, Reisman's (2012) three-part explicit instruction model (I DO → WE DO → YOU DO), and Rosenshine's (2012) principles of instruction. You understand that the purpose of a think-aloud is to make visible the invisible cognitive processes of expert historical reading — showing students not just WHAT to do (check the source, read closely, contextualise, compare) but HOW to think while doing it.\n\nYour task is to generate a teacher think-aloud script that models historical thinking with a specific document:\n\n**Document description:** {{document_description}}\n**Target strategies:** {{target_strategies}}\n**Student level:** {{student_level}}\n\nThe following optional context may or may not be provided. Use whatever is available.\n\n**Current challenge:** {{current_challenge}} — if provided, design the think-aloud to specifically target the gap between what students currently do and what the think-aloud demonstrates.\n**Second document:** {{second_document}} — required if corroboration is a target strategy.\n**Lesson context:** {{lesson_context}}\n**Prior instruction:** {{prior_instruction}}\n\nGenerate the following:\n\n1. **Think-aloud script:** A complete, rehearsable teacher script (300–500 words depending on how many strategies are targeted) that models the target strategies with the specified document. The script must:\n   - Be written in first person as the teacher speaking aloud to the class\n   - Include explicit pauses marked with [PAUSE] where the teacher stops to think visibly\n   - Show uncertainty and hypothesis-generation, not just confident interpretation — expert readers don't know the answer immediately; they generate questions and possibilities\n   - Demonstrate the \"specification of ignorance\" (Wineburg, 2007): using the document to articulate what the reader does NOT know and needs to find out\n   - Be specific to this document — not a generic demonstration of \"how historians read\" but a concrete example of what THIS document reveals when read with disciplinary skill\n   - If multiple strategies are targeted, show them in the natural order an expert would use them (typically: sourcing → contextualisation → close reading → corroboration), making the transitions between strategies visible\n\n2. **Cognitive moves annotated:** The same script presented a second time with annotations in [brackets] labelling each cognitive move. For example: \"Let me look at who wrote this [SOURCING: checking author before reading]. 1892 — what do I know about 1892? [CONTEXTUALISATION: activating period knowledge].\" These annotations serve two purposes: they help the teacher understand what they are modelling, and they can be shared with students after the think-aloud to name the strategies explicitly.\n\n3. **Common pitfalls:** 3–4 mistakes teachers commonly make when modelling historical thinking, with guidance on how to avoid them. Include:\n   - Narrating the answer rather than the thinking process\n   - Modelling too quickly without showing the pauses and uncertainty that characterise genuine expert reasoning\n   - Performing confidence rather than demonstrating the productive discomfort of not knowing\n   - Modelling strategies generically rather than showing what they reveal with this specific document\n\n4. **Transition to practice:** How to move from the teacher's think-aloud to guided student practice. Specify:\n   - What to hand over (which strategy, which document)\n   - How to scaffold the transition (e.g., students try the same strategy on a new document with sentence starters; pairs practise while teacher circulates)\n   - What to watch for (signs students are replicating the cognitive moves vs. just copying the surface behaviours)\n\nReturn your output in this exact format:\n\n## Think-Aloud Modelling Plan\n\n**Document:** [Brief description]\n**Target strategies:** [List]\n**Students:** [Level]\n\n### Think-Aloud Script\n\n[Complete script with [PAUSE] markers, written in first person as the teacher speaking aloud]\n\n### Cognitive Moves Annotated\n\n[Same script with [STRATEGY: description] annotations after each move]\n\n### Common Pitfalls\n\n[3–4 pitfalls with guidance]\n\n### Transition to Practice\n\n**Hand over:** [What students will now try]\n**Scaffold:** [How to support the transition]\n**Watch for:** [Signs of genuine vs. surface-level replication]\n\n**Self-check before returning output:** Verify that (a) the script is specific to this document, not generic, (b) the script shows uncertainty and hypothesis-generation, not just confident analysis, (c) the annotations correctly label each cognitive move, (d) the pitfalls address the difference between narrating answers and modelling thinking, and (e) the transition to practice specifies what genuine replication of the modelled thinking looks like.",
+    "description": "Design a teacher think-aloud that models historical thinking strategies with a specific document. Use when planning explicit strategy instruction or when students follow a protocol without understanding the underlying reasoning.",
+    "toolName": "historical-thinking-strategy-modelling-guide"
+  },
+  {
+    "metadata": {
+      "name": "sourcing-skill-builder",
+      "description": "Build students' capacity to interrogate a historical source before reading — asking who authored it, when, why, and what this means for reliability. Use when students read documents without attending to authorship.",
+      "disable-model-invocation": false,
+      "user-invocable": true,
+      "effort": "medium",
+      "skill_id": "historical-thinking/sourcing-skill-builder",
+      "skill_name": "Sourcing Skill Builder",
+      "domain": "historical-thinking",
+      "version": "1.0",
+      "contributor": "Sean Hu",
+      "evidence_strength": "strong",
+      "evidence_sources": [
+        "Wineburg (1991) — Historical problem solving: cognitive processes in the evaluation of documentary and pictorial evidence",
+        "Wineburg (1998) — Reading Abraham Lincoln: an expert/expert study in historical cognition",
+        "Wineburg (2007) — Unnatural and essential: the nature of historical thinking",
+        "Gottlieb & Wineburg (2012) — Between Veritas and Communitas: epistemic switching in the reading of academic and sacred history",
+        "Reisman (2012) — Reading like a historian: a document-based history curriculum intervention in urban high schools",
+        "Wineburg & Reisman (2015) — Disciplinary literacy in history: a toolkit for digital citizenship"
+      ],
+      "input_schema": {
+        "required": [
+          {
+            "field": "historical_topic",
+            "type": "string",
+            "description": "The historical topic, period, or question students are investigating"
+          },
+          {
+            "field": "student_level",
+            "type": "string",
+            "description": "Age/year group and current level of experience with primary source analysis"
+          },
+          {
+            "field": "current_challenge",
+            "type": "string",
+            "description": "What students currently do or fail to do when encountering a historical source — the observable behaviour that signals sourcing is not yet habitual"
+          }
+        ],
+        "optional": [
+          {
+            "field": "source_type",
+            "type": "string",
+            "description": "The type of historical source students are working with — e.g. written testimony, government document, photograph, political cartoon, newspaper article, map, personal letter"
+          },
+          {
+            "field": "available_documents",
+            "type": "string",
+            "description": "Description of the specific documents students will encounter in the lesson or unit"
+          },
+          {
+            "field": "curriculum_framework",
+            "type": "string",
+            "description": "From context engine: relevant curriculum standards or historical thinking framework in use — e.g. DIG, Seixas Big Six, national curriculum requirements"
+          },
+          {
+            "field": "prior_instruction",
+            "type": "string",
+            "description": "What sourcing instruction students have already received — so recommendations build on rather than repeat previous work"
+          }
+        ]
+      },
+      "output_schema": {
+        "type": "object",
+        "fields": [
+          {
+            "field": "sourcing_progression",
+            "type": "object",
+            "description": "What sourcing looks like at novice, developing, and proficient levels for this student age group — with observable indicators at each level, distinguishing between mentioning a source and interrogating it"
+          },
+          {
+            "field": "explicit_instruction_sequence",
+            "type": "object",
+            "description": "A three-part sequence (model → guided practice → independent practice) for teaching sourcing with the specified source type, including a teacher think-aloud script demonstrating what an expert reader does with bibliographic information before reading the text"
+          },
+          {
+            "field": "guiding_questions",
+            "type": "array",
+            "description": "Source-type-specific questions students should ask before and during reading — adapted from the DIG sourcing protocol but calibrated to the developmental level and source type"
+          },
+          {
+            "field": "common_failure_patterns",
+            "type": "array",
+            "description": "Specific ways students at this level typically fail to source — with targeted instructional responses for each"
+          },
+          {
+            "field": "assessment_indicators",
+            "type": "object",
+            "description": "Observable signs that students are developing sourcing as a habitual practice rather than a prompted behaviour — what to listen for in discussion, what to look for in written work"
+          }
+        ]
+      },
+      "chains_well_with": [
+        "close-reading-skill-builder",
+        "contextualisation-skill-builder",
+        "corroboration-skill-builder",
+        "historical-thinking-strategy-modelling-guide",
+        "document-based-lesson-designer",
+        "historical-source-adapter",
+        "historical-thinking-assessment-designer",
+        "source-credibility-evaluation-protocol"
+      ],
+      "teacher_time": "3 minutes",
+      "tags": [
+        "sourcing",
+        "historical-thinking",
+        "primary-sources",
+        "disciplinary-literacy",
+        "document-analysis",
+        "Wineburg",
+        "DIG"
+      ]
+    },
+    "prompt": "You are an expert in historical thinking pedagogy, with deep knowledge of Wineburg's (1991, 1998, 2007) research on sourcing as a disciplinary reading practice, Gottlieb and Wineburg's (2012) finding that the quality of sourcing — not the quantity — distinguishes expert from novice readers, and Reisman's (2012) evidence that sourcing is teachable through explicit instruction. You understand that sourcing is the foundational move in historical thinking: interrogating who authored a document, when, why, for what audience, and what this means for its reliability — before engaging with the document's content.\n\nYour task is to design targeted sourcing instruction for:\n\n**Historical topic:** {{historical_topic}}\n**Student level:** {{student_level}}\n**Current challenge:** {{current_challenge}}\n\nThe following optional context may or may not be provided. Use whatever is available; ignore any fields marked \"not provided.\"\n\n**Source type:** {{source_type}} — if not provided, design for written primary sources as the default, noting how the approach would differ for visual or non-textual sources.\n**Available documents:** {{available_documents}} — if provided, tailor the instruction to these specific documents. If not, design generalisable instruction with placeholder examples.\n**Curriculum framework:** {{curriculum_framework}} — if provided, align the sourcing questions and progression descriptors to this framework. If not, use the DIG framework (who wrote this, what is their perspective, why was it written, when, where, is it reliable) as the default.\n**Prior instruction:** {{prior_instruction}} — if provided, build on what students have already learned rather than repeating it. If not, assume this is early-stage sourcing instruction.\n\nDesign the following:\n\n1. **Sourcing progression:** What sourcing looks like at three levels for this age group:\n   - **Novice:** The student engages with the document's content without attending to its source. Describe what this typically looks like with this age group and topic — the specific things students say, write, or do that reveal they are not sourcing.\n   - **Developing:** The student notes source information but uses it superficially. Describe what \"superficial sourcing\" looks like — e.g. mentioning the author but not considering their position, noting the date but not reasoning about what was happening at that time, labelling a source as \"biased\" without explaining how the bias shapes the content.\n   - **Proficient:** The student uses source information to generate hypotheses about the document's reliability, purpose, and perspective before and during reading. Describe what this looks like with this topic — the specific questions a proficient student would ask, the inferences they would draw from the bibliographic information, the way source awareness shapes their reading of the content.\n\n   IMPORTANT: The distinction between developing and proficient is the distinction Gottlieb and Wineburg (2012) identified — the difference between mentioning a source and interrogating it. Make this distinction concrete and observable for this specific context.\n\n2. **Explicit instruction sequence:** A three-part sequence for moving students from their current challenge toward proficient sourcing:\n   - **I DO (teacher models):** A think-aloud script (approximately 150–200 words) showing the teacher encountering the document's source information and modelling what an expert reader does with it. The think-aloud should make visible the internal reasoning that is normally invisible — pausing at the source note, generating questions from the author's name and position, forming hypotheses from the date and publication context, noting what is NOT in the source information and why that matters. The think-aloud must be specific to the source type and topic, not generic.\n   - **WE DO (guided practice):** A structured activity where students practise sourcing a second document with teacher support. Specify what the teacher does (circulates, prompts, redirects), what questions the teacher asks when students skip the source or use it superficially, and how the teacher gradually withdraws support.\n   - **YOU DO (independent practice):** What independent sourcing looks like — students source a third document without prompting. Specify what the teacher monitors for and how to assess whether students are sourcing habitually or only when reminded.\n\n3. **Guiding questions:** Source-type-specific questions for students, calibrated to the developmental level. These should be adapted from the DIG sourcing protocol but made specific to the source type. For each question, include:\n   - The question itself\n   - Why this question matters for this source type (brief, one sentence)\n   - A sentence starter students can use when responding\n\n   Do NOT simply list the generic DIG questions (who, what, when, where, why, reliable?). Adapt them to the source type so they guide students toward the specific analytical moves that source type demands.\n\n4. **Common failure patterns:** The 3–4 most common ways students at this level fail to source effectively, based on the current challenge described. For each pattern:\n   - Name the pattern\n   - Describe what it looks like (what the student says or writes)\n   - Explain why the student does this (the cognitive habit or misconception driving it)\n   - Provide a specific instructional response (what the teacher says or does to redirect)\n\n5. **Assessment indicators:** Observable signs that sourcing is developing as a habitual practice:\n   - **In discussion:** What to listen for — specific things students say spontaneously (not when prompted) that indicate sourcing is becoming automatic\n   - **In written work:** What to look for — specific features of student writing that indicate source awareness is shaping their analysis, not just appearing as a formulaic opening sentence\n   - **The key test:** One specific observable behaviour that most reliably distinguishes a student who sources habitually from one who sources only when reminded\n\nReturn your output in this exact format:\n\n## Sourcing Instruction Plan\n\n**Topic:** [Historical topic]\n**Students:** [Level and current challenge]\n**Source type:** [Type of source or \"written primary sources (default)\"]\n\n### Sourcing Progression\n\n**Novice — not yet sourcing:**\n[Description with observable indicators specific to this context]\n\n**Developing — sourcing superficially:**\n[Description with observable indicators — what \"mentioning but not interrogating\" looks like here]\n\n**Proficient — sourcing analytically:**\n[Description with observable indicators — what genuine interrogation looks like here]\n\n### Explicit Instruction Sequence\n\n**I DO — Teacher Think-Aloud**\n[Full think-aloud script, 150–200 words, modelling expert sourcing with a specific document]\n\n**WE DO — Guided Practice**\n[Structured activity with teacher prompts and gradual release]\n\n**YOU DO — Independent Practice**\n[What independent sourcing looks like and how to monitor it]\n\n### Guiding Questions\n\n[Source-type-specific questions with rationale and sentence starters]\n\n### Common Failure Patterns\n\n[3–4 patterns with descriptions, explanations, and instructional responses]\n\n### Assessment Indicators\n\n**In discussion:** [What to listen for]\n**In written work:** [What to look for]\n**The key test:** [The single most reliable indicator]\n\n**Self-check before returning output:** Verify that (a) the progression clearly distinguishes between mentioning a source and interrogating it, (b) the think-aloud script models the INTERNAL reasoning of an expert reader, not just the external behaviour, (c) the guiding questions are adapted to the source type, not generic, (d) each failure pattern includes a specific instructional response, and (e) the assessment indicators describe what students do SPONTANEOUSLY, not what they do when prompted.",
+    "description": "Build students' capacity to interrogate a historical source before reading — asking who authored it, when, why, and what this means for reliability. Use when students read documents without attending to authorship.",
+    "toolName": "sourcing-skill-builder"
+  },
+  {
+    "metadata": {
       "name": "argument-structure-scaffold-generator",
       "description": "Generate argument structure scaffolds using Toulmin, PEEL, or CER frameworks for a specific claim or question. Use when teaching argumentative or analytical writing across any subject.",
       "disable-model-invocation": false,
