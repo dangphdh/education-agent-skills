@@ -36,16 +36,16 @@ function parseFrontmatter(filePath: string): Record<string, unknown> {
 }
 
 test.describe("Skill Discovery", () => {
-  test("finds exactly 107 SKILL.md files", () => {
+  test("finds exactly 131 SKILL.md files", () => {
     const paths = getAllSkillPaths();
-    expect(paths.length).toBe(108);
+    expect(paths.length).toBe(131);
   });
 
-  test("skills span exactly 14 domains", () => {
+  test("skills span exactly 17 domains", () => {
     const domains = fs.readdirSync(SKILLS_DIR).filter((d) =>
       fs.statSync(path.join(SKILLS_DIR, d)).isDirectory()
     );
-    expect(domains.length).toBe(14);
+    expect(domains.length).toBe(17);
   });
 
   test("every SKILL.md has valid YAML frontmatter", () => {
@@ -128,13 +128,13 @@ test.describe("Registry Validation", () => {
     expect(registry.standard).toBe("agent-skills-1.0");
   });
 
-  test("registry contains 107 skills", () => {
-    expect(registry.total_skills).toBe(108);
-    expect(registry.skills.length).toBe(108);
+  test("registry contains 131 skills", () => {
+    expect(registry.total_skills).toBe(131);
+    expect(registry.skills.length).toBe(131);
   });
 
-  test("registry contains 14 domains", () => {
-    expect(registry.domains.length).toBe(14);
+  test("registry contains 17 domains", () => {
+    expect(registry.domains.length).toBe(17);
   });
 
   test("all descriptions are <= 250 characters", () => {
