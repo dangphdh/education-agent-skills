@@ -180,76 +180,15 @@ YAML schema headers, typed input and output fields, chaining metadata, and compo
 
 ## Architecture
 
-The library is Layer 1 of a three-layer system. See [ARCHITECTURE.md](docs/ARCHITECTURE.md) for the full design.
-
-**Layer 1 — Skill Library** (this repository, complete and available now)
-131 skills across 17 domains. Each skill encodes a specific, evidence-grounded instructional or curriculum design decision. Works standalone today.
-
-**Layer 2 — Context Engine** *(in design)*
-Holds persistent information about students, classes, curriculum sequences, and assessment history. When connected, skill outputs become personalised — not generic advice about retrieval practice, but a specific retrieval schedule for this class based on what they have already learned and been assessed on.
-
-**Layer 3 — Orchestrator** *(in design)*
-Allows an educator to state a high-level goal — "Design a 6-week unit on climate change for my Year 8 class" — and receive a complete, personalised plan assembled from multiple skills. The orchestrator proposes; the educator decides.
+This library is Layer 1 of a three-layer system. For the full design — including the Context Engine (Layer 2) and Orchestrator (Layer 3) — see [ARCHITECTURE.md](docs/ARCHITECTURE.md).
 
 ### For developers: the YAML schema
 
-Every skill opens with a machine-readable header. Here is a real example:
-
-```yaml
----
-skill_id: "memory-learning-science/spaced-practice-scheduler"
-skill_name: "Spaced Practice Schedule Builder"
-domain: "memory-learning-science"
-version: "1.0"
-evidence_strength: "strong"
-evidence_sources:
-  - "Cepeda et al. (2006) — Meta-analysis of 254 studies on distributed practice"
-  - "Kornell & Bjork (2008) — Spacing and interleaving effects on learning"
-  - "Dunlosky et al. (2013) — Distributed practice rated high-utility learning strategy"
-input_schema:
-  required:
-    - field: "topics"
-      type: "array"
-      description: "List of topics or concepts to be spaced across the schedule"
-    - field: "timeline"
-      type: "string"
-      description: "Available teaching period (e.g. '6-week half-term')"
-    - field: "lessons_per_week"
-      type: "integer"
-      description: "Number of lessons per week for this subject"
-  optional:
-    - field: "assessment_date"
-      type: "string"
-      description: "From context engine: summative assessment date"
-    - field: "student_profiles"
-      type: "array"
-      description: "From context engine: class-level retention data from prior assessments"
-output_schema:
-  type: "object"
-  fields:
-    - field: "schedule"
-      type: "array"
-      description: "Week-by-week schedule of new teaching and spaced review slots"
-    - field: "review_activity_suggestions"
-      type: "array"
-      description: "Specific retrieval activities for each review slot"
-    - field: "teacher_guidance"
-      type: "string"
-      description: "Implementation guidance and how to handle gaps"
-chains_well_with:
-  - "retrieval-practice-generator"
-  - "formative-assessment-technique-selector"
-  - "interleaving-unit-planner"
-teacher_time: "5 minutes"
-tags: ["spacing", "memory", "planning", "forgetting-curve", "distributed-practice"]
----
-```
-
-An orchestrator calls `search_skills("retrieval practice")`, gets back candidates, calls `get_skill` on the best match, and injects the prompt into its workflow.
+Every skill opens with a machine-readable YAML header including skill ID, domain, evidence strength, evidence sources, typed input/output schemas, chaining metadata, and tags. See any skill file under `skills/` for the full format, or [ARCHITECTURE.md](docs/ARCHITECTURE.md) for the schema reference.
 
 ### MCP Server
 
-The skill library is available as a live MCP server. Any MCP-compatible client can discover, search, and invoke all 111 skills programmatically.
+The skill library is available as a live MCP server. Any MCP-compatible client can discover, search, and invoke all 131 skills programmatically.
 
 **Production URL:** `https://mcp-server-sigma-sooty.vercel.app/mcp`
 
@@ -268,7 +207,7 @@ Connect from Claude.ai by adding the URL under **Integrations > MCP Servers**. C
 
 The server exposes:
 - **135 tools** (131 skills + 4 discovery tools: `list_skills`, `find_skills`, `suggest_skills`, `get_skill_details`)
-- **109 prompts** (for clients that surface MCP prompts)
+- **131 prompts** (for clients that surface MCP prompts)
 
 Source code, local setup, and development instructions: [`mcp-server/`](mcp-server/)
 
