@@ -12,7 +12,7 @@ This document is for developers and AI builders who want to consume, orchestrate
 /plugin install GarethManning/education-agent-skills
 ```
 
-This makes all 107 skills available in your Claude Code session. Skills with `disable-model-invocation: false` will auto-activate when conversation context matches their trigger descriptions. Skills with `disable-model-invocation: true` must be invoked explicitly.
+This makes all 131 skills available in your Claude Code session. Skills with `disable-model-invocation: false` will auto-activate when conversation context matches their trigger descriptions. Skills with `disable-model-invocation: true` must be invoked explicitly.
 
 ### From Source
 
@@ -35,7 +35,7 @@ The registry is the primary programmatic interface to the library. It is generat
   "version": "2.0",
   "generated": "<ISO timestamp>",
   "standard": "agent-skills-1.0",
-  "total_skills": 107,
+  "total_skills": 131,
   "domains": [
     { "id": "memory-learning-science", "label": "Memory & Learning Science", "skill_count": 8 }
   ],

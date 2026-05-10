@@ -25,7 +25,7 @@ The YAML schemas are not documentation. They are the interface definition. Any s
 
 ### Layer 1 — The Skill Library (this repository)
 
-100 skills across 14 domains. Each skill encodes a specific, evidence-grounded instructional or curriculum design decision — retrieval practice scheduling, rubric construction, scaffolded task modification, adaptive hint design, and 96 others.
+131 skills across 17 domains. Each skill encodes a specific, evidence-grounded instructional or curriculum design decision — retrieval practice scheduling, rubric construction, scaffolded task modification, adaptive hint design, and more.
 
 An educator uses a skill by providing context through the input fields. Claude returns a structured output ready to use: a spaced practice schedule, a set of retrieval questions, a rubric with co-construction plan, a scaffolded task adapted for a specific language proficiency level.
 
@@ -67,7 +67,7 @@ The `chains_well_with` field in every skill's YAML header provides explicit chai
 
 ## MCP Server
 
-An MCP server exposes the full skill library as callable tools and prompts. Any MCP-compatible client can discover all 107 skills, read their input requirements, call them with structured parameters, and receive typed outputs — removing the manual copy-paste step entirely.
+An MCP server exposes the full skill library as callable tools and prompts. Any MCP-compatible client can discover all 131 skills, read their input requirements, call them with structured parameters, and receive typed outputs — removing the manual copy-paste step entirely.
 
 **Production URL:** `https://mcp-server-sigma-sooty.vercel.app/mcp`
 

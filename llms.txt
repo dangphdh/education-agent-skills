@@ -1,6 +1,6 @@
 # Claude Education Skills Library
 
-> An open-source library of 100 evidence-based Claude skills for curriculum design, lesson planning, and assessment. Designed for direct educator use and programmatic AI agent access.
+> An open-source library of 131 evidence-based agent skills for curriculum design, lesson planning, and assessment. Designed for direct educator use and programmatic AI agent access.
 
 Each skill encodes a specific, evidence-grounded instructional or curriculum design decision. Skills include YAML frontmatter with typed input/output schemas, evidence strength ratings, and chaining metadata. This is Layer 1 of a planned three-layer education AI system (skill library → context engine → orchestrator).
 
@@ -12,7 +12,7 @@ Each skill encodes a specific, evidence-grounded instructional or curriculum des
 - [EVIDENCE.md](https://github.com/GarethManning/education-agent-skills/blob/main/docs/EVIDENCE.md): Evidence standards, rating methodology, and source references
 - [IMPLEMENTATIONS.md](https://github.com/GarethManning/education-agent-skills/blob/main/docs/IMPLEMENTATIONS.md): Known implementations and use cases
 
-## Skill Domains (100 skills across 14 domains)
+## Skill Domains (131 skills across 17 domains)
 
 - [memory-learning-science/](https://github.com/GarethManning/education-agent-skills/tree/main/memory-learning-science): 8 skills — retrieval practice, spaced practice, interleaving, cognitive load, dual coding, elaborative interrogation, feedback
 - [self-regulated-learning/](https://github.com/GarethManning/education-agent-skills/tree/main/self-regulated-learning): 5 skills — metacognition, self-regulation scaffolds, goal-setting, study strategy selection, error analysis
