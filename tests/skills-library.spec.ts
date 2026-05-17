@@ -213,8 +213,8 @@ test.describe("Plugin Manifest Validation", () => {
   });
 });
 
-test.describe("Backward Compatibility", () => {
-  test("MCP server list_skills endpoint responds", async ({ request }) => {
+test.describe("Hosted MCP access control", () => {
+  test("anonymous MCP requests fail fast with a token-required response", async ({ request }) => {
     const response = await request.post("/mcp", {
       headers: {
         "Content-Type": "application/json",
@@ -226,10 +226,8 @@ test.describe("Backward Compatibility", () => {
         method: "tools/list",
       },
     });
-    expect(response.status()).toBe(200);
+    expect(response.status()).toBe(401);
     const body = await response.json();
-    expect(body.result).toBeTruthy();
-    expect(body.result.tools).toBeTruthy();
-    expect(body.result.tools.length).toBeGreaterThan(0);
+    expect(body.error).toBe("Hosted MCP access token required");
   });
 });

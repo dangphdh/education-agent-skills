@@ -13,7 +13,7 @@ The plan is to keep the library free while moving hosted MCP access toward a mor
 - Local plugin use remains free.
 - Manual copy-paste use remains free.
 - The GitHub repository remains open.
-- Hosted MCP may become access-controlled, rate-limited, or offered by request.
+- Hosted MCP is access-controlled with unique tokens and may be rate-limited so the service stays sustainable.
 
 ## Free alternatives to hosted MCP
 
@@ -43,7 +43,7 @@ Open any `SKILL.md` file under `skills/`, copy the instructions, and paste them 
 
 Clone the repository and run the MCP server locally if your client supports local MCP configuration. See [mcp-server/README.md](../mcp-server/README.md).
 
-## Hosted MCP access requests
+## Hosted MCP access signup
 
 Hosted MCP is mainly for people who cannot use local plugins or local skill files, or who are building a workflow that specifically depends on remote MCP discovery.
 
@@ -53,13 +53,16 @@ Request hosted MCP access here:
 https://docs.google.com/forms/d/e/1FAIpQLSdW1EdcmtjSPPq68Hx-bdth5hO2KNyjhAwEV9Ld0EwWL1Gr8Q/viewform
 ```
 
-The form is intentionally short and respectful. It collects only what is needed to decide whether hosted access is the right path.
+The form is intentionally short and respectful. It collects only what is needed to issue a unique token, understand real demand, and prevent abuse.
 
-After someone submits the form, access is not provisioned automatically yet. The current process is:
+After someone submits the form, Gareth's Agent normally:
 
-1. Review the request.
-2. If hosted access is appropriate, send the requester a token or connector details by email.
-3. Include short setup instructions for their client, including whether they need to reconnect, disable/re-enable a connector, or paste a token into an auth screen.
+1. Generates a unique access token.
+2. Emails the requester the MCP URL, token, one-click token URL, and short setup instructions.
+3. Logs the request in the hosted access sheet.
+4. Notifies Gareth with a short summary.
+
+The hosted endpoint rejects anonymous requests. Free local/plugin/manual options remain available.
 
 Recommended fields:
 
@@ -91,7 +94,7 @@ Recommended fields:
 
 Title:
 
-> Education Agent Skills — Hosted MCP Access Request
+> Education Agent Skills — Hosted MCP Access Signup
 
 Description:
 
@@ -99,7 +102,7 @@ Description:
 >
 > This form is only for people who specifically need the hosted MCP endpoint. Hosted MCP creates infrastructure costs, so I’m using this form to understand who depends on it and how to keep access sustainable.
 >
-> After you submit, I’ll review the request and email the next step. This form does not automatically issue a token yet. If hosted access is enabled for you, the email will include the token or connector details and short setup instructions for your client.
+> After you submit, Gareth’s Agent will normally email you a unique access token and short setup instructions within a few minutes. Access is rate-limited and may be revoked if it is abused, so the hosted service stays sustainable.
 >
 > Please do not include student data or confidential school information.
 
