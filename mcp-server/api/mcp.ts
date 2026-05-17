@@ -1,5 +1,6 @@
 import { createServer } from "../src/server.js";
 import { StreamableHTTPServerTransport } from "@modelcontextprotocol/sdk/server/streamableHttp.js";
+import { getAuthorizedTokenPrefix, getUnauthorizedResponse } from "../src/http-auth.js";
 import type { LoadedSkill } from "../src/types.js";
 import type { IncomingMessage, ServerResponse } from "node:http";
 
@@ -17,14 +18,31 @@ export default async function handler(
   // CORS headers for cross-origin MCP clients
   res.setHeader("Access-Control-Allow-Origin", "*");
   res.setHeader("Access-Control-Allow-Methods", "GET, POST, DELETE, OPTIONS");
-  res.setHeader("Access-Control-Allow-Headers", "Content-Type, mcp-session-id, mcp-protocol-version");
-  res.setHeader("Access-Control-Expose-Headers", "mcp-session-id");
+  res.setHeader("Access-Control-Allow-Headers", "Authorization, Content-Type, mcp-session-id, mcp-protocol-version");
+  res.setHeader("Access-Control-Expose-Headers", "mcp-session-id, WWW-Authenticate");
 
   if (req.method === "OPTIONS") {
     res.writeHead(204);
     res.end();
     return;
   }
+
+  const tokenPrefix = getAuthorizedTokenPrefix({
+    url: req.url,
+    authorization: req.headers.authorization,
+  });
+
+  if (!tokenPrefix) {
+    const unauthorized = getUnauthorizedResponse(req.url ?? "/mcp", req.method);
+    for (const [key, value] of Object.entries(unauthorized.headers)) {
+      res.setHeader(key, value);
+    }
+    res.writeHead(unauthorized.status);
+    res.end(unauthorized.body);
+    return;
+  }
+
+  res.setHeader("X-MCP-Access", "token");
 
   const server = createServer(skills);
   const transport = new StreamableHTTPServerTransport({
