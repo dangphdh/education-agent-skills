@@ -28,6 +28,7 @@ DOMAIN_LABELS = {
     "self-regulated-learning": "Self-Regulated Learning",
     "wellbeing-motivation-agency": "Wellbeing, Motivation & Agency",
     "historical-thinking": "Historical Thinking",
+    "inclusive-design": "Inclusive Design",
 }
 
 

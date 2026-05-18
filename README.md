@@ -1,11 +1,11 @@
 # Education Agent Skills Library
 
 [![Agent Skills](https://img.shields.io/badge/Agent%20Skills-1.0-blue)](https://agentskills.io)
-[![Skills](https://img.shields.io/badge/skills-139-blue)](https://github.com/GarethManning/education-agent-skills)
+[![Skills](https://img.shields.io/badge/skills-142-blue)](https://github.com/GarethManning/education-agent-skills)
 [![License: CC BY-SA 4.0](https://img.shields.io/badge/License-CC%20BY--SA%204.0-lightgrey.svg)](https://creativecommons.org/licenses/by-sa/4.0/)
 [![Last Commit](https://img.shields.io/github/last-commit/GarethManning/education-agent-skills)](https://github.com/GarethManning/education-agent-skills/commits/main)
 
-An open-source library of 139 evidence-based pedagogical skills for curriculum design, lesson planning, and assessment — works in Claude Code, Claude.ai (via MCP), and OpenAI Codex, and engineered for AI agent orchestration.
+An open-source library of 142 evidence-based pedagogical skills for curriculum design, lesson planning, and assessment — works in Claude Code, Claude.ai (via MCP), and OpenAI Codex, and engineered for AI agent orchestration.
 
 > [!IMPORTANT]
 > **Hosted MCP access now requires an auth token.**
@@ -182,7 +182,7 @@ YAML schema headers, typed input and output fields, chaining metadata, and compo
 
 ---
 
-## The 18 Domains
+## The 19 Domains
 
 | # | Domain | Skills | Focus |
 |---|--------|--------|-------|
@@ -204,6 +204,7 @@ YAML schema headers, typed input and output fields, chaining metadata, and compo
 | 16 | **Curriculum Alignment** | 4 | Coverage audit, KUD chart authoring, developmental band translation, scope and sequence |
 | 17 | **Historical Thinking** | 10 | Sourcing, close reading, contextualisation, corroboration, document-based lesson design, document set curation, source adaptation, strategy modelling, assessment design, central question evaluation |
 | 18 | **Systems Thinking** | 5 | Systems awareness iceberg, aspirational iceberg, mental model mapper, agency circles for systems action, ladder of inference |
+| 19 | **Inclusive Design** | 3 | UDL lesson auditing, options design across engagement/representation/action, proactive barrier anticipation before delivery |
 
 ---
 
@@ -242,8 +243,8 @@ Connect from Claude.ai by adding the URL under **Integrations > MCP Servers**. C
 ```
 
 The server exposes:
-- **143 tools** (139 skills + 4 discovery tools: `list_skills`, `find_skills`, `suggest_skills`, `get_skill_details`)
-- **139 prompts** (for clients that surface MCP prompts)
+- **146 tools** (142 skills + 4 discovery tools: `list_skills`, `find_skills`, `suggest_skills`, `get_skill_details`)
+- **142 prompts** (for clients that surface MCP prompts)
 
 Source code, local setup, and development instructions: [`mcp-server/`](mcp-server/)
 

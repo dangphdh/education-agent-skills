@@ -1,8 +1,8 @@
 {
   "version": "2.0",
-  "generated": "2026-05-18T14:42:26.383318+00:00",
+  "generated": "2026-05-18T14:55:34.587795+00:00",
   "standard": "agent-skills-1.0",
-  "total_skills": 139,
+  "total_skills": 142,
   "domains": [
     {
       "id": "ai-learning-science",
@@ -48,6 +48,11 @@
       "id": "historical-thinking",
       "label": "Historical Thinking",
       "skill_count": 10
+    },
+    {
+      "id": "inclusive-design",
+      "label": "Inclusive Design",
+      "skill_count": 3
     },
     {
       "id": "literacy-critical-thinking",
@@ -2501,6 +2506,105 @@
         "input_field": null
       },
       "path": "skills/historical-thinking/sourcing-skill-builder/SKILL.md"
+    },
+    {
+      "id": "inclusive-design/udl-barrier-anticipator",
+      "name": "udl-barrier-anticipator",
+      "display_name": "UDL Barrier Anticipator",
+      "domain": "inclusive-design",
+      "description": "Predicts access barriers in a learning task before delivery, given a learner variability profile. Distinguishes between barriers addressable through design and those requiring specialist support.",
+      "disable_model_invocation": false,
+      "evidence_strength": "moderate",
+      "tags": [
+        "UDL",
+        "inclusive-design",
+        "barrier-analysis",
+        "preventive-design",
+        "access",
+        "learner-variability",
+        "CAST"
+      ],
+      "teacher_time": "5-10 minutes",
+      "chains_with": [
+        "inclusive-design/udl-lesson-auditor",
+        "inclusive-design/udl-options-designer",
+        "curriculum-assessment/differentiation-adapter",
+        "curriculum-assessment/formative-assessment-technique-selector",
+        "self-regulated-learning/self-regulation-scaffold-generator"
+      ],
+      "chain_edges": {
+        "receives_from": [],
+        "feeds_into": [],
+        "output_field": null,
+        "input_field": null
+      },
+      "path": "skills/inclusive-design/udl-barrier-anticipator/SKILL.md"
+    },
+    {
+      "id": "inclusive-design/udl-lesson-auditor",
+      "name": "udl-lesson-auditor",
+      "display_name": "UDL Lesson Auditor",
+      "domain": "inclusive-design",
+      "description": "Audits an existing lesson against UDL's three principles \u2014 engagement, representation, and action/expression. Identifies specific access barriers and suggests concrete modifications ranked by impact.",
+      "disable_model_invocation": false,
+      "evidence_strength": "moderate",
+      "tags": [
+        "UDL",
+        "inclusive-design",
+        "barrier-analysis",
+        "access",
+        "lesson-audit",
+        "differentiation",
+        "CAST"
+      ],
+      "teacher_time": "10-15 minutes",
+      "chains_with": [
+        "inclusive-design/udl-options-designer",
+        "inclusive-design/udl-barrier-anticipator",
+        "curriculum-assessment/differentiation-adapter",
+        "curriculum-assessment/formative-assessment-technique-selector",
+        "self-regulated-learning/self-regulation-scaffold-generator"
+      ],
+      "chain_edges": {
+        "receives_from": [],
+        "feeds_into": [],
+        "output_field": null,
+        "input_field": null
+      },
+      "path": "skills/inclusive-design/udl-lesson-auditor/SKILL.md"
+    },
+    {
+      "id": "inclusive-design/udl-options-designer",
+      "name": "udl-options-designer",
+      "display_name": "UDL Options Designer",
+      "domain": "inclusive-design",
+      "description": "Generates multiple means of engagement, representation, and action/expression for a given learning goal. Produces specific, practical alternatives \u2014 not generic options \u2014 and recommends the highest-impact single change.",
+      "disable_model_invocation": false,
+      "evidence_strength": "moderate",
+      "tags": [
+        "UDL",
+        "inclusive-design",
+        "options",
+        "multiple-means",
+        "access",
+        "differentiation",
+        "CAST"
+      ],
+      "teacher_time": "5-10 minutes",
+      "chains_with": [
+        "inclusive-design/udl-lesson-auditor",
+        "inclusive-design/udl-barrier-anticipator",
+        "curriculum-assessment/differentiation-adapter",
+        "curriculum-assessment/formative-assessment-technique-selector",
+        "self-regulated-learning/self-regulation-scaffold-generator"
+      ],
+      "chain_edges": {
+        "receives_from": [],
+        "feeds_into": [],
+        "output_field": null,
+        "input_field": null
+      },
+      "path": "skills/inclusive-design/udl-options-designer/SKILL.md"
     },
     {
       "id": "literacy-critical-thinking/argument-structure-scaffold-generator",

@@ -1,7 +1,7 @@
 # Education Agent Skills Library — Claude Code Entry Point
 
 ## What this is
-139 evidence-based education skills across 18 domains for curriculum design, lesson planning, and assessment. CC BY-SA 4.0. Works in Claude Code, Claude.ai (via MCP), and OpenAI Codex. Includes a live MCP server at mcp-server-sigma-sooty.vercel.app/mcp, a CoWork plugin (.claude-plugin/), and a Codex plugin (.codex-plugin/).
+142 evidence-based education skills across 19 domains for curriculum design, lesson planning, and assessment. CC BY-SA 4.0. Works in Claude Code, Claude.ai (via MCP), and OpenAI Codex. Includes a live MCP server at mcp-server-sigma-sooty.vercel.app/mcp, a CoWork plugin (.claude-plugin/), and a Codex plugin (.codex-plugin/).
 
 ## Stack
 TypeScript (77.9%), Python (16.7%). Playwright for testing. Skills are structured markdown (SKILL.md) with YAML frontmatter. MCP server in mcp-server/ subdirectory. CI via GitHub Actions.
@@ -24,8 +24,8 @@ After adding or editing ANY skill, these three steps are mandatory before commit
 3. Stage all three files: the SKILL.md, registry.json, AND mcp-server/src/skills.json
 CI will fail if the bundle is out of sync with the skills. The MCP server serves a pre-built snapshot — unbundled changes will NOT appear on the live server even after Vercel redeploy.
 
-## 18 domains
-ai-learning-science, ai-literacy, curriculum-alignment, curriculum-assessment, eal-language-development, environmental-experiential-learning, explicit-instruction, global-cross-cultural-pedagogies, historical-thinking, literacy-critical-thinking, memory-learning-science, montessori-alternative-approaches, original-frameworks, professional-learning, questioning-discussion, self-regulated-learning, systems-thinking, wellbeing-motivation-agency
+## 19 domains
+ai-learning-science, ai-literacy, curriculum-alignment, curriculum-assessment, eal-language-development, environmental-experiential-learning, explicit-instruction, global-cross-cultural-pedagogies, historical-thinking, inclusive-design, literacy-critical-thinking, memory-learning-science, montessori-alternative-approaches, original-frameworks, professional-learning, questioning-discussion, self-regulated-learning, systems-thinking, wellbeing-motivation-agency
 
 ## Key conventions
 - Every skill must cite named research — no skills without evidence grounding
