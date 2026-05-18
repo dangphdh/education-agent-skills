@@ -3,9 +3,13 @@ import { Client } from "@modelcontextprotocol/sdk/client/index.js";
 import { StdioClientTransport } from "@modelcontextprotocol/sdk/client/stdio.js";
 import { resolve, dirname } from "node:path";
 import { fileURLToPath } from "node:url";
+import { readFileSync } from "node:fs";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const SERVER_SCRIPT = resolve(__dirname, "../dist/index.js");
+const bundledSkills = JSON.parse(
+  readFileSync(resolve(__dirname, "../src/skills.json"), "utf-8"),
+) as Array<{ metadata: { domain: string } }>;
 
 async function createClient(env?: Record<string, string>): Promise<Client> {
   const transport = new StdioClientTransport({
@@ -26,18 +30,18 @@ test.describe("MCP Server — Startup", () => {
     await client?.close();
   });
 
-  test("registers 135 tools (131 skills + 4 meta) and 131 prompts", async () => {
+  test("registers one tool and prompt per bundled skill plus meta tools", async () => {
     client = await createClient();
 
     const { tools } = await client.listTools();
     const metaTools = ["list_skills", "get_skill_details", "find_skills", "suggest_skills"];
-    expect(tools.length).toBe(135);
+    expect(tools.length).toBe(bundledSkills.length + metaTools.length);
     for (const name of metaTools) {
       expect(tools.find((t) => t.name === name)).toBeTruthy();
     }
 
     const { prompts } = await client.listPrompts();
-    expect(prompts.length).toBe(131);
+    expect(prompts.length).toBe(bundledSkills.length);
   });
 });
 
@@ -52,29 +56,13 @@ test.describe("MCP Server — list_skills", () => {
     await client?.close();
   });
 
-  test("returns skills grouped by all 17 domains", async () => {
+  test("returns skills grouped by all bundled domains", async () => {
     const result = await client.callTool({ name: "list_skills", arguments: {} });
     const text = (result.content as Array<{ type: string; text: string }>)[0].text;
 
-    const expectedDomains = [
-      "ai-learning-science",
-      "ai-literacy",
-      "curriculum-alignment",
-      "curriculum-assessment",
-      "eal-language-development",
-      "environmental-experiential-learning",
-      "explicit-instruction",
-      "global-cross-cultural-pedagogies",
-      "historical-thinking",
-      "literacy-critical-thinking",
-      "memory-learning-science",
-      "montessori-alternative-approaches",
-      "original-frameworks",
-      "professional-learning",
-      "questioning-discussion",
-      "self-regulated-learning",
-      "wellbeing-motivation-agency",
-    ];
+    const expectedDomains = Array.from(
+      new Set(bundledSkills.map((s) => s.metadata.domain)),
+    );
 
     for (const domain of expectedDomains) {
       expect(text).toContain(`## ${domain}`);

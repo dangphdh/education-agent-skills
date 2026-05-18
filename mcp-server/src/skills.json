@@ -10148,6 +10148,117 @@
   },
   {
     "metadata": {
+      "name": "compassionate-systems-awareness-orchestrator",
+      "description": "Orchestrate compassionate systems tools from issue or aspiration to wise action. Use when a class needs a complete inquiry workflow.",
+      "disable-model-invocation": false,
+      "user-invocable": true,
+      "effort": "medium",
+      "skill_id": "original-frameworks/compassionate-systems-awareness-orchestrator",
+      "skill_name": "Compassionate Systems Awareness Orchestrator",
+      "domain": "original-frameworks",
+      "version": "1.0",
+      "evidence_strength": "emerging",
+      "evidence_sources": [
+        "Center for Systems Awareness (2022) — Compassionate Systems Framework and tools practitioner resources",
+        "Senge (1990) — The Fifth Discipline (systems thinking and learning organisations)",
+        "Meadows (2008) — Thinking in Systems (structures, feedback, leverage points)",
+        "Argyris (1990) — Ladder of inference and defensive reasoning",
+        "Covey (1989) — Circle of concern and influence as agency framing"
+      ],
+      "input_schema": {
+        "required": [
+          {
+            "field": "starting_point",
+            "type": "string",
+            "description": "The current issue, aspiration, place-based concern, project idea, or class culture focus"
+          },
+          {
+            "field": "context",
+            "type": "string",
+            "description": "Class, school, community, ecological, or curriculum context"
+          },
+          {
+            "field": "intended_use",
+            "type": "string",
+            "description": "Student lesson, teacher planning, project design, staff inquiry, or community action"
+          }
+        ],
+        "optional": [
+          {
+            "field": "student_level",
+            "type": "string",
+            "description": "Age/year group"
+          },
+          {
+            "field": "available_time",
+            "type": "string",
+            "description": "Single lesson, sequence, project, staff meeting, or unit"
+          },
+          {
+            "field": "prior_evidence",
+            "type": "string",
+            "description": "Existing data, stories, observations, or student work"
+          },
+          {
+            "field": "safety_sensitivities",
+            "type": "string",
+            "description": "Conflict, trauma, identity, power, or safeguarding considerations"
+          }
+        ]
+      },
+      "output_schema": {
+        "type": "object",
+        "fields": [
+          {
+            "field": "workflow",
+            "type": "object",
+            "description": "Recommended sequence of discrete compassionate systems tools"
+          },
+          {
+            "field": "handoff_outputs",
+            "type": "array",
+            "description": "Outputs each step should pass to the next step"
+          },
+          {
+            "field": "lesson_sequence",
+            "type": "object",
+            "description": "Teacher-usable sequence"
+          },
+          {
+            "field": "stop_or_slow_down_checks",
+            "type": "array",
+            "description": "Decision gates before action"
+          }
+        ]
+      },
+      "chains_well_with": [
+        "systems-awareness-iceberg",
+        "aspirational-systems-iceberg",
+        "mental-model-mapper",
+        "agency-circles-for-systems-action",
+        "ladder-of-inference-reflection",
+        "place-based-inquiry-anchor",
+        "project-brief-designer"
+      ],
+      "teacher_time": "5 minutes",
+      "tags": [
+        "orchestrator",
+        "composite-framework",
+        "practitioner-framework",
+        "compassionate-systems",
+        "systems-thinking",
+        "classroom-inquiry",
+        "student-agency",
+        "regenerative",
+        "workflow"
+      ]
+    },
+    "prompt": "You are orchestrating a compassionate systems awareness workflow. First make the possible pathways visible to the educator. Do not assume the educator knows which pathway fits. If a pathway is not already selected, present options, recommend a best fit with assumptions, and ask the educator to choose before producing a full workflow. If the user explicitly asks for a full workflow immediately, proceed with the recommended pathway and label it provisional.\n\nChoose and sequence the appropriate discrete tools. Do not use every tool by default. Select the smallest coherent pathway that fits the starting point, time, and safety context.\n\nInputs:\nStarting point: {{starting_point}}\nContext: {{context}}\nIntended use: {{intended_use}}\nStudent level: {{student_level}}\nAvailable time: {{available_time}}\nPrior evidence: {{prior_evidence}}\nSafety sensitivities: {{safety_sensitivities}}\n\nAvailable tools:\n- systems-awareness-iceberg: use when starting from an undesirable/current event or recurring issue.\n- aspirational-systems-iceberg: use when starting from a desired event or future to grow.\n- mental-model-mapper: use when assumptions, beliefs, stories, values, or paradigms need deeper examination.\n- ladder-of-inference-reflection: use when a conflict or interpretation needs slowing down.\n- agency-circles-for-systems-action: use after analysis to locate control, influence, collective influence, and concern.\n- place-based-inquiry-anchor: use when a specific local place should become the primary text.\n- project-brief-designer or agency-scaffold-generator: use when the inquiry needs to become a student project or agency scaffold.\n\nDecision rules:\n1. Always present pathway options before committing to a workflow unless the educator has already selected a pathway.\n2. If the starting point is \"what is wrong / why does this keep happening?\" recommend the Current Problem to Wise Response pathway, usually beginning with systems-awareness-iceberg.\n3. If the starting point is \"what do we want to grow?\" recommend the Desired Culture / Aspirational Future pathway, usually beginning with aspirational-systems-iceberg.\n4. If the starting point is a wellbeing or pastoral pattern, recommend the Systems-Aware Wellbeing pathway and consider belonging, restorative, trauma-informed, or emotional-literacy skills as adjacent supports.\n5. If the starting point is a place, ecological system, or regenerative project, recommend the Place / Regenerative Systems pathway and chain with place-based or regenerative orchestrators only if useful.\n6. If strong interpretations, blame, conflict, or identity threat are present, insert ladder-of-inference before public systems mapping.\n7. If mental models are central or underdeveloped, insert mental-model-mapper after the iceberg.\n8. Always use agency-circles before action if students are asked to respond to a systemic issue.\n9. Do not proceed to action if the group lacks evidence, authority, safety, or adult support.\n10. Keep the pathway small enough for the available time.\n\nReturn exactly:\n\n## Compassionate Systems Awareness Pathway Options\n\nPresent these options before choosing unless a pathway has already been selected:\n- **Current Problem to Wise Response:** for recurring issues or undesired events.\n- **Desired Culture / Aspirational Future:** for designing a wanted pattern.\n- **Systems-Aware Wellbeing:** for belonging, help-seeking, conflict, feedback culture, digital wellbeing, or pastoral patterns.\n- **Place / Regenerative Systems:** for place-based, ecological, civic, or social-ecological issues where CSA tools may support another orchestrator.\n\nState the recommended pathway, why it fits, and one viable alternative if relevant. If no pathway is selected, ask which pathway to develop.\n\n## Compassionate Systems Awareness Workflow: [Starting Point]\n\n**Context:** [brief]\n**Intended use:** [lesson/planning/project/staff inquiry]\n**Recommended pathway:** [short list of tools in order]\n\n### Why This Pathway\n[Explain why these tools, and why this order]\n\n### Step-by-Step Sequence\nFor each step:\n**Step [N]: [Tool Name]**\n- **Purpose:** [what this step does]\n- **Teacher/student prompt:** [prompt to use]\n- **Output to capture:** [exact handoff output]\n- **Do not proceed if:** [safety/evidence/quality gate]\n- **Feeds into:** [next tool]\n\n### Handoff Map\n- From [tool] pass [output] to [tool].\n- From [tool] pass [output] to [tool].\n\n### Lesson or Workshop Shape\nAdapt to time available:\n- **Opening:** [grounding/check-in/framing]\n- **Main mapping:** [tool sequence]\n- **Sensemaking:** [discussion/gallery walk/synthesis]\n- **Agency/action:** [circle or first experiment]\n- **Reflection:** [closing prompts]\n\n### Stop or Slow Down Checks\n- [ ] Are we blaming individuals for structural patterns?\n- [ ] Are students being asked to carry adult/institutional responsibility?\n- [ ] Do we have enough evidence to act?\n- [ ] Could this activity expose students to identity, trauma, or peer harm?\n- [ ] Is the proposed action inside real control or influence?\n- [ ] Have we named who else must be involved?\n\n### Expected Final Output\n[Describe the final artefact: iceberg map, aspirational iceberg, mental-model map, agency circles, first experiment, project brief, etc.]\n\nSelf-check: The workflow must be coherent, not maximal. It must preserve compassion and systems depth. It must end with bounded agency, not heroic fixing.",
+    "description": "Orchestrate compassionate systems tools from issue or aspiration to wise action. Use when a class needs a complete inquiry workflow.",
+    "toolName": "compassionate-systems-awareness-orchestrator"
+  },
+  {
+    "metadata": {
       "name": "developmental-band-system-designer",
       "description": "Design a developmental band system mapping student growth from early childhood through upper secondary. Use when building competency-based curriculum architecture for a school or programme.",
       "disable-model-invocation": true,
@@ -10617,6 +10728,251 @@
     "prompt": "You are authoring learning targets using Gareth Manning's methodology (Learning Target Authoring Guide v4.0). You must follow these rules PRECISELY — they are the quality standard for every LT produced.\n\n═══════════════════════════════════════════════════════════════\nSTEP 0: KNOWLEDGE TYPE CLASSIFICATION (mandatory first step)\n═══════════════════════════════════════════════════════════════\n\nBefore decomposition. Before writing band statements. Before anything else.\n\nEvery LT must be classified as one of three knowledge types. The classification determines the assessment instrument. Writing the LT before classifying it produces the single most common failure mode in competency-based wellbeing and project curricula: dispositional goals assessed through rubrics, creating the illusion of measurement without the substance.\n\nTHE THREE TYPES:\n\n**Type 1 — Hierarchical Knowledge.** Concepts build on each other in a fixed sequence. Missing a prerequisite makes later content inaccessible, not merely harder.\n- Indicators: prerequisite chains exist; errors at lower levels propagate upward; canonical sequencing logic; content cannot be reordered without loss.\n- Assessment route: rubric with clear criteria, explanation tasks, vocabulary checks, knowledge tests.\n\n**Type 2 — Horizontal Knowledge.** Organised around a central question or situation, illuminated through multiple disciplinary lenses. No single correct answer, but better and worse analyses. What develops cumulatively is not content but thinking sophistication.\n- Indicators: multiple valid interpretive frameworks exist; reasoning quality determines assessment outcome; content can be entered from different points; analytical depth increases with experience.\n- Assessment route: reasoning-quality rubric, scenario analysis, roleplay with novel situations, case studies, written analytical tasks. Transfer is the test.\n\n**Type 3 — Dispositional Knowledge.** Capacities that develop gradually through sustained experience and exist only in enactment. Cannot be assessed through a single task. A rubric scored on a scenario task does not tell you whether a student has developed the disposition — it tells you whether they can perform it when asked.\n- Indicators: the quality exists only across time and contexts; observation of the real behaviour (not a simulation) is required for valid evidence.\n- Assessment route: multi-informant, longitudinal — teacher observation notes, student self-reflection, optional parent input, Strive data where applicable. Synthesised in developmental conversation. NOT a summative grade. NO RUBRIC.\n\nCLASSIFICATION DECISION TREE — apply to EVERY emerging LT strand:\n\n1. Does this LT describe content with a hard prerequisite sequence?\n   YES → Type 1. Assessment: rubric / knowledge test.\n\n2. Does this LT describe analytical or reasoning capability across multiple lenses?\n   YES → Type 2. Assessment: reasoning-quality rubric, scenario task.\n\n3. Does this LT describe a quality that only exists as it is enacted over time?\n   YES → Type 3. Assessment: multi-informant observation. NO RUBRIC.\n\n4. Does the statement contain elements from more than one type?\n   YES → COMPOUND. Split before proceeding. Type 3 elements always go to the multi-informant observation pathway. Type 1 and Type 2 elements go to the rubric pathway. Each pathway has a separate LT.\n\n5. Is this Type 3 LT dependent on Type 1 or Type 2 knowledge being in place first?\n   YES → Knowledge-contingent. Name the prerequisite LTs explicitly.\n\nKNOWLEDGE-CONTINGENT DISPOSITIONS:\nA Type 3 disposition is knowledge-contingent when the student cannot develop the capacity without first having the Type 1 or Type 2 knowledge base in place. This is a sequencing requirement, not a design flaw.\n\nExample: Self-regulation is knowledge-contingent. A student cannot genuinely develop self-regulation strategies without first understanding what the stress response is (Type 1), and without having practised a repertoire of regulation strategies in structured situations (Type 2). The Type 3 observation is only valid evidence once the prerequisites are established.\n\nDesign rule: If an LT is Type 3 and knowledge-contingent, name the prerequisite LTs explicitly. Do not expect the disposition to develop before the prerequisites are taught.\n\n═══════════════════════════════════════════════════════════════\nLT WRITING RULES (non-negotiable)\n═══════════════════════════════════════════════════════════════\n\n1. **Every band statement begins \"I can...\"** — present tense, active voice, first person. **TYPE 3 EXCEPTION: Type 3 LTs do NOT use \"I can...\" band statements. They use observation indicator sets — see Mode 3 below.**\n2. **No parentheses, no inline examples, no \"such as\" or \"for example\" anywhere.** Examples are provided separately in teaching guidance, never embedded in the LT statement itself. A statement with examples baked in becomes an implicit checklist.\n3. **Single-construct rule.** Each statement describes ONE coherent capability. Test: \"Could I assess these separately?\" If yes, they must be separate LTs or separate statements. \"Analyses sources and constructs arguments\" violates this — analysis and argument construction are separately assessable.\n4. **Compound knowledge-type rule.** If a statement contains elements from different knowledge types (e.g., one Type 2 and one Type 3 element), it MUST be split into separate LTs with separate assessment routes — REGARDLESS of whether each element passes the single-construct test on its own. This is the most common cause of assessment misrouting.\n5. **Observable action verbs ONLY.** Use: identify, describe, compare, explain, justify, analyse, evaluate, create, design, plan, conduct, present, reflect. NEVER use: understand, know, appreciate, be aware of, effectively, sophisticated, well (without observable criteria).\n6. **Progression uses LEVERS, not topic escalation.** The six progression levers: independence (how much support needed), complexity (how many variables or perspectives), scope (how broad the context), precision (how accurate or detailed), reasoning (how deep the justification), transfer (how far from the original context). Progression across bands is achieved by advancing one or more of these levers — NOT by changing the topic or adding content.\n7. **2 LTs per competency is the default.** 3 only if the strands are genuinely distinct and cannot be collapsed without losing meaning. NOTE: If a competency contains both a Type 2 analytical strand and a Type 3 dispositional strand, these must become separate LTs with separate assessment routes. This may mean a competency that appeared to need 2 LTs actually needs 3. This is correct design, not inflation.\n8. **The LT definition describes what ALL band levels do.** It is the generalised \"I can...\" statement that applies across every band. It is NOT a Band A statement. For Type 3 LTs, the definition must include a note that this LT is assessed through multi-informant observation.\n\n═══════════════════════════════════════════════════════════════\nREQUIRED FIELDS FOR EVERY LT\n═══════════════════════════════════════════════════════════════\n\nEvery LT must include:\n- **LT Name** (Title Case, noun-phrase style, stable across years)\n- **LT Definition** (one sentence, \"I can...\")\n- **Knowledge Type** (Type 1 / Type 2 / Type 3)\n- **Assessment Route** (Rubric with clear criteria / Reasoning quality rubric / Multi-informant observation)\n- **Prerequisites** (required for knowledge-contingent Type 3 LTs — name the Type 1/2 LTs that must be established first)\n- **Band statements** (Type 1 and Type 2) OR **Observation indicator set** (Type 3)\n\n═══════════════════════════════════════════════════════════════\nTHREE AUTHORING MODES\n═══════════════════════════════════════════════════════════════\n\n**Mode 1 — Plain-language decision targets**\nBest for: judgement, choices, safety, credibility, reflection, ethics, communication, collaboration routines, and most Type 2 wellbeing LTs.\nDefault pattern: DO / CHECK / DECIDE\n- DO: main action (one clear verb)\n- CHECK: 1-3 simple checks (fit, risk, source, audience, constraints)\n- DECIDE: outcome + short reason\n\n**Mode 2 — Skill/proficiency targets**\nBest for: academic disciplines, arts, performance, scientific practice. Also appropriate for Type 1 wellbeing science knowledge.\nDefaults: one clear skill per band statement; complexity and independence increase across bands; avoid tool/menu lists.\n\nPerformance-based Do tasks — presentations, physical demonstrations, structured performances, observable skill execution — are a sub-type of Mode 2. They are assessed through performance rubrics applied to the observable execution, not through multi-informant observation (Mode 3, T3 only) and not through analytical reasoning rubrics (which assess reasoning quality, not execution quality). Use the criterion-referenced rubric generator for performance-based Do tasks. Common examples: oral presentations, debate performances, physical education demonstrations, practical science procedures, musical or artistic performances.\n\n**Mode 3 — Observation indicator sets (Type 3 ONLY)**\nBest for: ALL Type 3 dispositional LTs. This mode is mandatory for Type 3 — not optional.\nStructure: a set of specific, observable, third-person indicators that describe what the disposition looks like when present, calibrated to each band. These are NOT assessed with a rubric — they inform the observation notes and the developmental conversation.\n\nFormat:",
     "description": "Author learning targets for a competency across developmental bands with precise, observable progression language. Use when writing 'I can' statements for competency-based programmes.",
     "toolName": "learning-target-authoring-guide"
+  },
+  {
+    "metadata": {
+      "name": "place-based-curriculum-orchestrator",
+      "description": "Present pathway options and orchestrate place-based curriculum design from a local place, curriculum requirement, or community issue. Use when place should become a primary text for learning.",
+      "disable-model-invocation": false,
+      "user-invocable": true,
+      "effort": "high",
+      "skill_id": "original-frameworks/place-based-curriculum-orchestrator",
+      "skill_name": "Place-Based Curriculum Orchestrator",
+      "domain": "original-frameworks",
+      "version": "1.0",
+      "evidence_strength": "emerging",
+      "evidence_sources": [
+        "Sobel (2004) — Place-Based Education: connecting classrooms and communities",
+        "Smith (2002) — Place-based education: learning to be where we are",
+        "Gruenewald (2003) — The best of both worlds: a critical pedagogy of place",
+        "Castagno & Brayboy (2008) — Culturally responsive schooling for Indigenous youth",
+        "Bang, Medin & Atran (2007) — Cultural mosaics and mental models of nature"
+      ],
+      "input_schema": {
+        "required": [
+          {
+            "field": "starting_point",
+            "type": "string",
+            "description": "The place, curriculum requirement, community question, or local issue the educator is starting from"
+          },
+          {
+            "field": "learner_stage",
+            "type": "string",
+            "description": "Age range or year group"
+          }
+        ],
+        "optional": [
+          {
+            "field": "subject_or_curriculum_content",
+            "type": "string",
+            "description": "Curriculum content, standards, competencies, or disciplines that need to be addressed"
+          },
+          {
+            "field": "local_place",
+            "type": "string",
+            "description": "Specific place: creek, high street, park, school grounds, neighbourhood, building, food system, etc."
+          },
+          {
+            "field": "community_knowledge_holders",
+            "type": "string",
+            "description": "People, groups, Elders, organisations, or local experts who know the place"
+          },
+          {
+            "field": "constraints",
+            "type": "string",
+            "description": "Time, access, safety, transport, permission, assessment, policy, or resource constraints"
+          },
+          {
+            "field": "pathway_choice",
+            "type": "string",
+            "description": "Optional selected pathway. If absent, present options before designing the full sequence."
+          }
+        ]
+      },
+      "output_schema": {
+        "type": "object",
+        "fields": [
+          {
+            "field": "pathway_options",
+            "type": "array",
+            "description": "Menu of suitable pathways with when-to-use notes and tradeoffs"
+          },
+          {
+            "field": "recommended_pathway",
+            "type": "object",
+            "description": "Best-fit pathway recommendation with assumptions; should not hide alternatives"
+          },
+          {
+            "field": "orchestrated_skill_chain",
+            "type": "array",
+            "description": "Discrete skills to use in order with handoff outputs"
+          },
+          {
+            "field": "curriculum_design_sequence",
+            "type": "object",
+            "description": "Teacher-usable place-based unit or lesson sequence once pathway is selected"
+          },
+          {
+            "field": "stop_slow_checks",
+            "type": "array",
+            "description": "Checks for ethics, safety, cultural humility, curriculum validity, and feasibility"
+          }
+        ]
+      },
+      "chains_well_with": [
+        "place-based-inquiry-anchor",
+        "ecological-inquiry-anchor-designer",
+        "phenomenon-based-unit-anchor",
+        "culturally-responsive-teaching-designer",
+        "curriculum-knowledge-architecture-designer",
+        "learning-target-authoring-guide",
+        "assessment-validity-checker",
+        "systems-awareness-iceberg",
+        "mental-model-mapper"
+      ],
+      "teacher_time": "8 minutes",
+      "tags": [
+        "orchestrator",
+        "composite-framework",
+        "practitioner-framework",
+        "place-based",
+        "emerging-evidence",
+        "curriculum",
+        "pathways",
+        "local",
+        "community",
+        "critical-pedagogy-of-place"
+      ]
+    },
+    "prompt": "You are a place-based curriculum orchestrator. Your first responsibility is to make pathway options visible before committing to a design. Do not assume the educator knows the pathways.\n\nInputs:\nStarting point: {{starting_point}}\nLearner stage: {{learner_stage}}\nSubject/curriculum content: {{subject_or_curriculum_content}}\nLocal place: {{local_place}}\nCommunity knowledge holders: {{community_knowledge_holders}}\nConstraints: {{constraints}}\nPathway choice: {{pathway_choice}}\n\nStep 1: Present pathway options unless pathway_choice is already provided.\nInclude:\n- Place-First Inquiry\n- Curriculum-First Localisation\n- Critical Place Inquiry\n- Ecological Place Inquiry\n- Place + Systems Pathway\nFor each pathway, state what it is for, what it produces, and when not to use it.\n\nStep 2: Recommend the best-fit pathway based on the input. Explain why, and name the assumptions behind the recommendation.\n\nStep 3: If no pathway_choice was provided, ask the educator to choose before producing the full design. If the user explicitly requested a full design anyway, continue with the recommended pathway and label it provisional.\n\nStep 4: Once a pathway is selected, orchestrate the skill chain. For every step, specify:\n- skill/tool to use\n- purpose\n- input it needs\n- output it should produce\n- handoff to the next step\n- do-not-proceed-if check\n\nStep 5: Produce the curriculum design sequence in teacher-usable language.\n\nReturn:\n\n## Place-Based Curriculum Pathway Options\n[Menu of pathways, with recommendation and choice prompt if needed]\n\n## Recommended Pathway\n[Best fit, assumptions, and alternatives]\n\n## Orchestrated Skill Chain\n[Step-by-step chain with handoffs]\n\n## Place-Based Curriculum Design\n[Only if a pathway is selected or provisional design is explicitly requested]\n\n## Stop / Slow Down Checks\n- [ ] Is the place a primary text, not a decorative hook?\n- [ ] Are local/community knowledge holders treated as knowledge partners, not content props?\n- [ ] Are cultural, Indigenous, historical, or access issues handled with humility?\n- [ ] Does the design avoid asking students to act before they understand the place?\n- [ ] Does assessment match the actual learning, not just the final product?\n- [ ] Are student action and adult/community responsibility clearly distinguished?",
+    "description": "Present pathway options and orchestrate place-based curriculum design from a local place, curriculum requirement, or community issue. Use when place should become a primary text for learning.",
+    "toolName": "place-based-curriculum-orchestrator"
+  },
+  {
+    "metadata": {
+      "name": "regenerative-project-design-orchestrator",
+      "description": "Present project-design pathway options and orchestrate regenerative projects using backwards design, PBL, SEEDS, compassionate systems action, or civic/service pathways.",
+      "disable-model-invocation": false,
+      "user-invocable": true,
+      "effort": "high",
+      "skill_id": "original-frameworks/regenerative-project-design-orchestrator",
+      "skill_name": "Regenerative Project Design Orchestrator",
+      "domain": "original-frameworks",
+      "version": "1.0",
+      "evidence_strength": "emerging",
+      "evidence_sources": [
+        "Wiggins & McTighe (2005) — Understanding by Design",
+        "Larmer, Mergendoller & Boss (2015) — Gold Standard Project Based Learning",
+        "Manning (2025) — SEEDS regenerative inquiry cycle and regenerative learning design",
+        "Kimmerer (2013) — Braiding Sweetgrass (reciprocity and care)",
+        "Meadows (2008) — Thinking in Systems (leverage, feedback, unintended consequences)"
+      ],
+      "input_schema": {
+        "required": [
+          {
+            "field": "project_intent",
+            "type": "string",
+            "description": "What the educator wants students to design, improve, investigate, regenerate, or contribute to"
+          },
+          {
+            "field": "learner_stage",
+            "type": "string",
+            "description": "Age range or year group"
+          }
+        ],
+        "optional": [
+          {
+            "field": "curriculum_goals",
+            "type": "string",
+            "description": "Required content, standards, competencies, or assessment goals"
+          },
+          {
+            "field": "system_or_context",
+            "type": "string",
+            "description": "The classroom, school, community, ecological, social, digital, or institutional system involved"
+          },
+          {
+            "field": "time_available",
+            "type": "string",
+            "description": "Lesson sequence, project week, term, semester, or year"
+          },
+          {
+            "field": "community_or_adult_partners",
+            "type": "string",
+            "description": "Adults, community groups, experts, or institutions who should be involved"
+          },
+          {
+            "field": "constraints",
+            "type": "string",
+            "description": "Assessment, safety, permission, resources, power, or implementation constraints"
+          },
+          {
+            "field": "pathway_choice",
+            "type": "string",
+            "description": "Optional selected project pathway. If absent, present options before designing the full project."
+          }
+        ]
+      },
+      "output_schema": {
+        "type": "object",
+        "fields": [
+          {
+            "field": "pathway_options",
+            "type": "array",
+            "description": "Project pathway menu with fit, outputs, and tradeoffs"
+          },
+          {
+            "field": "recommended_pathway",
+            "type": "object",
+            "description": "Best-fit pathway recommendation with assumptions and alternatives"
+          },
+          {
+            "field": "orchestrated_skill_chain",
+            "type": "array",
+            "description": "Selected skills in order with handoff outputs"
+          },
+          {
+            "field": "project_design",
+            "type": "object",
+            "description": "The resulting regenerative project sequence once a pathway is selected"
+          },
+          {
+            "field": "regenerative_quality_gates",
+            "type": "array",
+            "description": "Checks for reciprocity, stewardship, bounded agency, feasibility, and unintended consequences"
+          }
+        ]
+      },
+      "chains_well_with": [
+        "backwards-design-unit-planner",
+        "project-brief-designer",
+        "self-determined-project-design-protocol",
+        "seeds-regenerative-inquiry-cycle",
+        "agency-scaffold-generator",
+        "service-learning-project-designer",
+        "systems-awareness-iceberg",
+        "aspirational-systems-iceberg",
+        "agency-circles-for-systems-action",
+        "assessment-validity-checker"
+      ],
+      "teacher_time": "8 minutes",
+      "tags": [
+        "orchestrator",
+        "composite-framework",
+        "practitioner-framework",
+        "regenerative",
+        "emerging-evidence",
+        "project-design",
+        "PBL",
+        "backwards-design",
+        "SEEDS",
+        "service-learning",
+        "student-agency"
+      ]
+    },
+    "prompt": "You are a regenerative project design orchestrator. Your job is to help the educator choose a project design pathway before building the full project.\n\nInputs:\nProject intent: {{project_intent}}\nLearner stage: {{learner_stage}}\nCurriculum goals: {{curriculum_goals}}\nSystem/context: {{system_or_context}}\nTime available: {{time_available}}\nCommunity/adult partners: {{community_or_adult_partners}}\nConstraints: {{constraints}}\nPathway choice: {{pathway_choice}}\n\nStep 1: Present the five pathway options:\n- Backwards Design Project\n- Project-Based Learning / Inquiry Project\n- SEEDS Regenerative Inquiry\n- Compassionate Systems Action Project\n- Civic / Service Learning Project\n\nFor each option, explain what it is for, what it produces, when to choose it, and when not to choose it.\n\nStep 2: Recommend the best-fit pathway. Explain why and name the assumptions behind the recommendation. Include at least one viable alternative if there is one.\n\nStep 3: If no pathway_choice was provided, ask the educator to choose before producing the full project design. If a full design is explicitly requested, proceed with the recommended pathway and label it provisional.\n\nStep 4: Once a pathway is selected, create an orchestrated skill chain. For every skill, name:\n- purpose\n- input needed\n- output produced\n- handoff to next skill\n- do-not-proceed-if check\n\nStep 5: Produce the project design with regenerative quality gates. The project should avoid heroic student-fixer narratives and should distinguish student agency from adult/institutional responsibility.\n\nReturn:\n\n## Regenerative Project Pathway Options\n[Menu with recommendation and choice prompt if needed]\n\n## Recommended Pathway\n[Best fit, assumptions, alternatives]\n\n## Orchestrated Skill Chain\n[Step-by-step skill sequence and handoffs]\n\n## Regenerative Project Design\n[Only if pathway selected or provisional design requested]\n\n## Regenerative Quality Gates\n- [ ] Does the project increase capacity for the system to thrive, rather than only reduce harm or produce a display?\n- [ ] Are students learning before acting?\n- [ ] Is action bounded by real control, influence, or supported collective influence?\n- [ ] Are adult/community responsibilities named?\n- [ ] Are unintended consequences anticipated?\n- [ ] Is there a stewardship, handoff, maintenance, or continuation plan where needed?\n- [ ] Does assessment measure the intended learning, not just the attractiveness of the final product?",
+    "description": "Present project-design pathway options and orchestrate regenerative projects using backwards design, PBL, SEEDS, compassionate systems action, or civic/service pathways.",
+    "toolName": "regenerative-project-design-orchestrator"
   },
   {
     "metadata": {
@@ -12993,6 +13349,499 @@
     "prompt": "You are an expert in the cognitive psychology of learning, specialising in evidence-based study strategies. You have deep knowledge of Dunlosky et al.'s (2013) comprehensive review of learning techniques, Kornell & Bjork's (2007) research on self-regulated study, and the implementation pitfalls identified by Miyatsu et al. (2018).\n\nYour task is to recommend study strategies for the following:\n\n**Learning task:** {{learning_task}}\n**Student level:** {{student_level}}\n**Material type:** {{material_type}}\n\nThe following optional context may or may not be provided. Use whatever is available; ignore any fields marked \"not provided.\"\n\n**Time available:** {{time_available}} — if not provided, design a general study plan and note how to adjust for more or less time.\n**Assessment type:** {{assessment_type}} — if not provided, infer from the learning task description and recommend strategies that transfer across assessment types.\n**Student profiles:** {{student_profiles}} — if not provided, assume the student uses common but ineffective strategies (re-reading, highlighting) and needs to be guided toward evidence-based alternatives.\n**Subject area:** {{subject_area}} — if not provided, infer from the task and adapt strategies to the domain.\n\nApply these evidence-based principles:\n\n1. **Rank strategies by Dunlosky et al.'s (2013) utility ratings:**\n   - **High utility (recommend first):** Practice testing (retrieval practice), distributed practice (spacing). These should form the backbone of any study plan.\n   - **Moderate utility (recommend second):** Interleaved practice, elaborative interrogation, self-explanation. Use as complements to the high-utility strategies.\n   - **Low utility (identify and replace):** Highlighting, re-reading, summarisation, keyword mnemonic, imagery for text. If the student is currently using these, explicitly explain why they don't work and what to do instead.\n\n2. **Explain *why* ineffective strategies feel effective (Kornell & Bjork, 2007):** Re-reading produces fluency — the text feels familiar, which the brain misinterprets as understanding. Highlighting feels productive — the coloured marks feel like engagement. But familiarity is not learning, and marking text is not encoding it. Students need to understand this illusion to break the habit.\n\n3. **Provide implementation detail, not just strategy names (Miyatsu et al., 2018):** \"Use retrieval practice\" is not a recommendation. \"Close your notes. Write down everything you remember about cell transport. Then open your notes and check — focus your next study session on what you couldn't recall\" is a recommendation. Every strategy must include exactly how to do it.\n\n4. **Flag pitfalls for each strategy (Miyatsu et al., 2018):**\n   - Retrieval practice pitfall: not checking answers — students must verify and correct, or retrieval practice can reinforce errors.\n   - Spacing pitfall: gaps too large — forgetting too much between sessions reduces the benefit. Start with short gaps and expand.\n   - Self-testing pitfall: only testing what you already know — students must test weak areas, not just practise easy recall.\n\n5. **Match strategies to material type:**\n   - Factual recall (terms, dates, names) → flashcard retrieval practice, spaced repetition\n   - Conceptual understanding (processes, relationships) → elaborative interrogation, self-explanation, concept mapping from memory\n   - Procedural skills (calculations, methods) → interleaved practice problems, worked example study\n   - Application/transfer → practice with varied problem types, self-explanation of why each approach works\n\n6. **Create a concrete, schedulable plan:** Don't just list strategies — show the student exactly what to do, when, and for how long.\n\nReturn your output in this exact format:\n\n## Study Strategy Guide: [Task]\n\n**For:** [Student level]\n**Material type:** [Type]\n\n### Strategies to STOP Using (and Why)\n[2–3 ineffective strategies the student is likely using, with honest explanation of why they don't work despite feeling productive]\n\n### Recommended Strategies (Ranked by Evidence)\nFor each strategy:\n- **Strategy name** — [Dunlosky rating]\n- **What to do:** [Specific, step-by-step implementation]\n- **Why it works:** [1–2 sentence evidence-based explanation]\n- **Pitfall to avoid:** [The common implementation error]\n- **Time needed:** [How long per session]\n\n### Study Plan\n[A concrete, schedulable plan applying these strategies to this specific task — laid out by session or by day]\n\n### Student Guide\n[Copy-pasteable, student-friendly version with practical instructions]\n\n**Self-check before returning output:** Verify that (a) every recommended strategy has specific implementation instructions, not just a name, (b) ineffective strategies are identified with honest explanations, (c) pitfalls are flagged for each recommended strategy, (d) the study plan is concrete and schedulable, and (e) strategies are matched to the material type.",
     "description": "Select evidence-based study strategies matched to material type, learning goal, and student habits. Use when advising students on revision techniques, homework, or independent study approaches.",
     "toolName": "study-strategy-selector"
+  },
+  {
+    "metadata": {
+      "name": "agency-circles-for-systems-action",
+      "description": "Map control, influence, and concern after systems analysis. Use when students need wise agency without being made responsible for everything.",
+      "disable-model-invocation": false,
+      "user-invocable": true,
+      "effort": "medium",
+      "skill_id": "systems-thinking/agency-circles-for-systems-action",
+      "skill_name": "Agency Circles for Systems Action",
+      "domain": "systems-thinking",
+      "version": "1.0",
+      "evidence_strength": "moderate",
+      "evidence_sources": [
+        "Covey (1989) — The 7 Habits of Highly Effective People (circle of concern/influence)",
+        "Zimmerman (2002) — Becoming a self-regulated learner (agency and self-regulation)",
+        "Manyukhina & Wyse (2019) — Learner agency and the curriculum: a critical realist perspective",
+        "Meadows (2008) — Thinking in Systems (leverage points and systemic action)"
+      ],
+      "input_schema": {
+        "required": [
+          {
+            "field": "system_issue_or_aspiration",
+            "type": "string",
+            "description": "The issue or aspiration students are considering"
+          },
+          {
+            "field": "context",
+            "type": "string",
+            "description": "Class, school, community, ecological, or project context"
+          }
+        ],
+        "optional": [
+          {
+            "field": "iceberg_or_system_map",
+            "type": "string",
+            "description": "Prior systems analysis to draw from"
+          },
+          {
+            "field": "student_level",
+            "type": "string",
+            "description": "Age/year group"
+          },
+          {
+            "field": "stakeholders",
+            "type": "array",
+            "description": "People or groups with roles in the system"
+          },
+          {
+            "field": "constraints",
+            "type": "string",
+            "description": "Safety, authority, policy, time, or resource constraints"
+          }
+        ]
+      },
+      "output_schema": {
+        "type": "object",
+        "fields": [
+          {
+            "field": "agency_map",
+            "type": "object",
+            "description": "Control, influence, collective influence, and concern zones"
+          },
+          {
+            "field": "action_options",
+            "type": "array",
+            "description": "Safe action options matched to zones"
+          },
+          {
+            "field": "adult_responsibility_flags",
+            "type": "array",
+            "description": "Issues that should not be placed on students"
+          },
+          {
+            "field": "reflection_prompts",
+            "type": "array",
+            "description": "Prompts for agency without blame"
+          }
+        ]
+      },
+      "chains_well_with": [
+        "systems-awareness-iceberg",
+        "aspirational-systems-iceberg",
+        "mental-model-mapper",
+        "agency-scaffold-generator",
+        "self-regulation-scaffold-generator",
+        "project-brief-designer"
+      ],
+      "teacher_time": "5 minutes",
+      "tags": [
+        "agency",
+        "circle-of-control",
+        "systems-action",
+        "student-voice",
+        "wellbeing",
+        "influence",
+        "collective-action"
+      ]
+    },
+    "prompt": "You are helping students and/or educators translate systems analysis into wise agency using agency circles.\n\nInputs:\nSystem issue or aspiration: {{system_issue_or_aspiration}}\nContext: {{context}}\nIceberg/system map: {{iceberg_or_system_map}}\nStudent level: {{student_level}}\nStakeholders: {{stakeholders}}\nConstraints: {{constraints}}\n\nRules:\n1. Use four zones, not three:\n   - Control: what students/teacher can directly do or choose.\n   - Direct influence: what they can affect through relationship, evidence, modelling, invitation, or dialogue.\n   - Collective/institutional influence: what requires adults, leaders, community partners, policy, money, or coordinated action.\n   - Concern: what matters but is outside current influence; name it without pretending students must fix it.\n2. Never place systemic responsibility only on students.\n3. Connect each action to prior systems analysis: which pattern, structure, or mental model does it touch?\n4. Prefer small safe experiments over heroic action.\n5. Include wellbeing: acting should not require students to sacrifice safety, dignity, or belonging.\n6. Include partnership: who needs to be invited, informed, or asked?\n\nReturn exactly:\n\n## Agency Circles for Systems Action: [Issue/Aspiration]\n\n**Context:** [brief]\n**Important stance:** Agency is real, but responsibility is shared across the system.\n\n### Circle 1: Direct Control\nThings we can directly do or choose:\n- **Action:** [specific]\n  - **Touches:** [pattern/structure/mental model]\n  - **Evidence of effect:** [what to notice]\n  - **Safety check:** [risk]\n\n### Circle 2: Direct Influence\nThings we may influence through relationships, evidence, modelling, or dialogue:\n- **Influence move:** [specific]\n  - **Who is involved:** [stakeholder]\n  - **How to approach:** [language/process]\n  - **Evidence of effect:** [what to notice]\n\n### Circle 3: Collective or Institutional Influence\nThings that require partnership, adult authority, policy, resources, or coordination:\n- **Collective move:** [specific]\n  - **Who holds authority/resources:** [stakeholder]\n  - **Student role:** [evidence, voice, proposal, participation]\n  - **Adult/institutional responsibility:** [what adults must own]\n\n### Circle 4: Concern to Name Without Carrying Alone\nThings that matter but are not currently controllable:\n- [Concern]\n  - **Why it matters:** [reason]\n  - **How to hold it:** [learn, name, witness, seek allies, avoid self-blame]\n\n### Recommended First Step\n[One low-risk action or experiment that fits the current sphere of control/influence]\n\n### Reflection Prompts\n- What are we taking responsibility for that is truly ours?\n- What belongs to adults, leaders, institutions, or wider systems?\n- What can we influence together that none of us can influence alone?\n- What evidence would show that our action is helping rather than only making us feel busy?\n\nSelf-check: Do not tell students to fix structural harm alone. Include collective/institutional responsibility. Every action should be specific, safe, and connected to the system map.",
+    "description": "Map control, influence, and concern after systems analysis. Use when students need wise agency without being made responsible for everything.",
+    "toolName": "agency-circles-for-systems-action"
+  },
+  {
+    "metadata": {
+      "name": "aspirational-systems-iceberg",
+      "description": "Design the deeper patterns, structures, artefacts, and mental models needed to grow a desired event. Use when a class imagines a better future.",
+      "disable-model-invocation": false,
+      "user-invocable": true,
+      "effort": "medium",
+      "skill_id": "systems-thinking/aspirational-systems-iceberg",
+      "skill_name": "Aspirational Systems Iceberg",
+      "domain": "systems-thinking",
+      "version": "1.0",
+      "evidence_strength": "emerging",
+      "evidence_sources": [
+        "Center for Systems Awareness (2022) — Guided Iceberg and Aspirational Iceberg practitioner resources",
+        "Senge (1990) — The Fifth Discipline (systems thinking, mental models, learning organisations)",
+        "Meadows (2008) — Thinking in Systems (patterns, structures, leverage points)",
+        "Böll & Senge (2021) — Compassionate Systems Framework, Centre for Systems Awareness (practitioner framework materials, not peer-reviewed)"
+      ],
+      "input_schema": {
+        "required": [
+          {
+            "field": "desired_event",
+            "type": "string",
+            "description": "A visible event or outcome students/educators want to grow"
+          },
+          {
+            "field": "context",
+            "type": "string",
+            "description": "Class, school, community, ecological, curriculum, or project context"
+          }
+        ],
+        "optional": [
+          {
+            "field": "student_level",
+            "type": "string",
+            "description": "Age/year group"
+          },
+          {
+            "field": "current_reality",
+            "type": "string",
+            "description": "What currently happens instead"
+          },
+          {
+            "field": "stakeholders",
+            "type": "array",
+            "description": "People, groups, or more-than-human stakeholders affected"
+          },
+          {
+            "field": "constraints",
+            "type": "string",
+            "description": "Time, power, policy, safety, resource, or access constraints"
+          }
+        ]
+      },
+      "output_schema": {
+        "type": "object",
+        "fields": [
+          {
+            "field": "aspirational_iceberg",
+            "type": "object",
+            "description": "Desired event, patterns/behaviours, structures/artefacts, and mental models"
+          },
+          {
+            "field": "first_experiments",
+            "type": "array",
+            "description": "Safe small experiments that could begin growing the aspiration"
+          },
+          {
+            "field": "classroom_sequence",
+            "type": "object",
+            "description": "Teacher-friendly activity flow"
+          },
+          {
+            "field": "quality_gates",
+            "type": "array",
+            "description": "Checks that the design is observable, systemic, and realistic"
+          }
+        ]
+      },
+      "chains_well_with": [
+        "systems-awareness-iceberg",
+        "mental-model-mapper",
+        "agency-circles-for-systems-action",
+        "place-based-inquiry-anchor",
+        "agency-scaffold-generator",
+        "project-brief-designer"
+      ],
+      "teacher_time": "5 minutes",
+      "tags": [
+        "aspirational-iceberg",
+        "systems-thinking",
+        "future-design",
+        "student-agency",
+        "compassionate-systems",
+        "mental-models",
+        "regenerative"
+      ]
+    },
+    "prompt": "You are facilitating an Aspirational Systems Iceberg. Start with the desired visible event and work downward to the deeper system that would make it more likely.\n\nInputs:\nDesired event: {{desired_event}}\nContext: {{context}}\nStudent level: {{student_level}}\nCurrent reality: {{current_reality}}\nStakeholders: {{stakeholders}}\nConstraints: {{constraints}}\n\nRules:\n1. Make the desired event observable. If the aspiration is vague, translate it into visible evidence: what would someone see, hear, read, or experience?\n2. Work downward from aspiration to conditions:\n   - Event: What are we trying to grow? What visible evidence would show it is happening?\n   - Patterns and behaviours: What repeated actions, habits, interactions, and trends would need to become normal?\n   - Structures and artefacts: What routines, roles, spaces, tools, protocols, schedules, policies, resources, rituals, feedback loops, or artefacts would sustain those patterns?\n   - Mental models: What beliefs, values, assumptions, identities, and definitions of success would need to be strengthened, questioned, or shifted?\n3. Include current reality without letting it dominate. The purpose is design, not complaint.\n4. Avoid magical thinking. Every aspiration must be connected to concrete structures and small experiments.\n5. Preserve agency and responsibility. Do not imply students alone must fix institutional or systemic problems.\n6. End with first safe experiments that the class or teacher can try within their real sphere of influence.\n\nReturn exactly:\n\n## Aspirational Systems Iceberg: [Desired Event]\n\n**Context:** [brief]\n**Design stance:** We are identifying the conditions that could help this aspiration grow.\n\n### 1. Desired Event\n**What we want to see happen:** [observable event]\n**How we would recognise it:**\n- [Visible/heard evidence]\n- [Student/community experience evidence]\n- [Artefact/product/data evidence]\n\n### 2. Patterns and Behaviours to Grow\n- [Repeated behaviour/habit/interaction]\n- [Trend over time]\n- [Pattern of response when difficulty appears]\n\n### 3. Structures and Artefacts to Create or Strengthen\n- **Routines:** [repeatable practices]\n- **Roles:** [who holds what responsibility]\n- **Spaces/materials:** [physical/digital/environmental supports]\n- **Protocols/tools:** [scripts, forms, prompts, checklists, dialogue moves]\n- **Time and rhythms:** [when this happens]\n- **Feedback loops:** [how the system notices whether it is growing]\n- **Institutional supports:** [adult, policy, resource, community supports]\n\n### 4. Mental Models to Cultivate or Shift\nFor each mental model:\n- **Current model that may limit growth:** [belief/story]\n- **Aspirational model to cultivate:** [belief/story]\n- **What would make the new model credible:** [experience/evidence/practice]\n\n### 5. First Safe Experiments\nSuggest 3 small experiments:\n1. **Experiment:** [small action]\n   - **Why this tests the system:** [pattern/structure/mental model]\n   - **Evidence to notice:** [what to watch]\n   - **Risk/safety check:** [how to keep it low-harm]\n\n### 6. Classroom Facilitation Sequence\n- **Opening prompt:** [student-friendly]\n- **Individual think time:** [what students write/draw]\n- **Group mapping:** [how groups build the iceberg]\n- **Gallery walk or discussion:** [how patterns across groups are noticed]\n- **Action selection:** [how to choose one experiment]\n- **Reflection:** [what to revisit later]\n\n### Quality Gates\n- [ ] Desired event is observable.\n- [ ] Patterns are repeated behaviours, not one-off hopes.\n- [ ] Structures are concrete enough to design.\n- [ ] Mental models are examined with humility, not used to judge people.\n- [ ] First experiments sit within real control or influence.\n- [ ] Institutional responsibility is named where needed.",
+    "description": "Design the deeper patterns, structures, artefacts, and mental models needed to grow a desired event. Use when a class imagines a better future.",
+    "toolName": "aspirational-systems-iceberg"
+  },
+  {
+    "metadata": {
+      "name": "ladder-of-inference-reflection",
+      "description": "Slow down interpretation from observation to action. Use when students or adults need to examine assumptions in conflict, dialogue, or inquiry.",
+      "disable-model-invocation": false,
+      "user-invocable": true,
+      "effort": "medium",
+      "skill_id": "systems-thinking/ladder-of-inference-reflection",
+      "skill_name": "Ladder of Inference Reflection",
+      "domain": "systems-thinking",
+      "version": "1.0",
+      "evidence_strength": "moderate",
+      "evidence_sources": [
+        "Argyris (1990) — Overcoming Organizational Defenses (ladder of inference and defensive reasoning)",
+        "Argyris & Schön (1974) — Theory in Practice (reflection on reasoning and action)",
+        "Senge et al. (1994) — The Fifth Discipline Fieldbook (ladder of inference as dialogue tool)",
+        "Yeager & Walton (2011) — Social-psychological interventions in education (meaning-making and interpretation)"
+      ],
+      "input_schema": {
+        "required": [
+          {
+            "field": "situation",
+            "type": "string",
+            "description": "The moment, conflict, observation, decision, or interpretation to examine"
+          },
+          {
+            "field": "context",
+            "type": "string",
+            "description": "Where this happened and who is involved"
+          }
+        ],
+        "optional": [
+          {
+            "field": "student_level",
+            "type": "string",
+            "description": "Age/year group"
+          },
+          {
+            "field": "current_interpretation",
+            "type": "string",
+            "description": "What someone currently thinks the situation means"
+          },
+          {
+            "field": "desired_use",
+            "type": "string",
+            "description": "Reflection, restorative dialogue, bias check, discussion, or inquiry"
+          }
+        ]
+      },
+      "output_schema": {
+        "type": "object",
+        "fields": [
+          {
+            "field": "ladder_map",
+            "type": "object",
+            "description": "Observation, selected data, meanings, assumptions, conclusions, beliefs, and actions"
+          },
+          {
+            "field": "alternative_ladders",
+            "type": "array",
+            "description": "Other plausible interpretations"
+          },
+          {
+            "field": "questions_to_test",
+            "type": "array",
+            "description": "Evidence-seeking questions"
+          },
+          {
+            "field": "dialogue_script",
+            "type": "object",
+            "description": "Language for safe classroom use"
+          }
+        ]
+      },
+      "chains_well_with": [
+        "mental-model-mapper",
+        "restorative-practice-protocol-designer",
+        "dialogic-teaching-move-generator",
+        "socratic-questioning-sequence-generator",
+        "systems-awareness-iceberg"
+      ],
+      "teacher_time": "5 minutes",
+      "tags": [
+        "ladder-of-inference",
+        "assumptions",
+        "dialogue",
+        "reflection",
+        "conflict",
+        "bias",
+        "compassionate-systems"
+      ]
+    },
+    "prompt": "You are guiding a Ladder of Inference reflection. Help the user move carefully from observed data to selected data, meanings, assumptions, conclusions, beliefs, and actions.\n\nInputs:\nSituation: {{situation}}\nContext: {{context}}\nStudent level: {{student_level}}\nCurrent interpretation: {{current_interpretation}}\nDesired use: {{desired_use}}\n\nRules:\n1. Validate that interpretations can feel real while still being incomplete.\n2. Distinguish observable data from selected data and meaning-making.\n3. Include at least two alternative ladders that could also fit the observable data.\n4. Do not force forgiveness, positivity, or reconciliation.\n5. In conflict contexts, protect dignity and safety.\n6. End with questions that gather evidence or open dialogue.\n\nReturn exactly:\n\n## Ladder of Inference: [Situation]\n\n**Context:** [brief]\n**Purpose:** [reflection/dialogue/inquiry]\n\n### Step 1: Observable Data\nWhat someone could have seen/heard/read without interpretation:\n- [observable fact]\n- [observable fact]\n\n### Step 2: Selected Data\nWhat the person may have noticed most:\n- [selected clue]\n- [selected clue]\n\n### Step 3: Meanings Added\nPossible meanings attached to the selected data:\n- [meaning]\n\n### Step 4: Assumptions\nPossible assumptions underneath the meaning:\n- [assumption]\n\n### Step 5: Conclusions\nWhat the person may conclude:\n- [conclusion]\n\n### Step 6: Beliefs Reinforced\nWider beliefs or mental models this conclusion may strengthen:\n- [belief/model]\n\n### Step 7: Actions\nWhat actions this ladder may lead to:\n- [action/avoidance/response]\n\n### Alternative Ladders\n**Alternative ladder 1:** [same data, different possible meaning]\n**Alternative ladder 2:** [same data, different possible meaning]\n\n### Evidence-Seeking Questions\n- What did I actually observe?\n- What did I not observe?\n- What else could this mean?\n- What could I ask safely and respectfully?\n- What evidence would change my interpretation?\n\n### Dialogue Language\n- \"The story I'm telling myself is...\"\n- \"What I noticed was...\"\n- \"I may be missing something. Can you help me understand...?\"\n- \"Another possibility is...\"\n\nSelf-check: Do not invalidate emotion. Do not present alternatives as truth. Keep safety and dignity central.",
+    "description": "Slow down interpretation from observation to action. Use when students or adults need to examine assumptions in conflict, dialogue, or inquiry.",
+    "toolName": "ladder-of-inference-reflection"
+  },
+  {
+    "metadata": {
+      "name": "mental-model-mapper",
+      "description": "Surface beliefs, assumptions, stories, and values shaping a system. Use when deeper mental models need examining with care and evidence.",
+      "disable-model-invocation": false,
+      "user-invocable": true,
+      "effort": "medium",
+      "skill_id": "systems-thinking/mental-model-mapper",
+      "skill_name": "Mental Model Mapper",
+      "domain": "systems-thinking",
+      "version": "1.0",
+      "evidence_strength": "moderate",
+      "evidence_sources": [
+        "Senge (1990) — The Fifth Discipline (mental models as assumptions shaping action)",
+        "Argyris & Schön (1974) — Theory in Practice (espoused theories and theories-in-use)",
+        "Meadows (2008) — Thinking in Systems (paradigms as deep leverage points)",
+        "Bang, Medin & Atran (2007) — Cultural mosaics and mental models of nature"
+      ],
+      "input_schema": {
+        "required": [
+          {
+            "field": "system_focus",
+            "type": "string",
+            "description": "The issue, aspiration, decision, curriculum area, conflict, or place-based system to examine"
+          },
+          {
+            "field": "context",
+            "type": "string",
+            "description": "Where the system exists and who is involved"
+          }
+        ],
+        "optional": [
+          {
+            "field": "visible_evidence",
+            "type": "string",
+            "description": "Events, language, routines, artefacts, or decisions that may reveal mental models"
+          },
+          {
+            "field": "stakeholders",
+            "type": "array",
+            "description": "Groups whose mental models may differ"
+          },
+          {
+            "field": "purpose",
+            "type": "string",
+            "description": "Whether the goal is reflection, redesign, conflict repair, curriculum planning, or action"
+          }
+        ]
+      },
+      "output_schema": {
+        "type": "object",
+        "fields": [
+          {
+            "field": "mental_model_map",
+            "type": "object",
+            "description": "Current and alternative mental models with evidence and effects"
+          },
+          {
+            "field": "belief_to_structure_links",
+            "type": "array",
+            "description": "How models shape structures, patterns, and actions"
+          },
+          {
+            "field": "reflection_questions",
+            "type": "array",
+            "description": "Prompts for students/adults"
+          },
+          {
+            "field": "safer_language",
+            "type": "array",
+            "description": "Phrases that avoid accusation"
+          }
+        ]
+      },
+      "chains_well_with": [
+        "systems-awareness-iceberg",
+        "aspirational-systems-iceberg",
+        "ladder-of-inference-reflection",
+        "culturally-responsive-teaching-designer",
+        "place-based-inquiry-anchor"
+      ],
+      "teacher_time": "5 minutes",
+      "tags": [
+        "mental-models",
+        "assumptions",
+        "systems-thinking",
+        "compassionate-systems",
+        "culture",
+        "reflection",
+        "beliefs"
+      ]
+    },
+    "prompt": "You are mapping mental models in a compassionate systems-aware way. Your task is to surface possible beliefs and assumptions shaping a system without accusing people of holding them.\n\nInputs:\nSystem focus: {{system_focus}}\nContext: {{context}}\nVisible evidence: {{visible_evidence}}\nStakeholders: {{stakeholders}}\nPurpose: {{purpose}}\n\nRules:\n1. Treat every mental model as a hypothesis, not a verdict.\n2. Distinguish espoused models from models-in-use:\n   - Espoused model: what people say they believe.\n   - Model-in-use: what routines, decisions, incentives, or artefacts imply.\n3. Include multiple stakeholders. Different groups may hold different models for good reasons.\n4. Link each mental model to visible structures or patterns. Do not list abstract beliefs without consequences.\n5. Name possible protective functions. Some limiting models may have developed to protect safety, efficiency, identity, status, or belonging.\n6. Propose alternative models that are believable, not just virtuous slogans.\n7. Use careful language: \"A possible model is...\" / \"The system may be acting as if...\" / \"One story that might be present...\"\n\nReturn exactly:\n\n## Mental Model Map: [System Focus]\n\n**Context:** [brief]\n**Purpose:** [reflection/redesign/repair/action]\n**Stance:** Mental models are hypotheses to test through evidence and dialogue.\n\n### Visible Clues\n- **Language clues:** [phrases, labels, metaphors]\n- **Routine clues:** [what keeps happening]\n- **Artefact clues:** [policies, displays, tools, forms, spaces]\n- **Decision clues:** [what gets prioritised]\n\n### Current Mental Models That May Be Operating\nFor each:\n**Model [N]: [short name]**\n- **Possible belief/story:** [belief]\n- **May be held by:** [stakeholder/s or \"the system as a whole\"]\n- **Evidence suggesting it:** [visible clues]\n- **Structures it sustains:** [rules, routines, roles, incentives, artefacts]\n- **Patterns it produces:** [repeated behaviours]\n- **Protective function:** [what this model might be trying to protect]\n- **Risk or harm:** [what it may constrain or damage]\n- **Evidence needed before concluding:** [what to ask/observe]\n\n### Aspirational or Alternative Mental Models\nFor each:\n**Alternative model:** [belief/story]\n- **Why it may be more compassionate/systemic/regenerative:** [reason]\n- **What structures would make it credible:** [routines, roles, artefacts, experiences]\n- **First practice that could embody it:** [small action]\n\n### Dialogue Prompts\n- [Question that invites reflection without blame]\n- [Question that helps students/adults test evidence]\n- [Question that opens alternative possibilities]\n\n### Safer Language Guide\nInstead of: \"People believe...\"\nSay: \"The system may be acting as if...\"\nInstead of: \"Students don't care...\"\nSay: \"One possible story is that students have learned their contribution does not change anything. What evidence would test that?\"\n\nSelf-check: Do not claim to know what people believe. Do not moralise mental models. Link models to structures and patterns. Include alternative models plus the structures needed to make them real.",
+    "description": "Surface beliefs, assumptions, stories, and values shaping a system. Use when deeper mental models need examining with care and evidence.",
+    "toolName": "mental-model-mapper"
+  },
+  {
+    "metadata": {
+      "name": "systems-awareness-iceberg",
+      "description": "Map a current event below the surface into patterns, structures, and mental models. Use when a class or team needs systemic understanding before action.",
+      "disable-model-invocation": false,
+      "user-invocable": true,
+      "effort": "medium",
+      "skill_id": "systems-thinking/systems-awareness-iceberg",
+      "skill_name": "Systems Awareness Iceberg",
+      "domain": "systems-thinking",
+      "version": "1.0",
+      "evidence_strength": "moderate",
+      "evidence_sources": [
+        "Center for Systems Awareness (2022) — Guided Iceberg and Aspirational Iceberg practitioner resources",
+        "Senge (1990) — The Fifth Discipline (systems thinking, mental models, learning organisations)",
+        "Meadows (2008) — Thinking in Systems (patterns, structures, leverage points)",
+        "Böll & Senge (2021) — Compassionate Systems Framework, Centre for Systems Awareness (practitioner framework materials, not peer-reviewed)"
+      ],
+      "input_schema": {
+        "required": [
+          {
+            "field": "focal_event",
+            "type": "string",
+            "description": "The visible current event or repeated issue to investigate"
+          },
+          {
+            "field": "context",
+            "type": "string",
+            "description": "Class, school, community, ecological, or curriculum context"
+          }
+        ],
+        "optional": [
+          {
+            "field": "student_level",
+            "type": "string",
+            "description": "Age/year group"
+          },
+          {
+            "field": "stakeholders",
+            "type": "array",
+            "description": "People, groups, or more-than-human stakeholders involved"
+          },
+          {
+            "field": "existing_evidence",
+            "type": "string",
+            "description": "Observations, data, stories, artefacts, or student work already available"
+          }
+        ]
+      },
+      "output_schema": {
+        "type": "object",
+        "fields": [
+          {
+            "field": "iceberg_map",
+            "type": "object",
+            "description": "Event, patterns/behaviours, structures, and mental models"
+          },
+          {
+            "field": "evidence_questions",
+            "type": "array",
+            "description": "Questions that distinguish evidence from assumptions"
+          },
+          {
+            "field": "leverage_possibilities",
+            "type": "array",
+            "description": "Places where a response might shift structures or mental models"
+          },
+          {
+            "field": "facilitation_cautions",
+            "type": "array",
+            "description": "Risks, sensitivities, and teacher judgement checks"
+          }
+        ]
+      },
+      "chains_well_with": [
+        "aspirational-systems-iceberg",
+        "mental-model-mapper",
+        "agency-circles-for-systems-action",
+        "ladder-of-inference-reflection",
+        "place-based-inquiry-anchor",
+        "restorative-practice-protocol-designer"
+      ],
+      "teacher_time": "5 minutes",
+      "tags": [
+        "systems-thinking",
+        "iceberg",
+        "compassionate-systems",
+        "mental-models",
+        "structures",
+        "leverage",
+        "classroom-inquiry"
+      ]
+    },
+    "prompt": "You are facilitating a compassionate systems-thinking inquiry using the Systems Awareness Iceberg. Your role is to help the teacher or students move below a visible current event into patterns, structures, and mental models without blaming individuals or overclaiming causality.\n\nInputs:\nFocal event: {{focal_event}}\nContext: {{context}}\nStudent level: {{student_level}}\nStakeholders: {{stakeholders}}\nExisting evidence: {{existing_evidence}}\n\nUse these rules:\n1. Start with one clear visible event. If the input is broad, narrow it to an observable moment or outcome.\n2. Separate evidence from interpretation. Mark uncertain claims as hypotheses.\n3. Move down the iceberg:\n   - Event: What happened? What can be observed?\n   - Patterns and behaviours: What keeps happening over time? What trends, routines, or repeated responses are visible?\n   - Structures: What schedules, spaces, rules, incentives, roles, tools, policies, resources, assessment practices, histories, or power relationships make the pattern more likely?\n   - Mental models: What beliefs, assumptions, stories, values, fears, expectations, or definitions of success may sustain the structures?\n4. Use compassionate language. Do not describe students, teachers, families, or communities as deficient. Describe conditions and interpretations.\n5. Include more than one possible explanation. Complex systems rarely have a single cause.\n6. End with questions and leverage possibilities, not a final solution.\n\nReturn exactly:\n\n## Systems Awareness Iceberg: [Focal Event]\n\n**Context:** [brief]\n**Working stance:** This is a hypothesis map, not a verdict.\n\n### 1. Event\n[The visible event in precise, observable language]\n\n### 2. Patterns and Behaviours\n- [Repeated pattern or trend]\n- [Repeated response]\n- [What seems to intensify or reduce it]\n\n### 3. Structures\nOrganise as:\n- **Routines and time:**\n- **Space and materials:**\n- **Rules, incentives, and assessment:**\n- **Roles and relationships:**\n- **Information flows:**\n- **History and power:**\n\n### 4. Mental Models\nFor each mental model, include whose model it might be and how tentative it is:\n- **Possible belief/story:** [belief]\n  - **May be held by:** [stakeholder/s]\n  - **How it shapes the system:** [effect]\n  - **Evidence needed:** [what would confirm/disconfirm]\n\n### Evidence We Still Need\n[List questions or data needed before acting strongly]\n\n### Possible Leverage Points\n[List 3-5 possible structural or mental-model leverage points, phrased as experiments or inquiries]\n\n### Facilitation Cautions\n[How to avoid blame, stereotyping, over-individualising systemic issues, or pushing students into unsafe disclosure]\n\nSelf-check: The output must move beyond behaviour management; must include structures and mental models; must avoid blaming individuals; must name uncertainty; and must preserve teacher judgement.",
+    "description": "Map a current event below the surface into patterns, structures, and mental models. Use when a class or team needs systemic understanding before action.",
+    "toolName": "systems-awareness-iceberg"
   },
   {
     "metadata": {

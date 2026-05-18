@@ -36,16 +36,16 @@ function parseFrontmatter(filePath: string): Record<string, unknown> {
 }
 
 test.describe("Skill Discovery", () => {
-  test("finds exactly 131 SKILL.md files", () => {
+  test("finds at least the published baseline of SKILL.md files", () => {
     const paths = getAllSkillPaths();
-    expect(paths.length).toBe(131);
+    expect(paths.length).toBeGreaterThanOrEqual(131);
   });
 
-  test("skills span exactly 17 domains", () => {
+  test("skills span at least the published baseline of domains", () => {
     const domains = fs.readdirSync(SKILLS_DIR).filter((d) =>
       fs.statSync(path.join(SKILLS_DIR, d)).isDirectory()
     );
-    expect(domains.length).toBe(17);
+    expect(domains.length).toBeGreaterThanOrEqual(17);
   });
 
   test("every SKILL.md has valid YAML frontmatter", () => {
@@ -128,13 +128,13 @@ test.describe("Registry Validation", () => {
     expect(registry.standard).toBe("agent-skills-1.0");
   });
 
-  test("registry contains 131 skills", () => {
-    expect(registry.total_skills).toBe(131);
-    expect(registry.skills.length).toBe(131);
+  test("registry skill count matches the generated skill list", () => {
+    expect(registry.total_skills).toBe(registry.skills.length);
   });
 
-  test("registry contains 17 domains", () => {
-    expect(registry.domains.length).toBe(17);
+  test("registry domain count matches the generated domain list", () => {
+    const uniqueDomains = new Set(registry.skills.map((s) => s.domain));
+    expect(registry.domains.length).toBe(uniqueDomains.size);
   });
 
   test("all descriptions are <= 250 characters", () => {

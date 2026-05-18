@@ -1,8 +1,8 @@
 {
   "version": "2.0",
-  "generated": "2026-05-07T13:17:06.393524+00:00",
+  "generated": "2026-05-18T14:13:08.792006+00:00",
   "standard": "agent-skills-1.0",
-  "total_skills": 131,
+  "total_skills": 139,
   "domains": [
     {
       "id": "ai-learning-science",
@@ -67,7 +67,7 @@
     {
       "id": "original-frameworks",
       "label": "Original Frameworks",
-      "skill_count": 8
+      "skill_count": 11
     },
     {
       "id": "professional-learning",
@@ -82,6 +82,11 @@
     {
       "id": "self-regulated-learning",
       "label": "Self-Regulated Learning",
+      "skill_count": 5
+    },
+    {
+      "id": "systems-thinking",
+      "label": "Systems Thinking",
       "skill_count": 5
     },
     {
@@ -3126,6 +3131,43 @@
       "path": "skills/original-frameworks/coherent-rubric-logic-builder/SKILL.md"
     },
     {
+      "id": "original-frameworks/compassionate-systems-awareness-orchestrator",
+      "name": "compassionate-systems-awareness-orchestrator",
+      "display_name": "Compassionate Systems Awareness Orchestrator",
+      "domain": "original-frameworks",
+      "description": "Orchestrate compassionate systems tools from issue or aspiration to wise action. Use when a class needs a complete inquiry workflow.",
+      "disable_model_invocation": false,
+      "evidence_strength": "emerging",
+      "tags": [
+        "orchestrator",
+        "composite-framework",
+        "practitioner-framework",
+        "compassionate-systems",
+        "systems-thinking",
+        "classroom-inquiry",
+        "student-agency",
+        "regenerative",
+        "workflow"
+      ],
+      "teacher_time": "5 minutes",
+      "chains_with": [
+        "systems-awareness-iceberg",
+        "aspirational-systems-iceberg",
+        "mental-model-mapper",
+        "agency-circles-for-systems-action",
+        "ladder-of-inference-reflection",
+        "place-based-inquiry-anchor",
+        "project-brief-designer"
+      ],
+      "chain_edges": {
+        "receives_from": [],
+        "feeds_into": [],
+        "output_field": null,
+        "input_field": null
+      },
+      "path": "skills/original-frameworks/compassionate-systems-awareness-orchestrator/SKILL.md"
+    },
+    {
       "id": "original-frameworks/developmental-band-system-designer",
       "name": "developmental-band-system-designer",
       "display_name": "Developmental Band System Designer",
@@ -3270,6 +3312,88 @@
         "input_field": null
       },
       "path": "skills/original-frameworks/learning-target-authoring-guide/SKILL.md"
+    },
+    {
+      "id": "original-frameworks/place-based-curriculum-orchestrator",
+      "name": "place-based-curriculum-orchestrator",
+      "display_name": "Place-Based Curriculum Orchestrator",
+      "domain": "original-frameworks",
+      "description": "Present pathway options and orchestrate place-based curriculum design from a local place, curriculum requirement, or community issue. Use when place should become a primary text for learning.",
+      "disable_model_invocation": false,
+      "evidence_strength": "emerging",
+      "tags": [
+        "orchestrator",
+        "composite-framework",
+        "practitioner-framework",
+        "place-based",
+        "emerging-evidence",
+        "curriculum",
+        "pathways",
+        "local",
+        "community",
+        "critical-pedagogy-of-place"
+      ],
+      "teacher_time": "8 minutes",
+      "chains_with": [
+        "place-based-inquiry-anchor",
+        "ecological-inquiry-anchor-designer",
+        "phenomenon-based-unit-anchor",
+        "culturally-responsive-teaching-designer",
+        "curriculum-knowledge-architecture-designer",
+        "learning-target-authoring-guide",
+        "assessment-validity-checker",
+        "systems-awareness-iceberg",
+        "mental-model-mapper"
+      ],
+      "chain_edges": {
+        "receives_from": [],
+        "feeds_into": [],
+        "output_field": null,
+        "input_field": null
+      },
+      "path": "skills/original-frameworks/place-based-curriculum-orchestrator/SKILL.md"
+    },
+    {
+      "id": "original-frameworks/regenerative-project-design-orchestrator",
+      "name": "regenerative-project-design-orchestrator",
+      "display_name": "Regenerative Project Design Orchestrator",
+      "domain": "original-frameworks",
+      "description": "Present project-design pathway options and orchestrate regenerative projects using backwards design, PBL, SEEDS, compassionate systems action, or civic/service pathways.",
+      "disable_model_invocation": false,
+      "evidence_strength": "emerging",
+      "tags": [
+        "orchestrator",
+        "composite-framework",
+        "practitioner-framework",
+        "regenerative",
+        "emerging-evidence",
+        "project-design",
+        "PBL",
+        "backwards-design",
+        "SEEDS",
+        "service-learning",
+        "student-agency"
+      ],
+      "teacher_time": "8 minutes",
+      "chains_with": [
+        "backwards-design-unit-planner",
+        "project-brief-designer",
+        "self-determined-project-design-protocol",
+        "seeds-regenerative-inquiry-cycle",
+        "agency-scaffold-generator",
+        "service-learning-project-designer",
+        "systems-awareness-iceberg",
+        "aspirational-systems-iceberg",
+        "agency-circles-for-systems-action",
+        "assessment-validity-checker"
+      ],
+      "chain_edges": {
+        "receives_from": [],
+        "feeds_into": [],
+        "output_field": null,
+        "input_field": null
+      },
+      "path": "skills/original-frameworks/regenerative-project-design-orchestrator/SKILL.md"
     },
     {
       "id": "original-frameworks/seeds-regenerative-inquiry-cycle",
@@ -3974,6 +4098,174 @@
         "input_field": null
       },
       "path": "skills/self-regulated-learning/study-strategy-selector/SKILL.md"
+    },
+    {
+      "id": "systems-thinking/agency-circles-for-systems-action",
+      "name": "agency-circles-for-systems-action",
+      "display_name": "Agency Circles for Systems Action",
+      "domain": "systems-thinking",
+      "description": "Map control, influence, and concern after systems analysis. Use when students need wise agency without being made responsible for everything.",
+      "disable_model_invocation": false,
+      "evidence_strength": "moderate",
+      "tags": [
+        "agency",
+        "circle-of-control",
+        "systems-action",
+        "student-voice",
+        "wellbeing",
+        "influence",
+        "collective-action"
+      ],
+      "teacher_time": "5 minutes",
+      "chains_with": [
+        "systems-awareness-iceberg",
+        "aspirational-systems-iceberg",
+        "mental-model-mapper",
+        "agency-scaffold-generator",
+        "self-regulation-scaffold-generator",
+        "project-brief-designer"
+      ],
+      "chain_edges": {
+        "receives_from": [],
+        "feeds_into": [],
+        "output_field": null,
+        "input_field": null
+      },
+      "path": "skills/systems-thinking/agency-circles-for-systems-action/SKILL.md"
+    },
+    {
+      "id": "systems-thinking/aspirational-systems-iceberg",
+      "name": "aspirational-systems-iceberg",
+      "display_name": "Aspirational Systems Iceberg",
+      "domain": "systems-thinking",
+      "description": "Design the deeper patterns, structures, artefacts, and mental models needed to grow a desired event. Use when a class imagines a better future.",
+      "disable_model_invocation": false,
+      "evidence_strength": "emerging",
+      "tags": [
+        "aspirational-iceberg",
+        "systems-thinking",
+        "future-design",
+        "student-agency",
+        "compassionate-systems",
+        "mental-models",
+        "regenerative"
+      ],
+      "teacher_time": "5 minutes",
+      "chains_with": [
+        "systems-awareness-iceberg",
+        "mental-model-mapper",
+        "agency-circles-for-systems-action",
+        "place-based-inquiry-anchor",
+        "agency-scaffold-generator",
+        "project-brief-designer"
+      ],
+      "chain_edges": {
+        "receives_from": [],
+        "feeds_into": [],
+        "output_field": null,
+        "input_field": null
+      },
+      "path": "skills/systems-thinking/aspirational-systems-iceberg/SKILL.md"
+    },
+    {
+      "id": "systems-thinking/ladder-of-inference-reflection",
+      "name": "ladder-of-inference-reflection",
+      "display_name": "Ladder of Inference Reflection",
+      "domain": "systems-thinking",
+      "description": "Slow down interpretation from observation to action. Use when students or adults need to examine assumptions in conflict, dialogue, or inquiry.",
+      "disable_model_invocation": false,
+      "evidence_strength": "moderate",
+      "tags": [
+        "ladder-of-inference",
+        "assumptions",
+        "dialogue",
+        "reflection",
+        "conflict",
+        "bias",
+        "compassionate-systems"
+      ],
+      "teacher_time": "5 minutes",
+      "chains_with": [
+        "mental-model-mapper",
+        "restorative-practice-protocol-designer",
+        "dialogic-teaching-move-generator",
+        "socratic-questioning-sequence-generator",
+        "systems-awareness-iceberg"
+      ],
+      "chain_edges": {
+        "receives_from": [],
+        "feeds_into": [],
+        "output_field": null,
+        "input_field": null
+      },
+      "path": "skills/systems-thinking/ladder-of-inference-reflection/SKILL.md"
+    },
+    {
+      "id": "systems-thinking/mental-model-mapper",
+      "name": "mental-model-mapper",
+      "display_name": "Mental Model Mapper",
+      "domain": "systems-thinking",
+      "description": "Surface beliefs, assumptions, stories, and values shaping a system. Use when deeper mental models need examining with care and evidence.",
+      "disable_model_invocation": false,
+      "evidence_strength": "moderate",
+      "tags": [
+        "mental-models",
+        "assumptions",
+        "systems-thinking",
+        "compassionate-systems",
+        "culture",
+        "reflection",
+        "beliefs"
+      ],
+      "teacher_time": "5 minutes",
+      "chains_with": [
+        "systems-awareness-iceberg",
+        "aspirational-systems-iceberg",
+        "ladder-of-inference-reflection",
+        "culturally-responsive-teaching-designer",
+        "place-based-inquiry-anchor"
+      ],
+      "chain_edges": {
+        "receives_from": [],
+        "feeds_into": [],
+        "output_field": null,
+        "input_field": null
+      },
+      "path": "skills/systems-thinking/mental-model-mapper/SKILL.md"
+    },
+    {
+      "id": "systems-thinking/systems-awareness-iceberg",
+      "name": "systems-awareness-iceberg",
+      "display_name": "Systems Awareness Iceberg",
+      "domain": "systems-thinking",
+      "description": "Map a current event below the surface into patterns, structures, and mental models. Use when a class or team needs systemic understanding before action.",
+      "disable_model_invocation": false,
+      "evidence_strength": "moderate",
+      "tags": [
+        "systems-thinking",
+        "iceberg",
+        "compassionate-systems",
+        "mental-models",
+        "structures",
+        "leverage",
+        "classroom-inquiry"
+      ],
+      "teacher_time": "5 minutes",
+      "chains_with": [
+        "aspirational-systems-iceberg",
+        "mental-model-mapper",
+        "agency-circles-for-systems-action",
+        "ladder-of-inference-reflection",
+        "place-based-inquiry-anchor",
+        "restorative-practice-protocol-designer"
+      ],
+      "chain_edges": {
+        "receives_from": [],
+        "feeds_into": [],
+        "output_field": null,
+        "input_field": null
+      },
+      "path": "skills/systems-thinking/systems-awareness-iceberg/SKILL.md"
     },
     {
       "id": "wellbeing-motivation-agency/agency-scaffold-generator",

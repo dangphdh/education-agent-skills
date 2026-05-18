@@ -14,6 +14,7 @@ DOMAIN_LABELS = {
     "ai-literacy": "AI Literacy",
     "curriculum-alignment": "Curriculum Alignment",
     "curriculum-assessment": "Curriculum & Assessment",
+    "systems-thinking": "Systems Thinking",
     "eal-language-development": "EAL & Language Development",
     "environmental-experiential-learning": "Environmental & Experiential Learning",
     "explicit-instruction": "Explicit Instruction",
