@@ -47,7 +47,7 @@ The repository also includes a local marketplace helper at:
 .agents/plugins/marketplace.json
 ```
 
-This is there so Codex plugin tooling can discover the repository as a single installable local plugin rather than requiring people to copy all 131 skills one by one.
+This is there so Codex plugin tooling can discover the repository as a single installable local plugin rather than requiring people to copy all 165 skills one by one.
 
 3. Restart Codex.
 

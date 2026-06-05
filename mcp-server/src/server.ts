@@ -27,7 +27,7 @@ export function createServer(skills: LoadedSkill[]): McpServer {
     version: "0.3.0",
   });
 
-  // Register 131 skills as prompts (user-invoked, injected into conversation)
+  // Register the bundled skills as prompts (user-invoked, injected into conversation)
   for (const skill of skills) {
     const argsSchema: Record<string, z.ZodTypeAny> = {};
 
@@ -66,7 +66,7 @@ export function createServer(skills: LoadedSkill[]): McpServer {
     });
   }
 
-  // Register 131 skills as tools (for Claude.ai and orchestrator use)
+  // Register the bundled skills as tools (for Claude.ai and orchestrator use)
   for (const skill of skills) {
     const shape: Record<string, z.ZodTypeAny> = {};
 

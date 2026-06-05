@@ -1,10 +1,10 @@
-# Privacy Policy — Claude Education Skills MCP Server
+# Privacy Policy — Education Agent Skills MCP Server
 
 **Last updated: 2 April 2026**
 
 ## Overview
 
-The Claude Education Skills MCP server is a read-only service that provides access to the Claude Education Skills Library. This policy explains what data the server does and does not collect.
+The Education Agent Skills MCP server is a read-only service that provides access to the Education Agent Skills Library. This policy explains what data the server does and does not collect.
 
 ## Data Collection
 
@@ -19,7 +19,7 @@ This server collects no personal data. Specifically:
 
 ## How the Server Works
 
-The server responds to MCP tool calls by returning skill content and metadata from the Claude Education Skills Library — a static, open-source collection of evidence-based pedagogical skills. Every tool is read-only. No user data is written, stored, or transmitted as a result of using this server.
+The server responds to MCP tool calls by returning skill content and metadata from the Education Agent Skills Library — a static, open-source collection of evidence-based pedagogical skills. Every tool is read-only. No user data is written, stored, or transmitted as a result of using this server.
 
 ## Third-Party Services
 
@@ -31,4 +31,4 @@ The full source code for this server is available at [github.com/GarethManning/e
 
 ## Contact
 
-For questions about this privacy policy or the Claude Education Skills Library, contact gareth.manning@gmail.com.
+For questions about this privacy policy or the Education Agent Skills Library, contact gareth.manning@gmail.com.
